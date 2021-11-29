@@ -1,4 +1,4 @@
-package com.app.buna.mvvm
+package com.app.buna.foodplace
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.app.buna.mvvm", appContext.packageName)
+        assertEquals("com.app.buna.foodplace", appContext.packageName)
     }
 }

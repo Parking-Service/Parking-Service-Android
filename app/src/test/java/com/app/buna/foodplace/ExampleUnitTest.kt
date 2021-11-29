@@ -1,4 +1,4 @@
-package com.app.buna.mvvm
+package com.app.buna.foodplace
 
 import org.junit.Test
 
