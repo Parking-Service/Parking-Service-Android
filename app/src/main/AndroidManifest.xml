@@ -3,6 +3,7 @@
     package="com.app.buna.foodplace">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <meta-data
@@ -20,8 +21,13 @@
         android:theme="@style/Theme.MVVM"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".feature.login.LoginActivity"
-            android:exported="false" />
+            android:name=".feature.tutorial.activity.TutorialActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".feature.common.base.BaseActivity"
             android:exported="false" />
