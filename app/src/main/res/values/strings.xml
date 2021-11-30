@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Food Place</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Network status snack bar -->
+    <string name="snack_bar_content_internet_disconnected">인터넷 연결이 끊겼습니다.\n네트워크 상태를 확인해주세요!</string> <!--network is not conneceted-->
+
+    <!-- others -->
+    <string name="ok">확인</string>
 </resources>
