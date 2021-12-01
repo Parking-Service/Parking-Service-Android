@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dialog_horizontal_padding">24dp</dimen>
+    <dimen name="dialog_card_view_elevation">12dp</dimen>
+    <dimen name="dialog_card_view_corner_radius">20dp</dimen>
+    <dimen name="dialog_card_view_title_text">20dp</dimen>
+    <dimen name="dialog_card_view_content_text">15dp</dimen>
+    <dimen name="dialog_horizontal_margin">24dp</dimen>
+    <dimen name="dialog_top_margin">24dp</dimen>
+    <dimen name="dialog_bottom_margin">16dp</dimen>
+    <dimen name="dialog_height">160dp</dimen>
+    <dimen name="dialog_min_width">320dp</dimen>
+
+    <dimen name="login_activity_skip_right_margin">24dp</dimen>
+    <dimen name="login_activity_logo_container_top_margin">60dp</dimen>
+    <dimen name="login_activity_skip_bottom_margin">48dp</dimen>
+    <dimen name="login_activity_skip_text_button_text_size">17sp</dimen>
+</resources>
