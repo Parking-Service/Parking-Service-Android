@@ -7,4 +7,7 @@
 
     <!-- others -->
     <string name="ok">확인</string>
+
+    <!--login activity-->
+    <string name="skip">건너뛰기</string>
 </resources>

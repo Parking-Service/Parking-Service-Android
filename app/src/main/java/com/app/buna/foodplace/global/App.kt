@@ -1,17 +1,34 @@
 package com.app.buna.foodplace.global
 
 import android.app.Application
-import androidx.viewbinding.BuildConfig
+import android.content.Context
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.core.logger.Logger
+import org.koin.core.logger.Level
 
 class App : Application() {
 
+
+
     override fun onCreate() {
         super.onCreate()
+        appContext = this
 
         startKoin {
-
+            androidLogger(Level.ERROR)
+            androidContext(this@App)
         }
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        appContext = null
+    }
+
+    companion object {
+        var appContext: Context? = null
+            private set
+
     }
 }

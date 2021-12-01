@@ -39,10 +39,10 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
 
         networkConnection.observe(this, { isConnected -> // LiveData를 통해 실시간으로 네트워크 상태 확인
             if(isConnected) { // 인터넷 연결이 완료되었다면
-                dismissInternetCheckDialog() // 네트워크 확인 다이얼로그 dismiss()
+                dismissInternetCheckDialog() // 네트워크 확인 snackbar dismiss()
             } else{ // 인터넷 연결이 끊겼다면
-                createInternetCheckDialog() // 네트워크 확인 다이얼로그 생성
-                showInternetCheckDialog() // 네트워크 확인 다이얼로그 show()
+                createInternetCheckDialog() // 네트워크 확인 snackbar 생성
+                showInternetCheckDialog() // 네트워크 확인 snackbar show()
             }
         })
     }
@@ -59,12 +59,12 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
             .show()
     }
 
-    // 인터넷 연결 상태 확인을 위한 다이얼로그를 띄우는 메소드
+    // 인터넷 연결 상태 확인을 위한 스낵바를 띄우는 메소드
     private fun showInternetCheckDialog() {
         networkStatusSnackbar?.show()
     }
 
-    // 인터넷 연결 상태 확인을 위한 다이얼로그를 닫는 메소드
+    // 인터넷 연결 상태 확인을 위한 snackbar를 닫는 메소드
     private fun dismissInternetCheckDialog() {
         networkStatusSnackbar?.dismiss()
     }
