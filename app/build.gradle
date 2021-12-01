@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -76,6 +77,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation files('libs/libDaumMapAndroid.jar')
 
+    // Kakao login
+    implementation "com.kakao.sdk:v2-user:2.8.3" // 카카오 로그인
+
     // Navigation Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
@@ -100,9 +104,16 @@ dependencies {
 
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.android.gms:play-services-base:17.6.0'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-auth'
 
     // Firebase Analytics
     implementation 'com.google.firebase:firebase-analytics'
+
+    // Facebook Sdk
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     // Retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

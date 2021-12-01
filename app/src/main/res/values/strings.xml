@@ -10,4 +10,5 @@
 
     <!--login activity-->
     <string name="skip">건너뛰기</string>
+    <string name="fail_login">로그인에 실패하였습니다.</string>
 </resources>

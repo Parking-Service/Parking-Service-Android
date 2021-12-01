@@ -5,93 +5,106 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.app.buna.foodplace.feature.login.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        tools:context=".feature.login.LoginActivity">
+        android:layout_height="match_parent">
 
+
+        <!-- background image view -->
         <ImageView
             android:id="@+id/background_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
 
-        <LinearLayout
-            android:id="@+id/logo_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/login_button_container"
-            android:layout_marginTop="@dimen/login_activity_logo_container_top_margin">
-
-            <ImageView
-                android:id="@+id/logo_image_view"
-                android:layout_width="250dp"
-                android:layout_height="125dp"
-                android:background="@drawable/img_logo" />
-
-            <ImageView
-                android:id="@+id/sub_logo_image_view"
-                android:layout_width="125dp"
-                android:layout_height="25dp"
-                android:background="@drawable/img_sub_logo"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/login_button_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/skip_text_button"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo_container">
-
-            <ImageButton
-                android:id="@+id/facebook_login_button"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:background="@drawable/img_login_fb"
-                android:foreground="?attr/selectableItemBackgroundBorderless"/>
-
-            <ImageButton
-                android:id="@+id/kakao_login_button"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:background="@drawable/img_login_kakao"
-                android:foreground="?attr/selectableItemBackgroundBorderless"/>
-
-            <ImageButton
-                android:id="@+id/google_login_button"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
-                android:background="@drawable/img_login_google"
-                android:foreground="?attr/selectableItemBackgroundBorderless"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/skip_text_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/skip"
-            android:textColor="@color/white"
-            android:textSize="@dimen/login_activity_skip_text_button_text_size"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginBottom="@dimen/login_activity_skip_bottom_margin"
-            android:layout_marginRight="@dimen/login_activity_skip_right_margin"
-            android:clickable="true"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            tools:context=".feature.login.LoginActivity">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/logo_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_activity_logo_container_top_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/login_button_container"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/logo_image_view"
+                    android:layout_width="250dp"
+                    android:layout_height="125dp"
+                    android:background="@drawable/img_logo" />
+
+                <ImageView
+                    android:id="@+id/sub_logo_image_view"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/img_sub_logo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/login_button_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/skip_text_button"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logo_container">
+
+                <ImageButton
+                    android:id="@+id/facebook_login_button"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/img_login_fb"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.loginWithFacebook()}" />
+
+                <ImageButton
+                    android:id="@+id/kakao_login_button"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/img_login_kakao"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.loginWithKakao()}" />
+
+                <ImageButton
+                    android:id="@+id/google_login_button"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/img_login_google"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.loginWithGoogle()}" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/skip_text_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/login_activity_skip_right_margin"
+                android:layout_marginBottom="@dimen/login_activity_skip_bottom_margin"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:text="@string/skip"
+                android:textColor="@color/white"
+                android:textSize="@dimen/login_activity_skip_text_button_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>
