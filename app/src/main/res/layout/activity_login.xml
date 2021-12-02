@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.buna.foodplace.feature.login.LoginViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- background image view -->
+        <ImageView
+            android:id="@+id/background_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            tools:context=".feature.login.LoginActivity">
+
+
+            <LinearLayout
+                android:id="@+id/logo_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_activity_logo_container_top_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/login_button_container"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/logo_image_view"
+                    android:layout_width="250dp"
+                    android:layout_height="125dp"
+                    android:background="@drawable/img_logo" />
+
+                <ImageView
+                    android:id="@+id/sub_logo_image_view"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/img_sub_logo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/login_button_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/skip_text_button"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logo_container">
+
+                <ImageButton
+                    android:id="@+id/facebook_login_button"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/img_login_fb"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.loginWithFacebook()}" />
+
+                <ImageButton
+                    android:id="@+id/kakao_login_button"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/img_login_kakao"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.loginWithKakao()}" />
+
+                <ImageButton
+                    android:id="@+id/google_login_button"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/img_login_google"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:onClick="@{() -> viewModel.loginWithGoogle()}" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/skip_text_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/login_activity_skip_right_margin"
+                android:layout_marginBottom="@dimen/login_activity_skip_bottom_margin"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:text="@string/skip"
+                android:textColor="@color/white"
+                android:textSize="@dimen/login_activity_skip_text_button_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <org.quanqi.circularprogress.CircularProgressView
+            android:id="@+id/login_progress_bar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:angleAnimationDurationMillis="@integer/circular_default_angleAnimationDurationMillis"
+            app:borderWidth="@dimen/circular_default_border_width"
+            app:colorSequence="@array/circular_default_color_sequence"
+            app:sweepAnimationDurationMillis="@integer/circular_default_sweepAnimationDuration" />
+    </RelativeLayout>
+</layout>
