@@ -15,4 +15,5 @@
     <dimen name="login_activity_logo_container_top_margin">60dp</dimen>
     <dimen name="login_activity_skip_bottom_margin">48dp</dimen>
     <dimen name="login_activity_skip_text_button_text_size">17sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

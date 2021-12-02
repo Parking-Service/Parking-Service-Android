@@ -1,11 +1,16 @@
 package com.app.buna.foodplace.di
 
-import android.content.Context
-import com.app.buna.foodplace.feature.common.base.BaseViewModel
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.koinApplication
+import com.app.buna.foodplace.feature.login.LoginViewModel
+import com.app.buna.foodplace.model.repository.remote.UserRepository
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val contextModule = module {
-    factory {  }
+val repositoryModule = module {
+    single { UserRepository() }
+}
+
+val viewModelModule = module {
+    viewModel {
+        LoginViewModel(get())
+    }
 }

@@ -58,6 +58,7 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+        viewDataBinding = null
     }
 
     // binding 객체를 가져오는 메소드

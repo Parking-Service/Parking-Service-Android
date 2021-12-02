@@ -38,6 +38,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -89,11 +92,11 @@ dependencies {
     //코어
     implementation 'org.koin:koin-core:2.0.0-rc-2'
     //안드로이드 context 주입, 안드로이드 log 지원 기능을 제공
-    implementation 'org.koin:koin-android:2.0.0-rc-2'
+    implementation 'org.koin:koin-android:2.0.1'
     //LifecycleOwner 들에서 scope 생성-삭제를 자동화하는 기능을 제공
     implementation 'org.koin:koin-androidx-scope:2.0.0-rc-2'
     //AAC의 ViewModel 을 Actiity나 Fragment에서 손쉽게 주입받을 수 있는 기능을 제공
-    implementation 'org.koin:koin-androidx-viewmodel:2.0.0-rc-2'
+    implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
     // Koin Test features
     testImplementation "io.insert-koin:koin-test:$koin_version"
 
@@ -117,6 +120,9 @@ dependencies {
 
     // Retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
@@ -124,4 +130,7 @@ dependencies {
 
     // Timber
     implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Circular progress bar
+    implementation 'org.quanqi:CircularProgress:1.0.2'
 }
