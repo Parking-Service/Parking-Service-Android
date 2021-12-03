@@ -8,10 +8,40 @@
     <!-- others -->
     <string name="ok">확인</string>
 
-    <!--login activity-->
+    <!-- login activity -->
     <string name="skip">건너뛰기</string>
     <string name="fail_login">로그인에 실패하였습니다.</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- review activity -->
+    <string name="favorite">즐겨찾기</string>
+    <string name="visited">가봤어요</string>
+    <string name="write_review">리뷰작성</string>
+    <string name="add_list">목록추가</string>
+
+    <string name="parking_lot_introduce">주차장 정보</string>
+    <string name="jibun">지번</string>
+    <string name="find_road">길 찾기</string>
+    <string name="navigation">네비게이션</string>
+    <string name="call_taxi">콜택시</string>
+    <string name="copy_address">주소 복사</string>
+    <string name="call_parking_lot">전화걸기</string>
+    <string name="operation_time">영업시간</string>
+    <string name="weekday">평일</string>
+    <string name="saturday">토요일</string>
+    <string name="holiday">공휴일</string>
+    <string name="corona_warning_desc">코로나 19의 영향으로 주차장 운영에 변동이 있을 수 있습니다.\n주차장으로 문의 후 방문 부탁드립니다.</string>
+    <string name="fee">요금정보</string>
+    <string name="base_fee">주차기본요금</string>
+    <string name="additional_fee">추가비용</string>
+    <string name="payment_method">결제방법</string>
+    <string name="parking_ticket">주차권 정보</string>
+    <string name="parking_fee_per_day">1일 주차권 요금</string>
+    <string name="parking_fee_per_month">월 정기권 요금</string>
+
+
+
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

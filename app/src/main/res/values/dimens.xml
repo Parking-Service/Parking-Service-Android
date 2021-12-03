@@ -5,15 +5,56 @@
     <dimen name="dialog_card_view_corner_radius">20dp</dimen>
     <dimen name="dialog_card_view_title_text">20dp</dimen>
     <dimen name="dialog_card_view_content_text">15dp</dimen>
-    <dimen name="dialog_horizontal_margin">24dp</dimen>
-    <dimen name="dialog_top_margin">24dp</dimen>
-    <dimen name="dialog_bottom_margin">16dp</dimen>
+    <dimen name="dialog_margin_horizontal">24dp</dimen>
+    <dimen name="dialog_margin_top">24dp</dimen>
+    <dimen name="dialog_margin_bottom">16dp</dimen>
     <dimen name="dialog_height">160dp</dimen>
     <dimen name="dialog_min_width">320dp</dimen>
 
-    <dimen name="login_activity_skip_right_margin">24dp</dimen>
-    <dimen name="login_activity_logo_container_top_margin">60dp</dimen>
-    <dimen name="login_activity_skip_bottom_margin">48dp</dimen>
+    <dimen name="login_activity_skip_margin_right">24dp</dimen>
+    <dimen name="login_activity_logo_container_margin_top">60dp</dimen>
+    <dimen name="login_activity_skip_margin_bottom">48dp</dimen>
     <dimen name="login_activity_skip_text_button_text_size">17sp</dimen>
+
+    <dimen name="review_activity_image_slider_height">200dp</dimen>
+    <dimen name="container_horizontal_padding">16dp</dimen>
+    <dimen name="review_title_container_top_padding">18dp</dimen>
+    <dimen name="review_title_container_bottom_padding">12dp</dimen>
+    <dimen name="review_title_text_view_size">20sp</dimen>
+    <dimen name="review_title_text_view_padding_bottom">4dp</dimen>
+    <dimen name="review_icon_size">12dp</dimen>
+    <dimen name="review_data_text_size">12sp</dimen>
+    <dimen name="review_data_margin_between_icon_text">4dp</dimen>
+    <dimen name="review_data_margin_between_text_icon">8dp</dimen>
+    <dimen name="review_rate_text_size">32sp</dimen>
+    <dimen name="review_rate_margin_bottom">14dp</dimen>
+    <dimen name="review_layout_divider_margin_top">14dp</dimen>
+    <dimen name="review_icon_button_container_padding_horizontal">20dp</dimen>
+    <dimen name="review_title_button_text_size">12sp</dimen>
+    <dimen name="review_title_button_image_size">28dp</dimen>
+    <dimen name="review_title_button_image_margin_bottom">6dp</dimen>
+    <dimen name="container_margin_top">10dp</dimen>
+    <dimen name="review_parking_lot_introduce_container_padding_vertical">20dp</dimen>
+    <dimen name="parking_lot_introduce_title">15sp</dimen>
+    <dimen name="parking_lot_introduce_desc">13sp</dimen>
+    <dimen name="parking_lot_margin_top_between_title_desc">6dp</dimen>
+    <dimen name="parking_lot_jibun_text_background_radius">4dp</dimen>
+    <dimen name="parking_lot_jibun_text_background_stroke_width">1dp</dimen>
+    <dimen name="parking_lot_information_desc_text_size">12sp</dimen>
+    <dimen name="review_parking_lot_map_margin_top">16dp</dimen>
+
+    <dimen name="icon_button_radius">2dp</dimen>
+    <dimen name="icon_button_padding_vertical">12dp</dimen>
+    <dimen name="icon_button_icon_size">18dp</dimen>
+    <dimen name="icon_button_margin_between_icon_text">16dp</dimen>
+
+    <dimen name="corona_warning_background_radius">4dp</dimen>
+    <dimen name="corona_warning_icon_size">16dp</dimen>
+    <dimen name="corona_warning_text_size">12sp</dimen>
+    <dimen name="corona_warning_padding_vertical">8dp</dimen>
+    <dimen name="corona_warning_padding_horizontal">8dp</dimen>
+    <dimen name="corona_warning_margin_vertical">8dp</dimen>
+    <dimen name="corona_warning_icon_marign_vertical">10dp</dimen>
+
     <dimen name="fab_margin">16dp</dimen>
 </resources>

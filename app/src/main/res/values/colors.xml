@@ -14,10 +14,27 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!--Dialog-->
-    <color name="dialog_title">#1C1C1C</color>
-    <color name="dialog_content">#717171</color>
+    <!-- Dialog -->
+    <color name="dialogTitle">#1C1C1C</color>
+    <color name="dialogContent">#717171</color>
     <color name="snackbarBackground">#442C2E</color>
 
-    <!--Snack bar-->
+    <!-- Review Activity -->
+    <color name="reviewActivityBackground">#F3F3F3</color>
+    <color name="reviewActivityParkingLotNameText">#2B2B2B</color>
+    <color name="reviewActivityTitleIcon">#707070</color>
+    <color name="reviewActivityTitleText">#121212</color>
+    <color name="reviewActivityDescText">#858585</color>
+    <color name="reviewActivityDescDetailText">#656565</color>
+    <color name="reviewActivityJibunBackgroundStroke">#CDCDCD</color>
+    <color name="reviewActivityMapIcon">#5A5A5A</color>
+
+    <color name="reviewActivityCallIcon">#3C3C3C</color>
+
+    <color name="coronaWarningBackground">#CECECE</color>
+    <color name="coronaWarningIconTextColor">#595959</color>
+
+
+    <!-- Divider background -->
+    <color name="dividerColor">#CDCDCD</color>
 </resources>

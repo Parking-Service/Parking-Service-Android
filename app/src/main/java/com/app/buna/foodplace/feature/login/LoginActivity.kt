@@ -29,9 +29,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
     override val layoutResId: Int
         get() = R.layout.activity_login
     override val viewModel: LoginViewModel by viewModel()
-    private val binding: ActivityLoginBinding by lazy {
-        getViewDataBinding()!!
-    }
     private lateinit var googleLoginResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {

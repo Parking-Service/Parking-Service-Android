@@ -23,15 +23,17 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
     abstract fun initActivity()
     private var networkStatusSnackbar: Snackbar? = null
     private val compositeDisposable = CompositeDisposable()
+    val binding: T by lazy {
+        getViewDataBinding()!!
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 초기화된 layoutResId로 data binding 객체 생성
+        // Override될 layoutResId로 data binding 객체 생성
         viewDataBinding = DataBindingUtil.setContentView(this, layoutResId)
         // Live data를 사용하기 위한 lifecycleOwner 지정
         viewDataBinding?.lifecycleOwner = this@BaseActivity
-
         // viewModel의 화면 전환 MutableLiveData 감지
         viewModel.activityToStart.observe(this, {
             startActivity(Intent(this, it.first.java))
