@@ -1,6 +1,6 @@
 package com.app.buna.foodplace.model.repository.remote
 
-import com.app.buna.foodplace.model.network.dao.User
+import com.app.buna.foodplace.model.dto.User
 import com.app.buna.foodplace.model.network.retrofit.builder.RetrofitUserAPIBuilder
 
 class UserRepository {

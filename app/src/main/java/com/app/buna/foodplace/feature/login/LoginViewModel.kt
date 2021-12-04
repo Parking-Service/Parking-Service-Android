@@ -8,7 +8,7 @@ import com.app.buna.foodplace.feature.login.callback.ILoginCallback
 import com.app.buna.foodplace.feature.login.type.LoginType
 import com.app.buna.foodplace.feature.login.type.ResultType
 import com.app.buna.foodplace.global.App
-import com.app.buna.foodplace.model.network.dao.User
+import com.app.buna.foodplace.model.dto.User
 import com.app.buna.foodplace.model.repository.remote.UserRepository
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -27,9 +27,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {

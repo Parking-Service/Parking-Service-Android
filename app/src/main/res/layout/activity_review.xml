@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.buna.foodplace.feature.main.review.ReviewViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/reviewActivityBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".feature.main.review.ReviewActivity">
+
+            <ImageView
+                android:id="@+id/parking_lot_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/review_activity_image_slider_height"
+                android:orientation="horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_example_parking_lot"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/title_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingHorizontal="@dimen/container_horizontal_padding"
+                android:paddingTop="@dimen/review_title_container_top_padding"
+                android:paddingBottom="@dimen/review_title_container_bottom_padding"
+                app:layout_constraintTop_toBottomOf="@+id/parking_lot_image_view">
+
+                <TextView
+                    android:id="@+id/title_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:paddingBottom="@dimen/review_title_text_view_padding_bottom"
+                    android:text="용산 제1주차장"
+                    android:textColor="@color/reviewActivityParkingLotNameText"
+                    android:textSize="@dimen/review_title_text_view_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/review_rate_text_view"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!-- 주차장 조회수 카운트 -->
+                <ImageView
+                    android:id="@+id/view_count_image_view"
+                    android:layout_width="@dimen/review_icon_size"
+                    android:layout_height="@dimen/review_icon_size"
+                    android:src="@drawable/ic_review_view_count"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_count_text_view"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/view_count_text_view"
+                    app:tint="@color/reviewActivityTitleIcon" />
+
+                <TextView
+                    android:id="@+id/view_count_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/review_data_margin_between_icon_text"
+                    android:text="116,019"
+                    android:textSize="@dimen/review_data_text_size"
+                    app:layout_constraintLeft_toRightOf="@+id/view_count_image_view"
+                    app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+
+                <!-- 주차장 리뷰 즐겨찾기 카운트 -->
+                <ImageView
+                    android:id="@+id/favorite_count_image_view"
+                    android:layout_width="@dimen/review_icon_size"
+                    android:layout_height="@dimen/review_icon_size"
+                    android:layout_marginLeft="@dimen/review_data_margin_between_text_icon"
+                    android:src="@drawable/ic_review_favorite_count"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_count_text_view"
+                    app:layout_constraintLeft_toRightOf="@+id/view_count_text_view"
+                    app:layout_constraintTop_toTopOf="@id/view_count_text_view"
+                    app:tint="@color/reviewActivityTitleIcon" />
+
+                <TextView
+                    android:id="@+id/favorite_count_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/review_data_margin_between_icon_text"
+                    android:text="2,759"
+                    android:textSize="@dimen/review_data_text_size"
+                    app:layout_constraintLeft_toRightOf="@+id/favorite_count_image_view"
+                    app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+
+                <!-- 게시글 조회수 카운트 -->
+                <ImageView
+                    android:id="@+id/review_count_image_view"
+                    android:layout_width="@dimen/review_icon_size"
+                    android:layout_height="@dimen/review_icon_size"
+                    android:layout_marginLeft="@dimen/review_data_margin_between_text_icon"
+                    android:src="@drawable/ic_review_write_count"
+                    app:layout_constraintBottom_toBottomOf="@+id/review_count_text_view"
+                    app:layout_constraintLeft_toRightOf="@+id/favorite_count_text_view"
+                    app:layout_constraintTop_toTopOf="@id/review_count_text_view"
+                    app:tint="@color/reviewActivityTitleIcon" />
+
+                <TextView
+                    android:id="@+id/review_count_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/review_data_margin_between_icon_text"
+                    android:text="55"
+                    android:textSize="@dimen/review_data_text_size"
+                    app:layout_constraintLeft_toRightOf="@+id/review_count_image_view"
+                    app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+                <TextView
+                    android:id="@+id/review_rate_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/review_rate_margin_bottom"
+                    android:text="4.7"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/review_rate_text_size"
+                    app:layout_constraintBottom_toTopOf="@+id/title_divider"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/title_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.6dp"
+                    android:layout_marginTop="@dimen/review_layout_divider_margin_top"
+                    android:background="@color/dividerColor"
+                    app:layout_constraintTop_toBottomOf="@+id/review_count_text_view" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/review_layout_divider_margin_top"
+                    android:paddingHorizontal="@dimen/review_icon_button_container_padding_horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_divider">
+                    <!--즐겨찾기 버튼-->
+                    <LinearLayout
+                        android:id="@+id/favorite_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/visited_button">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_review_unfavorite"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/favorite"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/review_title_button_text_size" />
+                    </LinearLayout>
+
+                    <!--가봤어요 버튼-->
+                    <LinearLayout
+                        android:id="@+id/visited_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/favorite_button"
+                        app:layout_constraintRight_toLeftOf="@+id/write_review_button">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_review_unvisited" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/visited"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/review_title_button_text_size" />
+                    </LinearLayout>
+
+                    <!--리뷰작성 버튼-->
+                    <LinearLayout
+                        android:id="@+id/write_review_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/visited_button"
+                        app:layout_constraintRight_toLeftOf="@+id/add_list_button">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_write_review"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/write_review"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/review_title_button_text_size" />
+                    </LinearLayout>
+
+                    <!--마이리스트 버튼-->
+                    <LinearLayout
+                        android:id="@+id/add_list_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/write_review_button"
+                        app:layout_constraintRight_toRightOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_review_add_list"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_list"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/review_title_button_text_size" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/information_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/container_margin_top"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/container_horizontal_padding"
+                android:paddingVertical="@dimen/review_parking_lot_introduce_container_padding_vertical"
+                app:layout_constraintTop_toBottomOf="@id/title_container">
+
+                <TextView
+                    android:id="@+id/parking_lot_information_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parking_lot_introduce"
+                    android:textColor="@color/TitleTextColor"
+                    android:textSize="@dimen/parking_lot_introduce_title"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--영업 시간-->
+                <TextView
+                    android:id="@+id/parking_lot_operation_time_information_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/operation_time"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_information_title" />
+
+                <!-- 평일 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/weekday"
+                    android:textColor="@color/minorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_information_title" />
+
+                <TextView
+                    android:id="@+id/parking_lot_operation_time_weekday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="09:00 - 22:00"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_information_title" />
+
+                <!-- 토요일 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/saturday"
+                    android:textColor="@color/minorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_weekday" />
+
+                <TextView
+                    android:id="@+id/parking_lot_operation_time_saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="00:00 - 23:59"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_weekday" />
+
+                <!-- 공휴일 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/holiday"
+                    android:textColor="@color/minorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_saturday" />
+
+                <TextView
+                    android:id="@+id/parking_lot_operation_time_holiday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="00:00 - 23:59"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_saturday" />
+
+                <LinearLayout
+                    android:id="@+id/corona_warning_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/corona_warning_margin_vertical"
+                    android:background="@drawable/bg_corona_warning"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/corona_warning_padding_horizontal"
+                    android:paddingVertical="@dimen/corona_warning_padding_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_holiday">
+
+                    <ImageView
+                        android:layout_width="@dimen/corona_warning_icon_size"
+                        android:layout_height="@dimen/corona_warning_icon_size"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="@dimen/corona_warning_icon_marign_vertical"
+                        android:src="@drawable/ic_warning"
+                        app:tint="@color/coronaWarningIconTextColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/corona_warning_desc"
+                        android:textColor="@color/coronaWarningIconTextColor"
+                        android:textSize="@dimen/corona_warning_text_size" />
+                </LinearLayout>
+
+
+                <!-- 요금 정보-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/review_parking_lot_map_margin_top"
+                    android:text="@string/fee"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/corona_warning_container" />
+
+                <!--유료 / 무료-->
+                <TextView
+                    android:id="@+id/fee_information_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/review_parking_lot_map_margin_top"
+                    android:text="유료"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/corona_warning_container" />
+
+                <!-- 주차기본요금 텍스트 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/base_fee"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fee_information_text_view" />
+
+                <!--주차 기본 요금 수치-->
+                <TextView
+                    android:id="@+id/fee_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="300원"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fee_information_text_view" />
+
+                <!--추가 단위 시간 당 요금-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/additional_fee"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fee_text_view" />
+
+                <TextView
+                    android:id="@+id/additional_fee_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="15분당 200원"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fee_text_view" />
+
+                <!--결제 방법-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/payment_method"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/additional_fee_text_view" />
+
+                <TextView
+                    android:id="@+id/payment_method_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="현금, 카드"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/additional_fee_text_view" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/parking_ticket_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/container_margin_top"
+                android:background="@color/white"
+                android:paddingHorizontal="@dimen/container_horizontal_padding"
+                android:paddingTop="@dimen/review_title_container_top_padding"
+                android:paddingBottom="@dimen/review_title_container_bottom_padding"
+                app:layout_constraintTop_toBottomOf="@+id/information_container">
+
+                <TextView
+                    android:id="@+id/parking_ticket_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parking_ticket"
+                    android:textColor="@color/TitleTextColor"
+                    android:textSize="@dimen/parking_lot_introduce_title"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 1일 주차권 정보-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/parking_fee_per_day"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
+
+                <!-- 1일 주차권 시간 -->
+                <TextView
+                    android:id="@+id/parking_time_day_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="4.5시간"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toLeftOf="@+id/parking_time_day_divider"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
+
+                <TextView
+                    android:id="@+id/parking_time_day_divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text=" · "
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toLeftOf="@+id/parking_fee_day_text_view"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
+
+                <!-- 1일 주차권 비용 -->
+                <TextView
+                    android:id="@+id/parking_fee_day_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="5,000원"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
+
+
+                <!-- 1달 주차권 정보-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="@string/parking_fee_per_month"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_time_day_text_view" />
+
+                <!-- 1일 주차권 비용 -->
+                <TextView
+                    android:id="@+id/parking_fee_month_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="70,000원"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_time_day_text_view" />
+
+                <!-- 기타 특이사항 -->
+                <TextView
+                    android:id="@+id/parking_fee_remark_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/review_parking_lot_map_margin_top"
+                    android:text="정상금액 기준: 경차60퍼센트할인, 장애인2시간면제 50퍼센트할인, 친환경적, 저공해 자동차 60퍼센트할인, 성실납세자 면제(1년)"
+                    android:textColor="@color/majorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_fee_month_text_view" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/map_address_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/container_margin_top"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/container_horizontal_padding"
+                android:paddingVertical="@dimen/review_parking_lot_introduce_container_padding_vertical"
+                app:layout_constraintTop_toBottomOf="@id/parking_ticket_container">
+
+                <TextView
+                    android:id="@+id/parking_lot_road_name_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="경기도 고양시 덕양구 삼송로185번길 5 1F"
+                    android:textColor="@color/TitleTextColor"
+                    android:textSize="@dimen/parking_lot_introduce_title"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/parking_lot_jibun_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_jibun_text"
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/jibun"
+                    android:textColor="@color/minorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/parking_lot_jibun_text_view" />
+
+                <TextView
+                    android:id="@+id/parking_lot_jibun_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
+                    android:text="경기도 고양시 덕양구 삼송동 33-13 1F"
+                    android:textColor="@color/minorDescTextColor"
+                    android:textSize="@dimen/parking_lot_information_desc_text_size"
+                    app:layout_constraintLeft_toRightOf="@+id/parking_lot_jibun_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_road_name_text_view" />
+
+                <!-- 카카오 맵 컨테이너 -->
+                <RelativeLayout
+                    android:id="@+id/kakao_map_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="@dimen/review_parking_lot_map_margin_top"
+                    android:background="@color/snackbarBackground"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/parking_lot_jibun_text_view" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/review_icon_button_container_padding_horizontal"
+                    android:paddingHorizontal="@dimen/review_icon_button_container_padding_horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/kakao_map_container">
+
+
+                    <!-- 길 찾기 버튼 -->
+                    <LinearLayout
+                        android:id="@+id/find_road_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/navigation_button"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_review_find_road"
+                            app:tint="@color/reviewActivityMapIcon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/find_road"
+                            android:textColor="@color/reviewActivityMapIcon"
+                            android:textSize="@dimen/review_title_button_text_size" />
+
+                    </LinearLayout>
+
+                    <!-- 네비게이션 버튼 -->
+                    <LinearLayout
+                        android:id="@+id/navigation_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintLeft_toRightOf="@+id/find_road_button"
+                        app:layout_constraintRight_toLeftOf="@+id/call_taxi_button"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_review_navigation"
+                            app:tint="@color/reviewActivityMapIcon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/navigation"
+                            android:textColor="@color/reviewActivityMapIcon"
+                            android:textSize="@dimen/review_title_button_text_size" />
+
+                    </LinearLayout>
+
+                    <!-- 길 찾기 버튼 -->
+                    <LinearLayout
+                        android:id="@+id/call_taxi_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintLeft_toRightOf="@+id/navigation_button"
+                        app:layout_constraintRight_toLeftOf="@+id/copy_address_button"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_review_call_taxi"
+                            app:tint="@color/reviewActivityMapIcon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/call_taxi"
+                            android:textColor="@color/reviewActivityMapIcon"
+                            android:textSize="@dimen/review_title_button_text_size" />
+
+                    </LinearLayout>
+
+                    <!-- 길 찾기 버튼 -->
+                    <LinearLayout
+                        android:id="@+id/copy_address_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintLeft_toRightOf="@+id/call_taxi_button"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/review_title_button_image_size"
+                            android:layout_height="@dimen/review_title_button_image_size"
+                            android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"
+                            android:src="@drawable/ic_review_copy_address"
+                            app:tint="@color/reviewActivityMapIcon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/copy_address"
+                            android:textColor="@color/reviewActivityMapIcon"
+                            android:textSize="@dimen/review_title_button_text_size" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/call_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/review_layout_divider_margin_top"
+                    android:background="@drawable/bg_jibun_text"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingVertical="@dimen/icon_button_padding_vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/option_container">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_button_icon_size"
+                        android:layout_height="@dimen/icon_button_icon_size"
+                        android:layout_marginRight="@dimen/icon_button_margin_between_icon_text"
+                        android:src="@drawable/ic_review_call"
+                        app:tint="@color/reviewActivityCallIcon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/call_parking_lot"
+                        android:textColor="@color/reviewActivityMapIcon" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!-- 리뷰 리사이클러뷰 -->
+            <LinearLayout
+                android:id="@+id/review_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/container_margin_top"
+                android:background="@color/white"
+                android:paddingVertical="@dimen/review_parking_lot_introduce_container_padding_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/map_address_container"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/review_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parking_review"
+                    android:textColor="@color/TitleTextColor"
+                    android:textSize="@dimen/parking_lot_introduce_title"
+                    android:layout_marginHorizontal="@dimen/review_margin_horizontal"
+                    android:layout_marginBottom="12dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/review_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_review"
+                    android:scrollbars="none"/>
+
+                <TextView
+                    android:id="@+id/review_more_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parking_review_more"
+                    android:textColor="@color/colorPrimary"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:textSize="@dimen/text_button_size"
+                    android:layout_marginTop="@dimen/review_more_button_margin_top"
+                    android:layout_marginHorizontal="@dimen/review_margin_horizontal"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="right|center"/>
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

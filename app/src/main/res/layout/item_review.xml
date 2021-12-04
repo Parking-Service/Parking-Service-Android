@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginHorizontal="@dimen/review_margin_horizontal"
+        android:layout_marginVertical="@dimen/review_margin_vertical"
+        android:clipToPadding="false"
+        app:cardCornerRadius="@dimen/review_card_view_radius"
+        app:cardElevation="@dimen/review_card_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="@dimen/review_padding_vertical"
+            android:paddingHorizontal="@dimen/review_padding_horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image_view"
+                android:layout_width="@dimen/review_profile_size"
+                android:layout_height="@dimen/review_profile_size"
+                android:src="@drawable/img_default_profile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/nickname_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BuNa"
+                android:textColor="@color/TitleTextColor"
+                android:textSize="@dimen/parking_lot_introduce_title"
+                app:layout_constraintLeft_toRightOf="@+id/profile_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="12dp"/>
+
+            <TextView
+                android:id="@+id/review_date_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="2021년 12월 03일 16:15"
+                android:textColor="@color/minorDescTextColor"
+                android:textSize="@dimen/parking_lot_information_desc_text_size"
+                android:maxLines="2"
+                app:layout_constraintLeft_toRightOf="@+id/profile_image_view"
+                app:layout_constraintTop_toBottomOf="@+id/nickname_text_view"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="12dp"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/review_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="주차공간이 협소하고, 비용이 너무 비쌉니다. 아마 다시는 안 갈 것 같네요.."
+                android:textColor="@color/minorDescTextColor"
+                android:textSize="@dimen/parking_lot_information_desc_text_size"
+                android:maxLines="2"
+                app:layout_constraintLeft_toRightOf="@+id/profile_image_view"
+                app:layout_constraintTop_toBottomOf="@+id/review_date_text_view"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"/>
+
+            <RatingBar
+                android:id="@+id/rate_"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/parking_lot_introduce_title"
+                android:numStars="5"
+                android:stepSize="1"
+                android:rating="3"
+                android:isIndicator="true"
+                app:layout_constraintLeft_toRightOf="@+id/nickname_text_view"
+                android:layout_marginLeft="6dp"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                app:layout_constraintTop_toTopOf="@+id/nickname_text_view"
+                app:layout_constraintBottom_toBottomOf="@+id/nickname_text_view"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

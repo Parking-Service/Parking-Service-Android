@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/parking_lot_jibun_text_background_radius"/>
+    <stroke android:color="@color/reviewActivityJibunBackgroundStroke" android:width="@dimen/parking_lot_jibun_text_background_stroke_width"/>
+    <solid android:color="@color/white"/>
+
+
+</shape>

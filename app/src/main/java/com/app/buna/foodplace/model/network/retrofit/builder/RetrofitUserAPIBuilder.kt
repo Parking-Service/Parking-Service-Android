@@ -1,7 +1,7 @@
 package com.app.buna.foodplace.model.network.retrofit.builder
 
 import android.util.Log
-import com.app.buna.foodplace.model.network.dao.User
+import com.app.buna.foodplace.model.dto.User
 import com.app.buna.foodplace.model.network.retrofit.api.UserAPI
 import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Call
