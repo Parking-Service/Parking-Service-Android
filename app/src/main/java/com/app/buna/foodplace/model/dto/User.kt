@@ -1,4 +1,4 @@
-package com.app.buna.foodplace.model.network.dao
+package com.app.buna.foodplace.model.dto
 
 import com.google.gson.annotations.SerializedName
 

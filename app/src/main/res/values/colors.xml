@@ -23,9 +23,9 @@
     <color name="reviewActivityBackground">#F3F3F3</color>
     <color name="reviewActivityParkingLotNameText">#2B2B2B</color>
     <color name="reviewActivityTitleIcon">#707070</color>
-    <color name="reviewActivityTitleText">#121212</color>
-    <color name="reviewActivityDescText">#858585</color>
-    <color name="reviewActivityDescDetailText">#656565</color>
+    <color name="TitleTextColor">#121212</color>
+    <color name="minorDescTextColor">#858585</color>
+    <color name="majorDescTextColor">#656565</color>
     <color name="reviewActivityJibunBackgroundStroke">#CDCDCD</color>
     <color name="reviewActivityMapIcon">#5A5A5A</color>
 

@@ -41,13 +41,15 @@
 
                 <TextView
                     android:id="@+id/title_text_view"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
                     android:paddingBottom="@dimen/review_title_text_view_padding_bottom"
-                    android:text="용산 제1 주차장"
+                    android:text="용산 제1주차장"
                     android:textColor="@color/reviewActivityParkingLotNameText"
                     android:textSize="@dimen/review_title_text_view_size"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/review_rate_text_view"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -279,7 +281,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/parking_lot_introduce"
-                    android:textColor="@color/reviewActivityTitleText"
+                    android:textColor="@color/TitleTextColor"
                     android:textSize="@dimen/parking_lot_introduce_title"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -292,7 +294,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/operation_time"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_information_title" />
@@ -304,7 +306,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/weekday"
-                    android:textColor="@color/reviewActivityDescText"
+                    android:textColor="@color/minorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_information_title" />
@@ -316,7 +318,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="09:00 - 22:00"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_information_title" />
@@ -328,7 +330,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/saturday"
-                    android:textColor="@color/reviewActivityDescText"
+                    android:textColor="@color/minorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_weekday" />
@@ -340,7 +342,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="00:00 - 23:59"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_weekday" />
@@ -352,7 +354,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/holiday"
-                    android:textColor="@color/reviewActivityDescText"
+                    android:textColor="@color/minorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_saturday" />
@@ -364,7 +366,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="00:00 - 23:59"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_operation_time_saturday" />
@@ -404,7 +406,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/review_parking_lot_map_margin_top"
                     android:text="@string/fee"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/corona_warning_container" />
@@ -416,7 +418,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/review_parking_lot_map_margin_top"
                     android:text="유료"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/corona_warning_container" />
@@ -428,7 +430,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/base_fee"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fee_information_text_view" />
@@ -440,7 +442,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="300원"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fee_information_text_view" />
@@ -452,7 +454,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/additional_fee"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fee_text_view" />
@@ -463,7 +465,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="15분당 200원"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fee_text_view" />
@@ -475,7 +477,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/payment_method"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/additional_fee_text_view" />
@@ -486,7 +488,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="현금, 카드"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/additional_fee_text_view" />
@@ -508,7 +510,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/parking_ticket"
-                    android:textColor="@color/reviewActivityTitleText"
+                    android:textColor="@color/TitleTextColor"
                     android:textSize="@dimen/parking_lot_introduce_title"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -520,7 +522,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/parking_fee_per_day"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
@@ -532,7 +534,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="4.5시간"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toLeftOf="@+id/parking_time_day_divider"
                     app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
@@ -543,7 +545,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text=" · "
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toLeftOf="@+id/parking_fee_day_text_view"
                     app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
@@ -555,7 +557,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="5,000원"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_ticket_title" />
@@ -568,7 +570,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="@string/parking_fee_per_month"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_time_day_text_view" />
@@ -580,7 +582,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="70,000원"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_time_day_text_view" />
@@ -593,7 +595,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/review_parking_lot_map_margin_top"
                     android:text="정상금액 기준: 경차60퍼센트할인, 장애인2시간면제 50퍼센트할인, 친환경적, 저공해 자동차 60퍼센트할인, 성실납세자 면제(1년)"
-                    android:textColor="@color/reviewActivityDescDetailText"
+                    android:textColor="@color/majorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_fee_month_text_view" />
@@ -615,7 +617,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="경기도 고양시 덕양구 삼송로185번길 5 1F"
-                    android:textColor="@color/reviewActivityTitleText"
+                    android:textColor="@color/TitleTextColor"
                     android:textSize="@dimen/parking_lot_introduce_title"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -627,7 +629,7 @@
                     android:background="@drawable/bg_jibun_text"
                     android:paddingHorizontal="4dp"
                     android:text="@string/jibun"
-                    android:textColor="@color/reviewActivityDescText"
+                    android:textColor="@color/minorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/parking_lot_jibun_text_view" />
@@ -639,13 +641,13 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="@dimen/parking_lot_margin_top_between_title_desc"
                     android:text="경기도 고양시 덕양구 삼송동 33-13 1F"
-                    android:textColor="@color/reviewActivityDescText"
+                    android:textColor="@color/minorDescTextColor"
                     android:textSize="@dimen/parking_lot_information_desc_text_size"
                     app:layout_constraintLeft_toRightOf="@+id/parking_lot_jibun_icon"
                     app:layout_constraintTop_toBottomOf="@+id/parking_lot_road_name_text_view" />
 
                 <!-- 카카오 맵 컨테이너 -->
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/kakao_map_container"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
@@ -813,13 +815,48 @@
 
 
             <!-- 리뷰 리사이클러뷰 -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/review_recycler_view"
+            <LinearLayout
+                android:id="@+id/review_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/map_address_container"
+                android:layout_marginTop="@dimen/container_margin_top"
                 android:background="@color/white"
-                android:layout_marginTop="@dimen/container_margin_top"/>
+                android:paddingVertical="@dimen/review_parking_lot_introduce_container_padding_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/map_address_container"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/review_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parking_review"
+                    android:textColor="@color/TitleTextColor"
+                    android:textSize="@dimen/parking_lot_introduce_title"
+                    android:layout_marginHorizontal="@dimen/review_margin_horizontal"
+                    android:layout_marginBottom="12dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/review_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_review"
+                    android:scrollbars="none"/>
+
+                <TextView
+                    android:id="@+id/review_more_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parking_review_more"
+                    android:textColor="@color/colorPrimary"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:textSize="@dimen/text_button_size"
+                    android:layout_marginTop="@dimen/review_more_button_margin_top"
+                    android:layout_marginHorizontal="@dimen/review_margin_horizontal"
+                    android:layout_marginBottom="12dp"
+                    android:layout_gravity="right|center"/>
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

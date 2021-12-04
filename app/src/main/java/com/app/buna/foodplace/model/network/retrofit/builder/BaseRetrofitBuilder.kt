@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 open class BaseRetrofitBuilder {
-    private val baseUrl = "http://49.165.181.24:8080"
+    open val baseUrl = "http://49.165.181.24:8080"
     private val gson = GsonBuilder()
         .setLenient()
         .create()

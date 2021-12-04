@@ -8,7 +8,7 @@ import com.app.buna.foodplace.feature.login.callback.ILoginCallback
 import com.app.buna.foodplace.feature.login.type.LoginType
 import com.app.buna.foodplace.feature.login.type.ResultType
 import com.app.buna.foodplace.global.App
-import com.app.buna.foodplace.model.network.dao.User
+import com.app.buna.foodplace.model.dto.User
 import com.app.buna.foodplace.model.repository.remote.UserRepository
 import com.facebook.AccessToken
 import com.facebook.CallbackManager

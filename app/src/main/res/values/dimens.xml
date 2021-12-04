@@ -48,6 +48,15 @@
     <dimen name="icon_button_icon_size">18dp</dimen>
     <dimen name="icon_button_margin_between_icon_text">16dp</dimen>
 
+    <dimen name="review_margin_horizontal">16dp</dimen>
+    <dimen name="review_margin_vertical">6dp</dimen>
+    <dimen name="review_card_view_radius">4dp</dimen>
+    <dimen name="review_card_elevation">2dp</dimen>
+    <dimen name="review_profile_size">40dp</dimen>
+    <dimen name="review_padding_vertical">12dp</dimen>
+    <dimen name="review_padding_horizontal">12dp</dimen>
+    <dimen name="review_more_button_margin_top">16dp</dimen>
+
     <dimen name="corona_warning_background_radius">4dp</dimen>
     <dimen name="corona_warning_icon_size">16dp</dimen>
     <dimen name="corona_warning_text_size">12sp</dimen>
@@ -55,6 +64,8 @@
     <dimen name="corona_warning_padding_horizontal">8dp</dimen>
     <dimen name="corona_warning_margin_vertical">8dp</dimen>
     <dimen name="corona_warning_icon_marign_vertical">10dp</dimen>
+
+    <dimen name="text_button_size">15sp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
 </resources>

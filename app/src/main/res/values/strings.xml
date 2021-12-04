@@ -38,6 +38,8 @@
     <string name="parking_ticket">주차권 정보</string>
     <string name="parking_fee_per_day">1일 주차권 요금</string>
     <string name="parking_fee_per_month">월 정기권 요금</string>
+    <string name="parking_review">이용자 리뷰</string>
+    <string name="parking_review_more">더 보기 ></string>
 
 
 
