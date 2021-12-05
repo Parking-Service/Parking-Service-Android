@@ -19,12 +19,13 @@ object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
         val api = getRetrofit().create(ParkingLotAPI::class.java)
 
         // 1페이지의 데이터 10개 가져오기
-        api.getParkingLot(API_KEY, prkplceNm = "송현주공시장 공영 주차장").enqueue(object : Callback<ParkingLot> {
+        api.getParkingLot(API_KEY).enqueue(object : Callback<ParkingLot> {
             override fun onResponse(call: Call<ParkingLot>, response: Response<ParkingLot>) {
-                // result code가 00이면 정상
+                
                 val resultCode = response.body()?.response?.header?.resultcode
                 val resultMessage = response.body()?.response?.header?.resultmsg
 
+                // result code가 00이면 정상적으로 데이터를 가져옴
                 if(resultCode == "00") {
                     response.body()?.response?.body?.items?.forEach { data ->
                         // 주차장 이름 출력

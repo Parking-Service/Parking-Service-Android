@@ -55,8 +55,12 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
 
     val kakaoLoginCallback : (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) { // 에러가 존재한다면 실패
-            Timber.e("카카오 로그인 실패- $error")
-            loginCallback?.onSignIn(LoginType.KAKAO_TALK, ResultType.FAILURE)
+            Timber.e("카카오 로그인 실패- ${error.cause}")
+            if(error.cause == null) {
+                loginCallback?.onSignIn(LoginType.KAKAO_TALK, ResultType.CANCELED)
+            } else {
+                loginCallback?.onSignIn(LoginType.KAKAO_TALK, ResultType.FAILURE)
+            }
         } else if (token != null) { // 토큰이 비어있지 않다면 Success
 
             // 로그인 유저 정보 획득

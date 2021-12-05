@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Food Place</string>
+    <string name="app_name">어따세워</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Network status snack bar -->
@@ -41,7 +41,19 @@
     <string name="parking_review">이용자 리뷰</string>
     <string name="parking_review_more">더 보기 ></string>
 
+    <!-- marker -->
+    <string name="free">무료</string>
+    <string name="share">공유</string>
 
+    <!--main-->
+    <string name="search_bar_text">목적지를 입력해주세요!</string>
+
+
+
+    <!-- permissions -->
+    <string name="permission_location_alert">%s을 실행하려면 위치 접근 권한이 필요해요!</string>
+    <string name="permission_location_denied_1">앱을 다시 실행하여 위치 권한을 허용해주세요!</string>
+    <string name="permission_location_denied_2">설정(앱 정보)에서 위치 권한을 허용해주세요!</string>
 
 
     <!-- Strings used for fragments for navigation -->

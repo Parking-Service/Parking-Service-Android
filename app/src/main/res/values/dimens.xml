@@ -65,6 +65,23 @@
     <dimen name="corona_warning_margin_vertical">8dp</dimen>
     <dimen name="corona_warning_icon_marign_vertical">10dp</dimen>
 
+    <dimen name="marker_padding_horizontal">4dp</dimen>
+    <dimen name="marker_radius">48dp</dimen>
+    <dimen name="marker_stroke_width">1dp</dimen>
+    <dimen name="marker_icon_text_view_size">28dp</dimen>
+    <dimen name="marker_icon_text_size">12dp</dimen>
+    <dimen name="marker_fee_text_size">17dp</dimen>
+    <dimen name="marker_margin_left">4dp</dimen>
+
+    <!-- content_main_top.xml -->
+    <dimen name="content_main_menu_bar_padding_horizontal">16dp</dimen>
+    <dimen name="content_main_menu_bar_padding_vertical">13dp</dimen>
+    <dimen name="content_main_menu_bar_margin_horizontal">26dp</dimen>
+    <dimen name="content_main_menu_bar_margin_vertical">16dp</dimen>
+    <dimen name="content_main_menu_bar_icon_size">22dp</dimen>
+    <dimen name="content_main_search_bar_text_size">17dp</dimen>
+    <dimen name="content_main_menu_bar_horizontal_margin_horizontal">10dp</dimen>
+
     <dimen name="text_button_size">15sp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
