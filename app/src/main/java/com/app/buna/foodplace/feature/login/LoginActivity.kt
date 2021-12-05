@@ -98,6 +98,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
                     Timber.e(e.message)
                 }
             }
+            viewModel.isLoading.value = false // 로그인 로딩 종료
         }
     }
 

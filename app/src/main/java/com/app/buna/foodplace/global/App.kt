@@ -3,8 +3,10 @@ package com.app.buna.foodplace.global
 import android.app.Application
 import android.content.Context
 import com.app.buna.foodplace.R
+import com.app.buna.foodplace.di.MainViewModelModule
+import com.app.buna.foodplace.di.ReviewViewModelModule
 import com.app.buna.foodplace.di.repositoryModule
-import com.app.buna.foodplace.di.viewModelModule
+import com.app.buna.foodplace.di.loginViewModelModule
 import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,7 +25,7 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
             modules(repositoryModule)
-            modules(viewModelModule)
+            modules(listOf(loginViewModelModule, ReviewViewModelModule, MainViewModelModule))
         }
     }
 

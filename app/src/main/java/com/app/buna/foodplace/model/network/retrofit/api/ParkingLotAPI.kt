@@ -12,8 +12,6 @@ interface ParkingLotAPI {
         @Query("serviceKey") apiKey: String,
         @Query("pageNo") pageNo: Int = 0,
         @Query("numOfRows") numOfRows: Int = 100,
-        //@Query("rdnmadr") newAddress: String,
-        @Query("prkplceNm") prkplceNm: String,
-        @Query("type") type: String = "xml"
+        @Query("type") type: String = "json"
     ): Call<ParkingLot>
 }

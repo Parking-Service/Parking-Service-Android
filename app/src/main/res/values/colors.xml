@@ -34,6 +34,17 @@
     <color name="coronaWarningBackground">#CECECE</color>
     <color name="coronaWarningIconTextColor">#595959</color>
 
+    <!--Main Activity-->
+    <color name="mainActivityFabTint">#434343</color>
+    <color name="mainSearchBarText">#8E8E8E</color>
+    <color name="mainVoiceIconColor">#333333</color>
+
+
+    <!-- Marker color -->
+    <color name="shareMarkerBackround">@color/colorPrimary</color>
+    <color name="markerStrokeColor">#3A3A3A</color>
+    <color name="markerIconTextColor">#3A3A3A</color>
+    <color name="markerFeeTextColor">#ffffff</color>
 
     <!-- Divider background -->
     <color name="dividerColor">#CDCDCD</color>
