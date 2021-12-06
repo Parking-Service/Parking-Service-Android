@@ -23,4 +23,10 @@
 
     <style name="Theme.FoodPlace.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- navigation drawer style -->
+    <style name="DrawerLayoutTextStyle" parent="Widget.AppCompat.TextView">
+        <!-- text size in menu-->
+        <item name="android:textSize">@dimen/navigation_menu_text_size</item>
+    </style>
+
 </resources>

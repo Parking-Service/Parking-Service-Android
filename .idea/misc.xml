@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/drawable/bg_inquire_button.xml" value="0.26564102564102565" />
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/layout/activity_review.xml" value="0.4" />
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/layout/content_main.xml" value="0.1296875" />
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/layout/content_main_top.xml" value="0.134375" />
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/layout/item_review.xml" value="0.41708542713567837" />
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/layout/layout_main_nav_header.xml" value="0.264" />
+        <entry key="..\:/Users/joon/AndroidStudioProjects/FoodPlace/app/src/main/res/menu/navigation_menu.xml" value="0.4" />
         <entry key="..\:/android_project/FoodPlace/app/src/main/res/drawable/bg_circle.xml" value="0.25729166666666664" />
         <entry key="..\:/android_project/FoodPlace/app/src/main/res/drawable/bg_corona_warning_desc.xml" value="0.3592592592592593" />
         <entry key="..\:/android_project/FoodPlace/app/src/main/res/drawable/bg_icon_button_background.xml" value="0.3592592592592593" />
@@ -33,7 +41,7 @@
       <item index="0" class="java.lang.String" itemvalue="android.annotation.SuppressLint" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -5,35 +5,96 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.app.buna.foodplace.feature.main.MainViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.main.MainActivity">
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
 
-        <include android:id="@+id/main_container"
-            layout="@layout/content_main" />
-        <include layout="@layout/content_main_top"
-            android:layout_marginHorizontal="@dimen/content_main_menu_bar_margin_horizontal"
-            android:layout_marginTop="@dimen/content_main_menu_bar_margin_vertical"
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="match_parent"
+            tools:context=".feature.main.MainActivity">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            <include
+                android:id="@+id/main_container"
+                layout="@layout/content_main" />
+
+            <include
+                android:id="@+id/search_bar_container"
+                layout="@layout/content_main_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/content_main_menu_bar_margin_horizontal"
+                android:layout_marginTop="@dimen/content_main_menu_bar_margin_vertical"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/location_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:onClick="@{viewModel::onClickLocationFab}"
+                app:backgroundTint="@color/white"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:rippleColor="@android:color/transparent"
+                app:srcCompat="@drawable/ic_gps_double_unactive"
+                app:tint="@color/locationFabUnActive" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            app:backgroundTint="@color/white"
-            app:tint="@color/mainActivityFabTint"
-            app:srcCompat="@drawable/ic_gps"
-            app:fabSize="normal"
-            app:rippleColor="@android:color/transparent"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/layout_main_nav_header"
+            app:menu="@menu/navigation_menu"
+            app:itemTextAppearance="@style/DrawerLayoutTextStyle">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bg_inquire_button_height"
+                    android:background="@drawable/bg_inquire_button"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/inquire"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/ic_chat"
+                        app:tint="@color/white"/>
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 </layout>

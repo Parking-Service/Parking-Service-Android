@@ -25,6 +25,10 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
             android:theme="@style/Theme.FoodPlace.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".feature.common.base.BaseActivity"
@@ -32,11 +36,7 @@
         <activity
             android:name=".feature.login.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"

@@ -17,7 +17,8 @@
     <!-- Dialog -->
     <color name="dialogTitle">#1C1C1C</color>
     <color name="dialogContent">#717171</color>
-    <color name="snackbarBackground">#442C2E</color>
+    <color name="snackbarBackground">#FFFFFF</color>
+    <color name="snackbarTextColor">#363636</color>
 
     <!-- Review Activity -->
     <color name="reviewActivityBackground">#F3F3F3</color>
@@ -28,17 +29,15 @@
     <color name="majorDescTextColor">#656565</color>
     <color name="reviewActivityJibunBackgroundStroke">#CDCDCD</color>
     <color name="reviewActivityMapIcon">#5A5A5A</color>
-
     <color name="reviewActivityCallIcon">#3C3C3C</color>
-
     <color name="coronaWarningBackground">#CECECE</color>
     <color name="coronaWarningIconTextColor">#595959</color>
 
     <!--Main Activity-->
-    <color name="mainActivityFabTint">#434343</color>
+    <color name="locationFabUnActive">#434343</color>
+    <color name="locationFabActive">@color/colorPrimary</color>
     <color name="mainSearchBarText">#8E8E8E</color>
     <color name="mainVoiceIconColor">#333333</color>
-
 
     <!-- Marker color -->
     <color name="shareMarkerBackround">@color/colorPrimary</color>
@@ -46,6 +45,11 @@
     <color name="markerIconTextColor">#3A3A3A</color>
     <color name="markerFeeTextColor">#ffffff</color>
 
+    <!--Navigation-->
+    <color name="inquireButtonBackground">#F37474</color>
+
+    <!-- Circle Image View  -->
+    <color name="circleImageViewBorderColor">#CDCDCD</color>
     <!-- Divider background -->
     <color name="dividerColor">#CDCDCD</color>
 </resources>

@@ -5,6 +5,10 @@
     <!-- Network status snack bar -->
     <string name="snack_bar_content_internet_disconnected">인터넷 연결이 끊겼습니다.\n네트워크 상태를 확인해주세요!</string> <!--network is not conneceted-->
 
+    <!-- GPS status snack bar -->
+    <string name="snack_bar_content_gps_disconnected">위치 서비스가 꺼져 있습니다.\n위치 기능 사용을 설정하시겠습니까?</string> <!--network is not conneceted-->
+
+
     <!-- others -->
     <string name="ok">확인</string>
 
@@ -45,16 +49,27 @@
     <string name="free">무료</string>
     <string name="share">공유</string>
 
-    <!--main-->
+    <!-- content_main_top.xml -->
     <string name="search_bar_text">목적지를 입력해주세요!</string>
 
-
+    <!-- layout_main_nav -->
+    <string name="require_login">로그인을 해주세요.</string>
+    <string name="no_data">로그인 정보</string>
+    <string name="menu_notice">공지사항</string>
+    <string name="menu_favorite">즐겨찾기</string>
+    <string name="menu_guide">서비스 이용안내</string>
+    <string name="menu_suggest_edit">정보수정제안</string>
+    <string name="menu_setting">환경설정</string>
+    <string name="inquire">1:1 문의하기</string>
 
     <!-- permissions -->
     <string name="permission_location_alert">%s을 실행하려면 위치 접근 권한이 필요해요!</string>
     <string name="permission_location_denied_1">앱을 다시 실행하여 위치 권한을 허용해주세요!</string>
     <string name="permission_location_denied_2">설정(앱 정보)에서 위치 권한을 허용해주세요!</string>
 
+
+    <!-- onBackPressed -->
+    <string name="backpress_alert">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

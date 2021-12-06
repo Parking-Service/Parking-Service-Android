@@ -18,128 +18,122 @@ data class Response(
     val body: Body
 )
 
-data class Body(
-    @Expose
-    @SerializedName("items")
-    val items: List<Items>,
-    @Expose
-    @SerializedName("totalCount")
-    val totalcount: String,
-    @Expose
-    @SerializedName("numOfRows")
-    val numofrows: String,
-    @Expose
-    @SerializedName("pageNo")
-    val pageno: String
-)
-
-data class Items(
-    @Expose
-    @SerializedName("prkplceNo")
-    val prkplceno: String,
-    @Expose
-    @SerializedName("prkplceNm")
-    val prkplcenm: String,
-    @Expose
-    @SerializedName("prkplceSe")
-    val prkplcese: String,
-    @Expose
-    @SerializedName("prkplceType")
-    val prkplcetype: String,
-    @Expose
-    @SerializedName("rdnmadr")
-    val rdnmadr: String,
-    @Expose
-    @SerializedName("lnmadr")
-    val lnmadr: String,
-    @Expose
-    @SerializedName("prkcmprt")
-    val prkcmprt: String,
-    @Expose
-    @SerializedName("feedingSe")
-    val feedingse: String,
-    @Expose
-    @SerializedName("enforceSe")
-    val enforcese: String,
-    @Expose
-    @SerializedName("operDay")
-    val operday: String,
-    @Expose
-    @SerializedName("weekdayOperOpenHhmm")
-    val weekdayoperopenhhmm: String,
-    @Expose
-    @SerializedName("weekdayOperColseHhmm")
-    val weekdayopercolsehhmm: String,
-    @Expose
-    @SerializedName("satOperOperOpenHhmm")
-    val satoperoperopenhhmm: String,
-    @Expose
-    @SerializedName("satOperCloseHhmm")
-    val satoperclosehhmm: String,
-    @Expose
-    @SerializedName("holidayOperOpenHhmm")
-    val holidayoperopenhhmm: String,
-    @Expose
-    @SerializedName("holidayCloseOpenHhmm")
-    val holidaycloseopenhhmm: String,
-    @Expose
-    @SerializedName("parkingchrgeInfo")
-    val parkingchrgeinfo: String,
-    @Expose
-    @SerializedName("basicTime")
-    val basictime: String,
-    @Expose
-    @SerializedName("basicCharge")
-    val basiccharge: String,
-    @Expose
-    @SerializedName("addUnitTime")
-    val addunittime: String,
-    @Expose
-    @SerializedName("addUnitCharge")
-    val addunitcharge: String,
-    @Expose
-    @SerializedName("dayCmmtktAdjTime")
-    val daycmmtktadjtime: String,
-    @Expose
-    @SerializedName("dayCmmtkt")
-    val daycmmtkt: String,
-    @Expose
-    @SerializedName("monthCmmtkt")
-    val monthcmmtkt: String,
-    @Expose
-    @SerializedName("metpay")
-    val metpay: String,
-    @Expose
-    @SerializedName("spcmnt")
-    val spcmnt: String,
-    @Expose
-    @SerializedName("institutionNm")
-    val institutionnm: String,
-    @Expose
-    @SerializedName("phoneNumber")
-    val phonenumber: String,
-    @Expose
-    @SerializedName("latitude")
-    val latitude: String,
-    @Expose
-    @SerializedName("longitude")
-    val longitude: String,
-    @Expose
-    @SerializedName("referenceDate")
-    val referencedate: String,
-    @Expose
-    @SerializedName("insttCode")
-    val insttcode: String
-)
-
 data class Header(
     @Expose
     @SerializedName("resultCode")
     val resultcode: String,
     @Expose
     @SerializedName("resultMsg")
-    val resultmsg: String,
+    val resultmsg: String
+)
+
+data class Body(
     @Expose
-    @SerializedName("type")
-    val type: String
+    @SerializedName("items")
+    val items: List<Lot>,
+    @Expose
+    @SerializedName("totalCount")
+    val totalcount: String
+)
+
+data class Lot(
+    @Expose
+    @SerializedName("prkplceNo") // 주차장관리번호 (eg. 156-2-000043)
+    val parkCode: String,
+    @Expose
+    @SerializedName("prkplceNm") // 주차장명
+    val parkName: String,
+    @Expose
+    @SerializedName("prkplceSe") // 주차장 구분 (공영 / 민영)
+    val parkSep: String,
+    @Expose
+    @SerializedName("prkplceType") // 주차장 유형 (노외 / 노상 / 부설)
+    val parkType: String,
+    @Expose
+    @SerializedName("rdnmadr")
+    val newAddr: String?,
+    @Expose
+    @SerializedName("lnmadr")
+    val oldAddr: String?,
+    @Expose
+    @SerializedName("prkcmprt") // 주차 구획수
+    val parkCmprt: String,
+    @Expose
+    @SerializedName("feedingSe") // 급지 구분
+    val feedingSep: String,
+    @Expose
+    @SerializedName("enforceSe") // 부제시행구분
+    val enforceSep: String,
+    @Expose
+    @SerializedName("operDay")
+    val operDay: String,
+    @Expose
+    @SerializedName("weekdayOperOpenHhmm")
+    val weekdyOpenTime: String,
+    @Expose
+    @SerializedName("weekdayOperColseHhmm")
+    val weekdayCloseTime: String,
+    @Expose
+    @SerializedName("satOperOperOpenHhmm")
+    val saturdayOpenTime: String,
+    @Expose
+    @SerializedName("satOperCloseHhmm")
+    val saturdayCloseTime: String,
+    @Expose
+    @SerializedName("holidayOperOpenHhmm")
+    val holidayOpenTime: String,
+    @Expose
+    @SerializedName("holidayCloseOpenHhmm")
+    val holidayCloseTime: String,
+    @Expose
+    @SerializedName("parkingchrgeInfo") // 요금 정보 (무료/유료)
+    val feeType: String,
+    @Expose
+    @SerializedName("basicTime") // 주차기본시간
+    val basicParkTime: String,
+    @Expose
+    @SerializedName("basicCharge") // 주차기본요금
+    val basicFee: String,
+    @Expose
+    @SerializedName("addUnitTime") // 추가단위시간
+    val addUnitTime: String?,
+    @Expose
+    @SerializedName("addUnitCharge") // 추가단위요금
+    val addUnitFee: String?,
+    @Expose
+    @SerializedName("dayCmmtktAdjTime") // 1일주차권요금적용시간
+    val parkTimePerDay: String?,
+    @Expose
+    @SerializedName("dayCmmtkt") // 1일주차권요금
+    val feePerDay: String?,
+    @Expose
+    @SerializedName("monthCmmtkt") // 월정기권요금
+    val feePerMonth: String,
+    @Expose
+    @SerializedName("metpay") // 결제방법 (현금 / 현금, 카드 / 카드)
+    val payType: String,
+    @Expose
+    @SerializedName("spcmnt") // 특기사항(특이사항)
+    val uniqueness: String,
+    @Expose
+    @SerializedName("institutionNm") // 기관명
+    val institutionName: String,
+    @Expose
+    @SerializedName("phoneNumber") // 전화번호
+    val phoneNumber: String,
+    @Expose
+    @SerializedName("latitude") // 위도
+    val latitude: String,
+    @Expose
+    @SerializedName("longitude") // 경도
+    val longitude: String,
+    @Expose
+    @SerializedName("referenceDate")
+    val referencedate: String,
+    @Expose
+    @SerializedName("insttCode") // 기관 코드
+    val insttcode: String,
+    @Expose
+    @SerializedName("insttNm") // 기관명
+    val insttNm: String
 )
