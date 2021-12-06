@@ -28,7 +28,9 @@
                 android:layout_height="@dimen/review_profile_size"
                 android:src="@drawable/img_default_profile"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:civ_border_width="@dimen/circle_image_view_border_width"
+                app:civ_border_color="@color/circleImageViewBorderColor"/>
 
             <TextView
                 android:id="@+id/nickname_text_view"

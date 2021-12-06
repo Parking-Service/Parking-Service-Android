@@ -112,7 +112,7 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
     // 구글 계정 로그인(회원가입) 메소드
     fun onGoogleSignInAccount(account: GoogleSignInAccount?) {
         if (account != null) {
-            val credential = GoogleAuthProvider.getCredential(account.idToken,null)
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
 
             // 구글 로그인 성공시
             FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener { task -> // task : 사용자 및 결과 정보를 가지고 있음
@@ -135,7 +135,7 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
                 loginCallback?.onSignIn(LoginType.GOOGLE, ResultType.SUCCESS)
 
             } else { // Google로 로그인 실패
-                Timber.d(this::class.java.simpleName, "Firebase Login Failure.")
+                Timber.e("Firebase Login Failure.")
             }
         }
     }

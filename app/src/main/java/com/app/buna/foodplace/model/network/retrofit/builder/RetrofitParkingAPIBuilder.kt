@@ -1,46 +1,54 @@
 package com.app.buna.foodplace.model.network.retrofit.builder
 
-import android.util.Log
+import com.app.buna.foodplace.model.dto.Lot
 import com.app.buna.foodplace.model.dto.ParkingLot
 import com.app.buna.foodplace.model.network.retrofit.api.ParkingLotAPI
+import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import kotlin.coroutines.resumeWithException
 
 object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
 
-    // base url을 공공 데이터 포털 사이트로 지정
-    override val baseUrl: String
-        get() = "http://api.data.go.kr"
-    const val API_KEY = "dBA13HtoNsD/e5rHRalqhisQmGXh5FfOTGpqyCIfm0ZcGO7qEKGcabtsEEIf5k1GlFFStcue18GiGGWjgaQEdw=="
+    suspend fun getParkingLots(latitude: Double, longitude: Double) =
 
-    fun getParkingLots() {
-        val api = getRetrofit().create(ParkingLotAPI::class.java)
+        // 데이터를 가져올 동안, 코루틴 잠시 일시 중지
+        suspendCancellableCoroutine<List<Lot>> { continuation ->
+            val api = getRetrofit().create(ParkingLotAPI::class.java)
 
-        // 1페이지의 데이터 10개 가져오기
-        api.getParkingLot(API_KEY).enqueue(object : Callback<ParkingLot> {
-            override fun onResponse(call: Call<ParkingLot>, response: Response<ParkingLot>) {
-                
-                val resultCode = response.body()?.response?.header?.resultcode
-                val resultMessage = response.body()?.response?.header?.resultmsg
+            // 1페이지의 데이터 10개 가져오기
+            api.getLots(latitude, longitude).enqueue(object : Callback<ParkingLot> {
+                override fun onResponse(call: Call<ParkingLot>, response: Response<ParkingLot>) {
 
-                // result code가 00이면 정상적으로 데이터를 가져옴
-                if(resultCode == "00") {
-                    response.body()?.response?.body?.items?.forEach { data ->
-                        // 주차장 이름 출력
-                        Timber.d("주차장 명 : ${data.prkplcenm}")
+                    val resultCode = response.body()?.response?.header?.resultcode
+                    val resultMessage = response.body()?.response?.header?.resultmsg
+
+                    // result code가 00이면 정상적으로 데이터를 가져옴
+                    if (resultCode == "00") {
+                        // 주차장 데이터 리스트
+                        val parkData = response.body()?.response?.body?.items!! 
+                        response.body()?.response?.body?.items?.forEach { data ->
+                            // 주차장 이름 출력
+                            Timber.d("주차장 명 : ${data.parkName}")
+                        }
+                        
+                        // 주차장 데이터를 반환하면서 코루틴 재게
+                        continuation.resumeWith(Result.success(parkData))
+                    } else { // 데이터를 정상적으로 가져오지 못했을 때
+                        Timber.d("에러 발생 : ${resultCode.toString()}")
+                        Timber.d("에러 발생 : ${resultMessage.toString()}")
+                        continuation.resumeWithException(Exception("데이터를 불러오기에 실패했습니다."))
                     }
-                } else { // 데이터를 정상적으로 가져오지 못했을 때
-                    Timber.d("에러 발생 : ${resultCode.toString()}")
-                    Timber.d("에러 발생 : ${resultMessage.toString()}")
+
                 }
 
-            }
+                override fun onFailure(call: Call<ParkingLot>, t: Throwable) {
+                    Timber.e("데이터 불러오기 실패 : ${t.message}")
+                    continuation.resumeWithException(Exception("데이터를 불러오기에 실패했습니다."))
+                }
+            })
+        }
 
-            override fun onFailure(call: Call<ParkingLot>, t: Throwable) {
-                Timber.e("데이터 불러오기 실패 : ${t.message}")
-            }
-        })
-    }
 }

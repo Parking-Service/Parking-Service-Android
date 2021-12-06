@@ -1,9 +1,12 @@
 package com.app.buna.foodplace.feature.common.base
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -69,7 +72,7 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
     private fun createInternetCheckDialog() {
         val snackbar = Snackbar.make(viewDataBinding?.root!!, getString(R.string.snack_bar_content_internet_disconnected), Snackbar.LENGTH_INDEFINITE)
         snackbar.setAction(getString(R.string.ok)) { snackbar.dismiss() }
-            .setTextColor(ContextCompat.getColor(this, R.color.white))
+            .setTextColor(ContextCompat.getColor(this, R.color.snackbarTextColor))
             .setActionTextColor(ContextCompat.getColor(this, R.color.colorPrimaryVariant))
             .setBackgroundTint(ContextCompat.getColor(this, R.color.snackbarBackground))
             .show()

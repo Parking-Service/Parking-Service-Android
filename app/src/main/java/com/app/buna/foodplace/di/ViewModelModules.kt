@@ -7,10 +7,6 @@ import com.app.buna.foodplace.model.repository.remote.UserRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val repositoryModule = module {
-    single { UserRepository() }
-}
-
 val loginViewModelModule = module {
     viewModel {
         LoginViewModel(get())

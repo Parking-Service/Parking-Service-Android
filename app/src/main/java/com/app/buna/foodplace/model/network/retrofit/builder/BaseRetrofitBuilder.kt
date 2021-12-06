@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 open class BaseRetrofitBuilder {
     open val baseUrl = "http://49.165.181.24:8080"
     private val gson = GsonBuilder()
+        .excludeFieldsWithoutExposeAnnotation()
         .setLenient()
         .create()
 
