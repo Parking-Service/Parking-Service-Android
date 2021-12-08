@@ -9,7 +9,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.app.buna.foodplace"
+        applicationId "com.app.service.parking"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -60,6 +60,7 @@ dependencies {
     def arch_version = "2.1.0"
     def nav_version = "2.3.5"
     def koin_version= "3.1.4"
+    def lottieVersion = "4.2.2"
 
     // room
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -136,4 +137,10 @@ dependencies {
 
     // Circular image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    // Bottom Sheet Dialog
+    implementation "com.arthurivanets.bottomsheet:bottomsheets-core:1.0.0"
 }

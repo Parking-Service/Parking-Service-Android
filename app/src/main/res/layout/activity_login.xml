@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.app.buna.foodplace.feature.login.LoginViewModel" />
+            type="com.app.service.parking.feature.login.LoginViewModel" />
     </data>
 
     <RelativeLayout

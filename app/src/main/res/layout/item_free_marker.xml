@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/marker_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_free_marker"
+        android:clickable="true"
+        android:paddingHorizontal="@dimen/marker_padding_horizontal"
+        android:paddingVertical="3dp">
+
+        <TextView
+            android:id="@+id/marker_type_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="26dp"
+            android:background="@drawable/bg_free_marker_inside"
+            android:gravity="center"
+            android:paddingHorizontal="2dp"
+            android:text="@string/free"
+            android:textColor="@color/markerIconTextColor"
+            android:textSize="@dimen/marker_icon_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -91,6 +91,14 @@
     <dimen name="profile_nickname_text_size">16sp</dimen>
     <dimen name="profile_id_text_size">14sp</dimen>
 
+    <dimen name="record_bottom_sheet_dialog_padding_top">12dp</dimen>
+    <dimen name="record_bottom_sheet_dialog_padding_bottom">24dp</dimen>
+    <dimen name="record_bottom_sheet_dialog_padding_horizontal">16dp</dimen>
+    <dimen name="record_bottom_sheet_dialog_lottie_size">100dp</dimen>
+    <dimen name="record_bottom_sheet_content_margin_top">16dp</dimen>
+    <dimen name="record_bottom_sheet_subtitle_bg_radius">20dp</dimen>
+    <dimen name="record_bottom_sheet_subtitle_bg_padding">10dp</dimen>
+
     <!-- 문의하기 버튼 radius -->
     <dimen name="bg_inquire_button_height">46dp</dimen>
     <dimen name="bg_inquire_button_radius">8dp</dimen>
