@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/subtitleBackground"/>
+    <corners android:radius="@dimen/record_bottom_sheet_subtitle_bg_radius"/>
+    <padding android:top="@dimen/record_bottom_sheet_subtitle_bg_padding"/>
+    <padding android:bottom="@dimen/record_bottom_sheet_subtitle_bg_padding"/>
+    <padding android:left="@dimen/record_bottom_sheet_subtitle_bg_padding"/>
+    <padding android:right="@dimen/record_bottom_sheet_subtitle_bg_padding"/>
+
+</shape>

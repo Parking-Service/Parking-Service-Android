@@ -17,7 +17,7 @@
     <!-- Dialog -->
     <color name="dialogTitle">#1C1C1C</color>
     <color name="dialogContent">#717171</color>
-    <color name="snackbarBackground">#FFFFFF</color>
+    <color name="snackbarBackground">#FAFAFA</color>
     <color name="snackbarTextColor">#363636</color>
 
     <!-- Review Activity -->
@@ -40,10 +40,15 @@
     <color name="mainVoiceIconColor">#333333</color>
 
     <!-- Marker color -->
-    <color name="shareMarkerBackround">@color/colorPrimary</color>
+    <color name="markerPayBackround">@color/colorPrimary</color>
+    <color name="markerFreeBackround">#42A5F5</color>
     <color name="markerStrokeColor">#3A3A3A</color>
-    <color name="markerIconTextColor">#3A3A3A</color>
+    <color name="markerIconTextColor">#232323</color>
     <color name="markerFeeTextColor">#ffffff</color>
+
+    <!-- Voice dialog -->
+    <color name="subtitleBackground">#EEEEEE</color>
+    <color name="subtitleTextColor">#7A7A7A</color>
 
     <!--Navigation-->
     <color name="inquireButtonBackground">#F37474</color>

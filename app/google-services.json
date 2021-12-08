@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:949662077578:android:dad37b902e87567b631373",
         "android_client_info": {
-          "package_name": "com.app.buna.foodplace"
+          "package_name": "com.app.service.parking"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "949662077578-f4ip9hqth6lqcdlvt922fbmitg5p2uba.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.app.buna.foodplace",
+            "package_name": "com.app.service.parking",
             "certificate_hash": "c809c21e49670372bfaf7b6ce00d6e3458b4cfd5"
           }
         },

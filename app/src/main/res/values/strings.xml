@@ -46,8 +46,8 @@
     <string name="parking_review_more">더 보기 ></string>
 
     <!-- marker -->
-    <string name="free">무료</string>
-    <string name="share">공유</string>
+    <string name="free">무료 주차장</string>
+    <string name="pay">유료</string>
 
     <!-- content_main_top.xml -->
     <string name="search_bar_text">목적지를 입력해주세요!</string>
@@ -66,6 +66,24 @@
     <string name="permission_location_alert">%s을 실행하려면 위치 접근 권한이 필요해요!</string>
     <string name="permission_location_denied_1">앱을 다시 실행하여 위치 권한을 허용해주세요!</string>
     <string name="permission_location_denied_2">설정(앱 정보)에서 위치 권한을 허용해주세요!</string>
+    <string name="permission_record_denied">음성 녹음 권한을 허용하지 않으면 기능을 이용할 수 없어요!</string>
+
+    <!-- record bottom sheet dialog -->
+    <string name="record_bottom_sheet_dialog_app_name">어따세워 🚗</string>
+    <string name="record_bottom_sheet_dialog_title">이렇게 말해보세요</string>
+    <string name="record_bottom_sheet_dialog_subtitle">\"서울특별시 상암동 주차장\"</string>
+
+    <!-- Recognition Error Type -->
+    <string name="error_audio">오디오 에러가 발생했습니다.</string>
+    <string name="error_client">응답이 길어 인식이 어렵습니다.\n다시 시도해주시기 바랍니다.</string>
+    <string name="error_permission">오디오 권한이 없습니다.\n권한을 설정해주세요!</string>
+    <string name="error_network">네트워크 에러가 발생했습니다.</string>
+    <string name="error_network_timeout">네트워크 타임아웃이 발생했습니다.</string>
+    <string name="error_no_match">응답이 없어 음성인식이 종료되었습니다.</string>
+    <string name="error_busy">잠시 후 다시 시도해주세요.</string>
+    <string name="error_server">서버 에러가 발생했습니다.</string>
+    <string name="error_speech_timeout">응답이 길어 인식이 어렵습니다.\n다시 시도해주시기 바랍니다.</string>
+    <string name="error_unknown">알 수 없는 오류가 발생했습니다.</string>
 
 
     <!-- onBackPressed -->

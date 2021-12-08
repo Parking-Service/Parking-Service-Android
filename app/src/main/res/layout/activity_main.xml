@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.app.buna.foodplace.feature.main.MainViewModel" />
+            type="com.app.service.parking.feature.main.MainViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -63,9 +63,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:id="@+id/ask_container">
 
                 <LinearLayout
+                    android:id="@+id/ask_button"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/bg_inquire_button_height"
                     android:background="@drawable/bg_inquire_button"
