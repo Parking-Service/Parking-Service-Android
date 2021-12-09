@@ -52,7 +52,7 @@
             app:layout_constraintLeft_toRightOf="@+id/hash_icon"
             app:layout_goneMarginLeft="@dimen/search_bar_margin_left" />
 
-        <View
+        <LinearLayout
             android:id="@+id/cancel_button"
             android:layout_width="@dimen/search_bar_icon_hash_button_size"
             android:layout_height="@dimen/search_bar_icon_hash_button_size"
@@ -71,7 +71,7 @@
                 android:layout_height="@dimen/search_bar_cancel_button_size"
                 android:src="@drawable/ic_cancel"
                 app:tint="@color/searchBarItemColor" />
-        </View>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/search_type_change_button"

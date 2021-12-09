@@ -2,18 +2,13 @@ package com.app.service.parking.feature.main.search
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ActivitySearchBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.model.type.SearchMode
-import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.roundToInt
 
 class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
     override val layoutResId: Int
