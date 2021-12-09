@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.app.service.parking.feature.base.BaseViewModel
+import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.model.type.LocationFabStatus
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.network.retrofit.builder.RetrofitParkingAPIBuilder
@@ -42,5 +43,9 @@ class MainViewModel : BaseViewModel() {
             val nextStatus = fabStatus.value?.getNextStatus()
             fabStatus.value = (nextStatus!!)
         }
+    }
+
+    fun onClickSearchBar(view: View) {
+        startActivity(SearchActivity::class, null)
     }
 }

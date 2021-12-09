@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.core.app.ActivityCompat
@@ -19,6 +20,7 @@ import com.app.service.parking.custom.RecordBottomSheetDialog
 import com.app.service.parking.databinding.ActivityMainBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.main.adapter.CustomMarkerAdapter
+import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.model.type.LocationFabStatus
 import com.app.service.parking.util.MarkerManager
 import com.app.service.parking.util.PermissionHelper
@@ -53,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.mainContainer.root.removeAllViews()
+        //binding.mainContainer.root.removeAllViews()
     }
 
     override fun initActivity() {
@@ -166,6 +168,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             viewModel.lotData.observe(this, { lotData ->
                 markerManager.removeAllMarkers(mapView) // 현재 맵 상의 마커를 모두 지운다.
                 lotData.forEach { lot ->
+                    Log.d("ddd", lot.toString())
                     val marker = markerManager.createMarker(
                         lot.feeType,
                         lot.basicFee,
@@ -277,6 +280,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     openVoiceDialog()
                 }
             }
+            searchBarContainer.searchBar.setOnClickListener {
+                startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+            }
         }
     }
 
@@ -338,7 +344,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
             // 에러 발생
             override fun onError(error: Int) {
-                val message: String = when (error) {
+                /*val message: String = when (error) {
                     SpeechRecognizer.ERROR_AUDIO -> getString(R.string.error_audio) // 말이 없을 때
                     SpeechRecognizer.ERROR_CLIENT -> getString(R.string.error_client) // 말이 너무 길때
                     SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> getString(R.string.error_permission)
@@ -349,7 +355,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     SpeechRecognizer.ERROR_SERVER -> getString(R.string.error_server)
                     SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> getString(R.string.error_speech_timeout)
                     else -> getString(R.string.error_unknown)
-                }
+                }*/
 
                 mRecognizer?.cancel()
                 mRecognizer?.startListening(
@@ -364,9 +370,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             // 말을 하면 ArrayList에 단어를 넣고 textView에 단어를 이어줌
             override fun onResults(results: Bundle?) {
                 val matches = results!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-                matches?.forEach {
-                    showToast(it)
-                }
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        SearchActivity::class.java
+                    ).putExtra("keyword", matches?.get(0))
+                )
                 dismissVoiceDialog()
             }
 

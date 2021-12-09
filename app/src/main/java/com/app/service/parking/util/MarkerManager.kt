@@ -8,7 +8,7 @@ import net.daum.mf.map.api.MapView
 class MarkerManager {
 
     // 마커 인스턴스를 생성한다.
-    fun createMarker(type: String, fee: String?, latitude: Double, longitude: Double): MapPOIItem {
+    fun createMarker(type: String?, fee: String?, latitude: Double, longitude: Double): MapPOIItem {
         val marker = MapPOIItem().apply {
             itemName = fee // 마커 이름 설정
             mapPoint = MapPoint.mapPointWithGeoCoord(latitude, longitude) // 마커 좌표 설정

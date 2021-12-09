@@ -3,10 +3,7 @@ package com.app.service.parking.global
 import android.app.Application
 import android.content.Context
 import com.app.service.parking.R
-import com.app.service.parking.di.MainViewModelModule
-import com.app.service.parking.di.ReviewViewModelModule
-import com.app.service.parking.di.repositoryModule
-import com.app.service.parking.di.loginViewModelModule
+import com.app.service.parking.di.*
 import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,8 +21,8 @@ class App : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
-            modules(repositoryModule)
-            modules(listOf(loginViewModelModule, ReviewViewModelModule, MainViewModelModule))
+            modules(listOf(userRepositoryModule, parkingRepositoryModule))
+            modules(listOf(loginViewModelModule, ReviewViewModelModule, MainViewModelModule, SearchViewModelModule))
         }
     }
 

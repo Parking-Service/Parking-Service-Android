@@ -99,6 +99,30 @@
     <dimen name="record_bottom_sheet_subtitle_bg_radius">20dp</dimen>
     <dimen name="record_bottom_sheet_subtitle_bg_padding">10dp</dimen>
 
+    <!-- layout_search_bar.xml -->
+    <dimen name="search_bar_padding_horizontal">16dp</dimen>
+    <dimen name="search_bar_general_icon_button_size">20dp</dimen>
+    <dimen name="search_bar_cancel_button_size">12dp</dimen>
+    <dimen name="search_bar_icon_hash_button_size">35dp</dimen>
+    <dimen name="search_bar_icon_glasses_button_size">20dp</dimen>
+    <dimen name="search_bar_text_size">17dp</dimen>
+    <dimen name="search_bar_margin_left">18dp</dimen>
+    <dimen name="search_bar_cancel_button_margin_left">12dp</dimen>
+    
+    <!-- activity_search.xml -->
+    <dimen name="no_search_image_size">80dp</dimen>
+    <dimen name="no_search_text_size">19sp</dimen>
+    <dimen name="no_search_view_margin_top">20dp</dimen>
+
+    <!-- item_search.xml -->
+    <dimen name="search_item_container_padding_horizontal">20dp</dimen>
+    <dimen name="search_item_container_padding_vertical">25dp</dimen>
+    <dimen name="search_item_parking_lot_name_text_size">18sp</dimen>
+    <dimen name="search_item_parking_lot_address_text_size">15sp</dimen>
+    <dimen name="search_item_text_margin_top">4dp</dimen>
+    <dimen name="search_item_delete_icon_size">12dp</dimen>
+    <dimen name="search_item_text_margin_right">16dp</dimen>
+
     <!-- 문의하기 버튼 radius -->
     <dimen name="bg_inquire_button_height">46dp</dimen>
     <dimen name="bg_inquire_button_radius">8dp</dimen>

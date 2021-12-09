@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.service.parking.feature.main.search.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        tools:context=".feature.main.search.SearchActivity">
+
+        <include
+            android:id="@+id/search_bar_container"
+            layout="@layout/layout_search_bar"
+            bind:viewModel="@{viewModel}"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar_container"
+            tools:listitem="@layout/item_search" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/no_result_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar_container">
+
+            <ImageView
+                android:id="@+id/no_result_image_view"
+                android:layout_width="@dimen/no_search_image_size"
+                android:layout_height="@dimen/no_search_image_size"
+                android:src="@drawable/ic_no_result"
+                app:layout_constraintBottom_toTopOf="@+id/no_result_text_view"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/no_result_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/no_search_view_margin_top"
+                android:gravity="center"
+                android:text="@string/search_no_result"
+                android:textColor="@color/TitleTextColor"
+                android:textSize="@dimen/no_search_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/no_result_image_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
