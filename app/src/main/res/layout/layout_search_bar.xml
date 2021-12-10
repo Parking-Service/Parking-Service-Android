@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.app.service.parking.feature.main.search.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        android:elevation="6dp"
+        android:paddingHorizontal="@dimen/search_bar_padding_horizontal">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="@dimen/search_bar_general_icon_button_size"
+            android:layout_height="@dimen/search_bar_general_icon_button_size"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/hash_icon"
+            android:layout_width="@dimen/search_bar_general_icon_button_size"
+            android:layout_height="@dimen/search_bar_general_icon_button_size"
+            android:layout_marginLeft="@dimen/search_bar_margin_left"
+            android:src="@drawable/ic_hash"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/back_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary" />
+
+        <EditText
+            android:id="@+id/search_bar_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:hint="@string/search_bar_address_hint"
+            android:textColor="@color/searchBarItemColor"
+            android:textColorHint="@color/searchBarHintColor"
+            android:textSize="@dimen/search_bar_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/hash_icon"
+            app:layout_goneMarginLeft="@dimen/search_bar_margin_left" />
+
+        <LinearLayout
+            android:id="@+id/cancel_button"
+            android:layout_width="@dimen/search_bar_icon_hash_button_size"
+            android:layout_height="@dimen/search_bar_icon_hash_button_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toRightOf="@+id/search_bar_edit_text"
+            app:layout_constraintRight_toLeftOf="@+id/search_type_change_button"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="@dimen/search_bar_cancel_button_margin_left"
+            android:gravity="center"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="@dimen/search_bar_cancel_button_size"
+                android:layout_height="@dimen/search_bar_cancel_button_size"
+                android:src="@drawable/ic_cancel"
+                app:tint="@color/searchBarItemColor" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/search_type_change_button"
+            android:layout_width="@dimen/search_bar_icon_hash_button_size"
+            android:layout_height="@dimen/search_bar_icon_hash_button_size"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:onClick="@{viewModel::onClickSearchMode}"
+            android:src="@drawable/ic_round_hash"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/cancel_button"
+            app:layout_constraintRight_toLeftOf="@+id/voice_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/voice_button"
+            android:layout_width="@dimen/search_bar_general_icon_button_size"
+            android:layout_height="@dimen/search_bar_general_icon_button_size"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:src="@drawable/ic_voice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/search_type_change_button"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorPrimary" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

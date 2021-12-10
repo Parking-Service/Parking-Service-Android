@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.app.service.parking.feature.base.BaseViewModel
+import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.model.type.LocationFabStatus
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.network.retrofit.builder.RetrofitParkingAPIBuilder
@@ -15,7 +16,7 @@ import java.lang.Exception
 class MainViewModel : BaseViewModel() {
 
 
-    val lotData = MutableLiveData<List<Lot>>() // 주차장 데이터
+    val lotData = MutableLiveData<ArrayList<Lot>>() // 주차장 데이터
     val fabStatus = MutableLiveData<LocationFabStatus>() // fab버튼 상태 라이브 데이터
     var isMovedMyLocation = false
     var backPressInterval = 2000 // 뒤로가기 시간 interval
@@ -42,5 +43,9 @@ class MainViewModel : BaseViewModel() {
             val nextStatus = fabStatus.value?.getNextStatus()
             fabStatus.value = (nextStatus!!)
         }
+    }
+
+    fun onClickSearchBar(view: View) {
+        startActivity(SearchActivity::class, null)
     }
 }

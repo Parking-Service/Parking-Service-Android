@@ -46,6 +46,12 @@
     <color name="markerIconTextColor">#232323</color>
     <color name="markerFeeTextColor">#ffffff</color>
 
+    <!-- Search Activity -->
+    <color name="searchBarItemColor">#323232</color>
+    <color name="searchBarHintColor">#B1B1B1</color>
+    <color name="searchBarItemDeleteIcon">#838383</color>
+    <color name="searchBarHintHighlight">@color/colorPrimary</color>
+
     <!-- Voice dialog -->
     <color name="subtitleBackground">#EEEEEE</color>
     <color name="subtitleTextColor">#7A7A7A</color>

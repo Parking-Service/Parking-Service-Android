@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardElevation="6dp"
-    app:cardCornerRadius="8dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.app.service.parking.feature.main.MainViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/content_main_menu_bar_padding_horizontal"
-        android:paddingVertical="@dimen/content_main_menu_bar_padding_vertical">
+        android:layout_height="wrap_content"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="8dp">
 
-        <ImageView
-            android:id="@+id/menu_button"
-            android:layout_width="@dimen/content_main_menu_bar_icon_size"
-            android:layout_height="@dimen/content_main_menu_bar_icon_size"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:src="@drawable/ic_menu_noti"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/content_main_menu_bar_padding_horizontal"
+            android:paddingVertical="@dimen/content_main_menu_bar_padding_vertical">
 
-        <TextView
-            android:id="@+id/search_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/content_main_menu_bar_horizontal_margin_horizontal"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:text="@string/search_bar_text"
-            android:textColor="@color/mainSearchBarText"
-            android:textSize="@dimen/content_main_search_bar_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/menu_button"
-            app:layout_constraintRight_toLeftOf="@+id/voice_button"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/menu_button"
+                android:layout_width="@dimen/content_main_menu_bar_icon_size"
+                android:layout_height="@dimen/content_main_menu_bar_icon_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:src="@drawable/ic_menu_noti"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/voice_button"
-            android:layout_width="@dimen/content_main_menu_bar_icon_size"
-            android:layout_height="@dimen/content_main_menu_bar_icon_size"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:src="@drawable/ic_voice"
-            app:tint="@color/mainVoiceIconColor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            <TextView
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/content_main_menu_bar_horizontal_margin_horizontal"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:text="@string/search_bar_text"
+                android:textColor="@color/mainSearchBarText"
+                android:textSize="@dimen/content_main_search_bar_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/menu_button"
+                app:layout_constraintRight_toLeftOf="@+id/voice_button"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{viewModel::onClickSearchBar}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/voice_button"
+                android:layout_width="@dimen/content_main_menu_bar_icon_size"
+                android:layout_height="@dimen/content_main_menu_bar_icon_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:src="@drawable/ic_voice"
+                app:tint="@color/mainVoiceIconColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
