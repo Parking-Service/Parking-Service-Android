@@ -168,7 +168,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             viewModel.lotData.observe(this, { lotData ->
                 markerManager.removeAllMarkers(mapView) // 현재 맵 상의 마커를 모두 지운다.
                 lotData.forEach { lot ->
-                    Log.d("ddd", lot.toString())
                     val marker = markerManager.createMarker(
                         lot.feeType,
                         lot.basicFee,

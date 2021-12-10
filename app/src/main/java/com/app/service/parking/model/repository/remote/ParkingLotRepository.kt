@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class ParkingLotRepository {
 
     // 검색 값(query)을 바탕으로 스프링부트 서버에 주차장 데이터 요청
-    suspend fun getLotsFlow(query: String?, latitude: Double, longitude: Double): Flow<List<Lot>> {
+    suspend fun getLotsFlow(query: String?, latitude: Double, longitude: Double): Flow<ArrayList<Lot>> {
         return RetrofitParkingAPIBuilder.getParkingLotsByQuery(query, latitude, longitude)
     }
 }

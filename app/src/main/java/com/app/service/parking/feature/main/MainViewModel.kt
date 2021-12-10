@@ -16,7 +16,7 @@ import java.lang.Exception
 class MainViewModel : BaseViewModel() {
 
 
-    val lotData = MutableLiveData<List<Lot>>() // 주차장 데이터
+    val lotData = MutableLiveData<ArrayList<Lot>>() // 주차장 데이터
     val fabStatus = MutableLiveData<LocationFabStatus>() // fab버튼 상태 라이브 데이터
     var isMovedMyLocation = false
     var backPressInterval = 2000 // 뒤로가기 시간 interval

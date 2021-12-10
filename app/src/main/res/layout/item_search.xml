@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
             type="com.app.service.parking.model.dto.Lot" />
@@ -13,6 +14,7 @@
         android:id="@+id/search_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:paddingHorizontal="@dimen/search_item_container_padding_horizontal"
         android:paddingVertical="@dimen/search_item_container_padding_horizontal">
@@ -21,44 +23,51 @@
             android:id="@+id/parking_lot_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/search_item_text_margin_right"
             android:ellipsize="end"
-            tools:text="배다골 테마파크"
             android:maxLines="1"
             android:text="@{model.parkName}"
             android:textColor="@color/TitleTextColor"
             android:textSize="@dimen/search_item_parking_lot_name_text_size"
-            app:layout_constraintRight_toLeftOf="@+id/delete_button"
             app:layout_constraintBottom_toTopOf="@+id/parking_lot_address"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/delete_button"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="@dimen/search_item_text_margin_right"/>
+            tools:text="배다골 테마파크" />
 
         <TextView
             android:id="@+id/parking_lot_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/search_item_text_margin_top"
+            android:layout_marginRight="@dimen/search_item_text_margin_right"
             android:ellipsize="end"
-            tools:text="경기도 고양시 덕양구 화정동 7-2"
             android:text="@{model.oldAddr}"
             android:textColor="@color/minorDescTextColor"
             android:textSize="@dimen/search_item_parking_lot_address_text_size"
-            app:layout_constraintRight_toLeftOf="@+id/delete_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/delete_button"
             app:layout_constraintTop_toBottomOf="@+id/parking_lot_name"
-            android:layout_marginRight="@dimen/search_item_text_margin_right"/>
+            tools:text="경기도 고양시 덕양구 화정동 7-2" />
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/delete_button"
-            android:layout_width="@dimen/search_item_delete_icon_size"
-            android:layout_height="@dimen/search_item_delete_icon_size"
+            android:layout_width="@dimen/search_bar_icon_hash_button_size"
+            android:layout_height="@dimen/search_bar_icon_hash_button_size"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:src="@drawable/ic_cancel"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/searchBarItemDeleteIcon"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/search_item_delete_icon_size"
+                android:layout_height="@dimen/search_item_delete_icon_size"
+                android:src="@drawable/ic_cancel"
+                app:tint="@color/searchBarItemDeleteIcon" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

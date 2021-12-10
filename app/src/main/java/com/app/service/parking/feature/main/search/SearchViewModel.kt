@@ -1,5 +1,6 @@
 package com.app.service.parking.feature.main.search
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -12,11 +13,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
+import java.text.FieldPosition
 
 class SearchViewModel(val repository: ParkingLotRepository) : BaseViewModel() {
     private val debounceTime = 300L
     private val _searchQuery = MutableStateFlow("") // 검색 쿼리 Flow
     val searchMode = MutableLiveData<SearchMode>(SearchMode.TEXT)
+    val lots = ArrayList<Lot>()
 
     // 검색 쿼리값 설정
     fun setSearchQuery(query: String?) {
@@ -28,6 +31,7 @@ class SearchViewModel(val repository: ParkingLotRepository) : BaseViewModel() {
     }
 
     // 쿼리 Flow 변화에 따라 서버에게 값을 받아와 갱신 (LiveData)
+    // 검색 결과 리스트 Live Data
     @ExperimentalCoroutinesApi
     @FlowPreview
     val searchResult = _searchQuery
@@ -50,14 +54,20 @@ class SearchViewModel(val repository: ParkingLotRepository) : BaseViewModel() {
 
 
     // 검색창에 입력한 값을 바탕으로 서버에서 주차장 데이터를 요청함 
-    private suspend fun getLotsFlow(query: String?): Flow<List<Lot>> {
+    private suspend fun getLotsFlow(query: String?): Flow<ArrayList<Lot>> {
         // 가까운 주차장 순으로 가져오기 위해 위도, 경도를 파라미터로 전달
         return repository.getLotsFlow(query, 37.621036529541356, 126.83155822753906)
     }
 
     // 검색 모드 변경 아이콘을 클릭했을 때
     fun onClickSearchMode(v: View) {
-
         searchMode.postValue(searchMode.value?.toggleMode())
+    }
+    
+    // 아이템 삭제 버튼을 클릭했을 때
+    @SuppressLint("LongLogTag")
+    fun deleteItem(position: Int) {
+        Log.d("deleteItem(position: Int)", searchResult.value?.get(position)?.parkName.toString())
+        //searchResult.value[position]
     }
 }

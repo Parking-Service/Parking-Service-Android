@@ -17,22 +17,17 @@ object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
     suspend fun getParkingLots(latitude: Double, longitude: Double) =
 
         // 데이터를 가져올 동안, 코루틴 잠시 일시 중지
-        suspendCancellableCoroutine<List<Lot>> { continuation ->
+        suspendCancellableCoroutine<ArrayList<Lot>> { continuation ->
             val api = getRetrofit().create(ParkingLotAPI::class.java)
-            api.getLotsByLocation(latitude, longitude).enqueue(object : Callback<List<Lot>> {
-                override fun onResponse(call: Call<List<Lot>>, response: Response<List<Lot>>) {
+            api.getLotsByLocation(latitude, longitude).enqueue(object : Callback<ArrayList<Lot>> {
+                override fun onResponse(call: Call<ArrayList<Lot>>, response: Response<ArrayList<Lot>>) {
                     val parkingList = response.body()
-
-                    /*data?.forEach { lot ->
-                        // 주차장 이름 출력
-                        Timber.d("주차장 명 : ${lot.parkName}")
-                    }*/
 
                     // 주차장 데이터를 반환하면서 코루틴 재게
                     parkingList?.let { continuation.resumeWith(Result.success(it)) }
                 }
 
-                override fun onFailure(call: Call<List<Lot>>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<Lot>>, t: Throwable) {
                     Timber.e("데이터 불러오기 실패 : ${t.message}")
                     continuation.resumeWithException(Exception("데이터를 불러오기에 실패했습니다."))
                 }
@@ -45,17 +40,17 @@ object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
         query: String?,
         latitude: Double,
         longitude: Double
-    ): Flow<List<Lot>> =
+    ): Flow<ArrayList<Lot>> =
 
         // 데이터를 가져올 동안, 코루틴 잠시 일시 중지
         suspendCancellableCoroutine { continuation ->
             val api = getRetrofit().create(ParkingLotAPI::class.java)
-            api.getLotsByAddress(query, latitude, longitude).enqueue(object : Callback<List<Lot>> {
-                override fun onResponse(call: Call<List<Lot>>, response: Response<List<Lot>>) {
-                    val parkingList: List<Lot>? = response.body()
+            api.getLotsByAddress(query, latitude, longitude).enqueue(object : Callback<ArrayList<Lot>> {
+                override fun onResponse(call: Call<ArrayList<Lot>>, response: Response<ArrayList<Lot>>) {
+                    val parkingList: ArrayList<Lot>? = response.body()
                     parkingList?.forEach { lot ->
                         // 주차장 이름 출력
-                        Timber.d("주차장 명 : ${lot.parkName}")
+                        Timber.d("주차장 명 : ${lot.newAddr}")
                     }
 
                     // 주차장 데이터를 반환하면서 코루틴 재게
@@ -64,7 +59,7 @@ object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
 
                 }
 
-                override fun onFailure(call: Call<List<Lot>>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<Lot>>, t: Throwable) {
                     Timber.e("데이터 불러오기 실패 : ${t.message}")
                     continuation.resumeWithException(Exception("데이터를 불러오기에 실패했습니다."))
                 }

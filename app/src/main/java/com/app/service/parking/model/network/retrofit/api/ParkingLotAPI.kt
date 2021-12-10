@@ -11,12 +11,12 @@ interface ParkingLotAPI {
     fun getLotsByLocation(
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double
-    ): Call<List<Lot>>
+    ): Call<ArrayList<Lot>>
 
     @GET("/lots/address")
     fun getLotsByAddress(
         @Query("addr") query: String? = "",
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double
-    ): Call<List<Lot>>
+    ): Call<ArrayList<Lot>>
 }

@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_bar_container"
             tools:listitem="@layout/item_search" />
@@ -35,6 +36,7 @@
             android:id="@+id/no_result_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            tools:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_bar_container">
 
