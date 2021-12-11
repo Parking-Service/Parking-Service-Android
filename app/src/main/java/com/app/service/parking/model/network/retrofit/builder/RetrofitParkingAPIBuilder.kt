@@ -50,7 +50,7 @@ object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
                     val parkingList: ArrayList<Lot>? = response.body()
                     parkingList?.forEach { lot ->
                         // 주차장 이름 출력
-                        Timber.d("주차장 명 : ${lot.newAddr}")
+                        Timber.d("주차장 명 : ${lot.parkName}")
                     }
 
                     // 주차장 데이터를 반환하면서 코루틴 재게

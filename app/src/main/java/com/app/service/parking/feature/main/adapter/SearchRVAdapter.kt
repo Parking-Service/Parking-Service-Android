@@ -1,6 +1,5 @@
 package com.app.service.parking.feature.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -22,7 +21,7 @@ class SearchRVAdapter(val listener: RecyclerItemClickListener) : RecyclerView.Ad
     inner class ViewHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.model = lots[position] // 바인딩 모델 지정
-            binding.root.setOnClickListener { listener.onClick(position) } // 아이템 클릭 리스너
+            binding.root.setOnClickListener { listener.onClick(position) } // 주소 리스트 아이템을 클릭했을 때 작동
             binding.deleteButton.setOnClickListener { listener.onClick(position, R.id.delete_button) }
         }
     }
@@ -32,7 +31,7 @@ class SearchRVAdapter(val listener: RecyclerItemClickListener) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(holder.adapterPosition)
     }
 
     override fun getItemCount(): Int {

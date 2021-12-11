@@ -9,7 +9,7 @@ import com.app.service.parking.global.App
 import java.lang.IllegalStateException
 
 @SuppressLint("StaticFieldLeak")
-object FoodPlacePreference {
+object ParkingPreference {
     private var preference: SharedPreferences
 
     init {

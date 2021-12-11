@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ItemFreeMarkerBinding
 import com.app.service.parking.databinding.ItemPayMarkerBinding
+import com.app.service.parking.global.App
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import java.text.DecimalFormat
@@ -30,12 +31,17 @@ class CustomMarkerAdapter(val context: Context, inflater: LayoutInflater) : Call
     // 마커 클릭시 나오는 말풍선의 뷰 구성
     override fun getCalloutBalloon(marker: MapPOIItem?): View? {
         // itemName = 가격
-        val fee = marker?.itemName
+        val fee = marker?.itemName?.split("@")?.get(0)
+        val type = marker?.itemName?.split("@")?.get(1)
 
-        return if (fee.equals("0") || fee.isNullOrEmpty()) { // 가격
+        return if (type.equals("무료")) { // 무료 주차장
             freeBinding.root
-        } else {
-            payBinding.feeTextView.text = DecimalFormat("#,###").format(Integer.parseInt(marker?.itemName))
+        } else { // 유료 주차장
+            if(fee.isNullOrBlank() || fee == "0") { // 비용이 0이면 '정보없음'으로 표시
+                payBinding.feeTextView.text = App.context?.getString(R.string.no_info)
+            }else { // 가격 설정
+                payBinding.feeTextView.text = DecimalFormat("#,###").format(Integer.parseInt(fee))
+            }
             payBinding.root
         }
     }
@@ -46,9 +52,9 @@ class CustomMarkerAdapter(val context: Context, inflater: LayoutInflater) : Call
         val intent = Intent(context, ReviewActivity::class.java)
         context.startActivity(intent)*/
         // itemName = 가격
-        val fee = marker?.itemName
+        val type = marker?.itemName?.split("@")?.get(1)
 
-        return if (fee.equals("0") || fee.isNullOrEmpty()) { // 가격
+        return if (type.equals("무료")) { // 가격
             freeBinding.root
         } else {
             payBinding.root

@@ -2,4 +2,6 @@
 <resources>
     <string name="request_code" translatable="false">REQUEST_CODE</string>
     <string name="preference_name" translatable="false">FOODPLACE</string>
+    <string name="latitude" translatable="false">latitude</string>
+    <string name="longitude" translatable="false">longitude</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 
 import com.app.service.parking.R
 import com.app.service.parking.feature.main.MainActivity
+import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.global.App
 
 
@@ -66,6 +67,32 @@ object PermissionHelper {
 
     // 오디오 활성화를 확인하기 위한 펄미션 체크
     fun checkRecordPermission(activity: MainActivity, granted: () -> Unit) {
+        /*
+        - 런타임 퍼미션 처리
+        - 오디오 레코드 권한을 허용했는지 여부를 확인
+         */
+        val hasFineLocationPermission = ContextCompat.checkSelfPermission(
+            activity,
+            REQUIRED_PERMISSION_RECORD[0]
+        )
+
+        // 권한을 허용한 상태라면 (Android 6.0 이하는 위치권한 허용 필요 없음)
+        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED) {
+            // 권한 허용이 승인됐다는 콜백 수행
+            granted()
+        } else { // 권한을 허용하지 않은 상태라면
+            // 권한 요청이 필요하다는 Toast를 보여줌.
+            // 사용자게에 펄미션 요청, 요청 결과는 onRequestPermissionResult에서 수신
+            ActivityCompat.requestPermissions(
+                activity, REQUIRED_PERMISSION_RECORD,
+                PERMISSIONS_RECORD_REQUEST_CODE
+            )
+        }
+    }
+
+
+    // 오디오 활성화를 확인하기 위한 펄미션 체크
+    fun checkRecordPermission(activity: SearchActivity, granted: () -> Unit) {
         /*
         - 런타임 퍼미션 처리
         - 오디오 레코드 권한을 허용했는지 여부를 확인
