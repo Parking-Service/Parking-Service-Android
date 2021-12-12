@@ -12,7 +12,7 @@ import com.app.service.parking.feature.login.callback.ILoginCallback
 import com.app.service.parking.feature.login.type.LoginType
 import com.app.service.parking.feature.login.type.ResultType
 import com.app.service.parking.feature.main.MainActivity
-import com.app.service.parking.model.preference.FoodPlacePreference
+import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.preference.PreferenceConst
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -68,7 +68,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             }
         })
 
-        when(FoodPlacePreference.getString(PreferenceConst.LOGIN_TYPE.name)) {
+        when(ParkingPreference.getString(PreferenceConst.LOGIN_TYPE.name)) {
             LoginType.FACEBOOK.name, LoginType.GOOGLE.name -> { // 마지막 로그인 타입이 페이스북 또는 구글로 되어 있는 경우
                 viewModel.setIsFirebaseSignIn() // 파이어베이스 Auth로 로그인 되어 있는지 확인
             } LoginType.KAKAO_TALK.name -> { // 마지막 로그인 타입이 카카오톡이라면
@@ -132,13 +132,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
         }
         when (loginType) {
             LoginType.GOOGLE -> {
-                FoodPlacePreference.putValue(PreferenceConst.LOGIN_TYPE.name, LoginType.GOOGLE.name)
+                ParkingPreference.putValue(PreferenceConst.LOGIN_TYPE.name, LoginType.GOOGLE.name)
             }
             LoginType.FACEBOOK -> {
-                FoodPlacePreference.putValue(PreferenceConst.LOGIN_TYPE.name, LoginType.FACEBOOK.name)
+                ParkingPreference.putValue(PreferenceConst.LOGIN_TYPE.name, LoginType.FACEBOOK.name)
             }
             LoginType.KAKAO_TALK -> {
-                FoodPlacePreference.putValue(PreferenceConst.LOGIN_TYPE.name, LoginType.KAKAO_TALK.name)
+                ParkingPreference.putValue(PreferenceConst.LOGIN_TYPE.name, LoginType.KAKAO_TALK.name)
             }
         }
         viewModel.isLoading.value = false // 로그인 로딩 종료

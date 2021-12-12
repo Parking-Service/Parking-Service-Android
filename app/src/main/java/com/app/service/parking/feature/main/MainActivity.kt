@@ -21,6 +21,7 @@ import com.app.service.parking.databinding.ActivityMainBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.main.adapter.CustomMarkerAdapter
 import com.app.service.parking.feature.main.search.SearchActivity
+import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.type.LocationFabStatus
 import com.app.service.parking.util.MarkerManager
 import com.app.service.parking.util.PermissionHelper
@@ -29,16 +30,16 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import net.daum.android.map.MapViewEventListener
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapPoint.GeoCoordinate
+import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
-    NavigationView.OnNavigationItemSelectedListener {
+    NavigationView.OnNavigationItemSelectedListener, MapView.MapViewEventListener {
 
     override val layoutResId: Int = R.layout.activity_main
     override val viewModel: MainViewModel by viewModel()
@@ -138,7 +139,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     accuracyInMeters: Float
                 ) {
                     val geoLocation: GeoCoordinate = currentLocation?.mapPointGeoCoord!!
-
+                    showToast(geoLocation.latitude.toString())
                 }
 
                 // 단말의 방향(Heading) 각도값을 통보받을 수 있다.
@@ -146,6 +147,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     mapView: MapView?,
                     accuracyInMeters: Float
                 ) {
+                    showToast(accuracyInMeters.toString())
                 }
 
                 // 현위치 갱신 작업에 실패한 경우 호출된다.
@@ -160,21 +162,35 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             })
 
             // 맵 뷰가 초기화 됐을때 리스너
-            it.mapViewEventListener = MapViewEventListener {
+            it.setMapViewEventListener(this)
+            
+            // SharedPreference에서 최근에 있던 위치의 위도, 경도를 가져옴
+            val latitude = ParkingPreference.getString(getString(R.string.latitude), "0.0")?.toDouble()
+            val longitude = ParkingPreference.getString(getString(R.string.longitude), "0.0")?.toDouble()
 
+            if(latitude != 0.0 || longitude != 0.0) {
+                // 위도, 경도 지정
+                viewModel.setLocation(Pair(latitude!!, longitude!!))
+                it.setMapCenterPoint(mapPointWithGeoCoord(latitude, longitude), false)
             }
 
             // 주차장 데이터 리스트가 추가되거나, 변경되면 마커를 새로 찍음.
             viewModel.lotData.observe(this, { lotData ->
-                markerManager.removeAllMarkers(mapView) // 현재 맵 상의 마커를 모두 지운다.
-                lotData.forEach { lot ->
+                markerManager.removeAllMarkers(it) // 현재 맵 상의 마커를 모두 지운다.
+                lotData?.forEach { lot ->
+                    // 새로운 마커를 생성하고 맵상에 추가한다.
+                    var fee = if(lot.basicFee == "0") { // 기본 비용이 없으면(default값 0원) 하루당 비용 보여주기
+                        lot.feePerDay
+                    } else{ // 기본 비용이 있으면 기본 비용으로 보여주기
+                        lot.basicFee
+                    }
                     val marker = markerManager.createMarker(
                         lot.feeType,
-                        lot.basicFee,
+                        fee,
                         lot.latitude.toDouble(),
                         lot.longitude.toDouble()
                     )
-                    markerManager.addMarker(mapView, marker)
+                    markerManager.addMarker(it, marker)
                 }
             })
         }
@@ -183,11 +199,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         PermissionHelper.checkGPSPermission(this) { // callback
             // 위치 권한 허용시 카카오 맵뷰를 현재 위치로 이동시킴
             moveToMyLocation()
-        }
-
-        // 주차장 데이터를 가져와서 맵 상에 마커를 띄우도록 한다. (observer)
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getLotData(37.621036529541356, 126.83155822753906)
         }
     }
 
@@ -312,35 +323,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         }
     }
 
-    // 음성인식 리스너너
+    // 음성인식 리스너
     private fun getRecognitionListener(): RecognitionListener {
         return object : RecognitionListener {
 
             // 말하기 시작할 준비가되면 호출
-            override fun onReadyForSpeech(params: Bundle?) {
-
-            }
-
+            override fun onReadyForSpeech(params: Bundle?) {}
             // 말하기 시작했을 때 호출
-            override fun onBeginningOfSpeech() {
-
-            }
-
+            override fun onBeginningOfSpeech() {}
             // 입력받는 소리의 크기를 알려줌
-            override fun onRmsChanged(dB: Float) {
-
-            }
-
+            override fun onRmsChanged(dB: Float) {}
             // 말을 시작하고 인식이 된 단어를 buffer에 담음
-            override fun onBufferReceived(p0: ByteArray?) {
-
-            }
-
+            override fun onBufferReceived(p0: ByteArray?) {}
             // 말하기가 끝났을 때
-            override fun onEndOfSpeech() {
-
-            }
-
+            override fun onEndOfSpeech() {}
             // 에러 발생
             override fun onError(error: Int) {
                 /*val message: String = when (error) {
@@ -373,20 +369,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     Intent(
                         this@MainActivity,
                         SearchActivity::class.java
-                    ).putExtra("keyword", matches?.get(0))
+                    ).putExtra("query", matches?.get(0))
                 )
                 dismissVoiceDialog()
             }
-
             // 부분 인식 결과를 사용할 수 있을 때 호출
-            override fun onPartialResults(p0: Bundle?) {
-
-            }
-
+            override fun onPartialResults(p0: Bundle?) {}
             // 향후 이벤트를 추가하기 위해 예약
-            override fun onEvent(p0: Int, p1: Bundle?) {
-
-            }
+            override fun onEvent(p0: Int, p1: Bundle?) {}
         }
     }
 
@@ -425,4 +415,37 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         }
         return false
     }
+
+    override fun onMapViewInitialized(p0: MapView?) {}
+
+    // 맵 중심점이 바뀔 때마다 호출
+    override fun onMapViewCenterPointMoved(p0: MapView?, mapPoint: MapPoint?) {
+        // 지도 드래그를 마칠 때마다, 주차장 데이터를 가져와서 맵 상에 마커를 띄우도록 한다.
+        val location = mapPoint?.mapPointGeoCoord // 좌표 객체
+        val latitude: Double = location?.latitude ?: 0.0 // 위도
+        val longitude: Double = location?.longitude ?: 0.0 // 경도
+        
+        // Preference에 가장 최근 위도, 경도 저장
+        ParkingPreference.putValue(getString(R.string.latitude), latitude.toString())
+        ParkingPreference.putValue(getString(R.string.longitude), longitude.toString())
+        
+        // 현재 좌표 지정(마커를 찍기 위함)
+        viewModel.setLocation(Pair(latitude, longitude))
+    }
+
+    override fun onMapViewZoomLevelChanged(p0: MapView?, p1: Int) {}
+
+    override fun onMapViewSingleTapped(p0: MapView?, p1: MapPoint?) {}
+
+    override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {}
+
+    override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {}
+
+    override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
+        viewModel.fabStatus.value = LocationFabStatus.UNACTIVE
+    }
+
+    override fun onMapViewDragEnded(mapView: MapView?, mapPoint: MapPoint?) {}
+
+    override fun onMapViewMoveFinished(mapView: MapView?, mapPoint: MapPoint?) {}
 }

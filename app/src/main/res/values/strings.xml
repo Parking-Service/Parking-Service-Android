@@ -48,6 +48,7 @@
     <!-- marker -->
     <string name="free">무료 주차장</string>
     <string name="pay">유료</string>
+    <string name="no_info">정보없음</string>
 
     <!-- content_main_top.xml -->
     <string name="search_bar_text">목적지를 입력해주세요!</string>

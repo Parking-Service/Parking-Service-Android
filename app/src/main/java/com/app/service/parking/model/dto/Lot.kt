@@ -1,5 +1,7 @@
 package com.app.service.parking.model.dto
 
+import com.app.service.parking.R
+import com.app.service.parking.global.App
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -53,10 +55,10 @@ data class Lot(
     val parkType: String,
     @Expose
     @SerializedName("rdnmadr")
-    val newAddr: String?,
+    val newAddr: String? = App.context?.getString(R.string.no_info),
     @Expose
     @SerializedName("lnmadr")
-    val oldAddr: String?,
+    val oldAddr: String? = App.context?.getString(R.string.no_info),
     @Expose
     @SerializedName("prkcmprt") // 주차 구획수
     val parkCmprt: String,
@@ -95,7 +97,7 @@ data class Lot(
     val basicParkTime: String,
     @Expose
     @SerializedName("basicCharge") // 주차기본요금
-    val basicFee: String,
+    val basicFee: String = "0",
     @Expose
     @SerializedName("addUnitTime") // 추가단위시간
     val addUnitTime: String?,
