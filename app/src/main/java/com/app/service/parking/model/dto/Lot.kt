@@ -4,6 +4,7 @@ import com.app.service.parking.R
 import com.app.service.parking.global.App
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /*
 data class ParkingLot(
@@ -140,4 +141,4 @@ data class Lot(
     @Expose
     @SerializedName("insttNm") // 기관명
     val insttNm: String
-)
+) : Serializable

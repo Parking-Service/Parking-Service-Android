@@ -10,4 +10,9 @@ class ParkingLotRepository {
     suspend fun getLotsFlow(query: String?, latitude: Double, longitude: Double): Flow<ArrayList<Lot>> {
         return RetrofitParkingAPIBuilder.getParkingLotsByQuery(query, latitude, longitude)
     }
+
+    // 전화번호(number)를 바탕으로 스프링부트 서버에 주차장 데이터 요청
+    suspend fun getLotsFlow(number: String): Flow<ArrayList<Lot>> {
+        return RetrofitParkingAPIBuilder.getParkingLotsByNumber(number)
+    }
 }

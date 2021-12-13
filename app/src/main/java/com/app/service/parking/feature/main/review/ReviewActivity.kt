@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.feature.base.BaseActivity
+import com.app.service.parking.model.dto.Lot
 import net.daum.mf.map.api.MapView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,6 +17,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setParkModel() // Intent로 받은 주차장 데이터로 초기화
 
     }
 
@@ -27,5 +29,10 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     override fun finish() {
         binding.kakaoMapContainer.removeView(mapView) // 종료할 때 맵뷰 제거 (맵뷰 2개 이상 동시에 불가)
         super.finish()
+    }
+
+    private fun setParkModel() {
+        viewModel.lotModel = intent.getSerializableExtra("model") as Lot
+        binding.model = viewModel.lotModel // 데이터바인딩 모델 세팅
     }
 }

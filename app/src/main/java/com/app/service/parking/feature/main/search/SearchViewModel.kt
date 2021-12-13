@@ -3,6 +3,7 @@ package com.app.service.parking.feature.main.search
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.app.service.parking.R
@@ -17,9 +18,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
-import java.text.FieldPosition
 
-class SearchViewModel(val repository: ParkingLotRepository) : BaseViewModel() {
+class SearchViewModel(private val repository: ParkingLotRepository) : BaseViewModel() {
     private val debounceTime = 300L
     private val _searchQuery = MutableStateFlow("") // 검색 쿼리 Flow
     val searchMode = MutableLiveData<SearchMode>(SearchMode.TEXT)
@@ -48,7 +48,11 @@ class SearchViewModel(val repository: ParkingLotRepository) : BaseViewModel() {
         .flatMapLatest { query ->
             // 검색 쿼리가 2글자 이상일 때
             if (query.isNullOrBlank().not() && query.length > 1) {
-                getLotsFlow(query) // 주차장 리스트 플로우를 가져온다.
+                if(searchMode.value == SearchMode.TEXT) { // 텍스트로 검색한 경우
+                    getLotsFlowByQuery(query) // 검색어를 바탕으로 주차장 리스트 플로우를 가져온다.
+                }else { // 전화번호로 검색한 경우
+                    getLotsFlowByNumber(query) // 전화번호를 바탕으로 주차장 리스트 플로우를 가져온다.
+                }
             } else {
                 flowOf(ArrayList()) // 값이 비어 있다면 빈 리스트를 반환한다.
             }
@@ -63,7 +67,7 @@ class SearchViewModel(val repository: ParkingLotRepository) : BaseViewModel() {
 
 
     // 검색창에 입력한 값을 바탕으로 서버에서 주차장 데이터를 요청함 
-    private suspend fun getLotsFlow(query: String?): Flow<ArrayList<Lot>> {
+    private suspend fun getLotsFlowByQuery(query: String?): Flow<ArrayList<Lot>> {
         // 가까운 주차장 순으로 가져오기 위해 위도, 경도를 파라미터로 전달
         // SharedPreference에서 최근에 있던 위치의 위도, 경도를 가져옴
         val latitude = ParkingPreference.getString(App.context?.getString(R.string.latitude) ?: "latitude", "0.0")?.toDouble()
@@ -71,9 +75,16 @@ class SearchViewModel(val repository: ParkingLotRepository) : BaseViewModel() {
         return repository.getLotsFlow(query, latitude!!, longitude!!)
     }
 
+    // 주차장 데이터 가져오는 함수
+    // 입력받은 전화번호로 서버에게 주차장 데이터 요청
+    private suspend fun getLotsFlowByNumber(number: String): Flow<ArrayList<Lot>> {
+        // 전화번호를 서버에게 전달하여 주차장 데이터를 가져옴
+        return repository.getLotsFlow(number)
+    }
+
     // 검색 모드 변경 아이콘을 클릭했을 때
     fun onClickSearchMode(v: View) {
-        searchMode.postValue(searchMode.value?.toggleMode())
+        searchMode.value = searchMode.value?.toggleMode()
     }
     
     // 아이템 삭제 버튼을 클릭했을 때
