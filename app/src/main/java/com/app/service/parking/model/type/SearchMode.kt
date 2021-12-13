@@ -1,5 +1,6 @@
 package com.app.service.parking.model.type
 
+
 enum class SearchMode {
     TEXT {
         override fun toggleMode(): SearchMode {

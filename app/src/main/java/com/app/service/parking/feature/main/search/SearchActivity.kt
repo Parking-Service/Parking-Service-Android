@@ -11,6 +11,7 @@ import android.speech.SpeechRecognizer
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
@@ -22,10 +23,13 @@ import com.app.service.parking.databinding.ActivitySearchBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.listener.RecyclerItemClickListener
 import com.app.service.parking.feature.main.adapter.SearchRVAdapter
+import com.app.service.parking.feature.main.adapter.WrapContentLinearLayoutManager
+import com.app.service.parking.feature.main.review.ReviewActivity
 import com.app.service.parking.model.type.SearchMode
 import com.app.service.parking.util.PermissionHelper
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
+import okhttp3.Dispatcher
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
 
@@ -78,18 +82,21 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
             // 리사이클러뷰 아이템을 클릭했을 때 호출되는 리스너
             override fun onClick(position: Int, resId: Int?) {
                 when (resId) {
-                    R.id.delete_button -> {
+                    R.id.delete_button -> { // 검색 결과 삭제 버튼을 클릭했을 때
                         viewModel.deleteItem(position)
-                    } // 검색 결과 삭제 버튼을 클릭했을 때
-                    else -> {
-                    } // resId가 지정되어 있지 않은 경우 레이아웃 전체를 클릭한 것으로 간주
+                    }
+                    else -> { // resId가 지정되어 있지 않은 경우 레이아웃 전체를 클릭한 것으로 간주
+                        startActivity(Intent(this@SearchActivity, ReviewActivity::class.java).putExtra("model",
+                            viewModel.searchResult.value?.get(position)
+                        ))
+                    }
                 }
             }
         })
         with(binding.searchRecyclerView) {
             setHasFixedSize(true)
             adapter = rvAdapter
-            layoutManager = LinearLayoutManager(this@SearchActivity)
+            layoutManager = WrapContentLinearLayoutManager(this@SearchActivity)
         }
 
         binding.searchBarContainer.backButton.setOnClickListener {
@@ -140,12 +147,14 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
             addTextChangedListener(textWatcher)
             requestFocus()
 
-            // 액티비티를 켜면 자동으로 키보드를 올리기
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            this.postDelayed({
-                imm.showSoftInput(this, 0)
-            }, 500)
 
+            if ((intent.getStringExtra("query")?.length ?: 0) < 2) {
+                // 액티비티를 켜면 자동으로 키보드를 올리기
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                this.postDelayed({
+                    imm.showSoftInput(this, 0)
+                }, 500)
+            }
         }
 
         // 검색 값을 받으면 리사이클러뷰 갱신
@@ -165,8 +174,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                     }
                 }
 
-                rvAdapter?.updateItems(searchResult) // 리사이클러뷰 어댑터에 새로 가져온 주차장 데이터 업데이트
-                binding.searchProgressBar.visibility = View.GONE // 결과를 다 가져왔으면, 프로그레스바 가리기
+                CoroutineScope(Dispatchers.Main).launch {
+                    rvAdapter?.updateItems(searchResult) // 리사이클러뷰 어댑터에 새로 가져온 주차장 데이터 업데이트
+                    binding.searchProgressBar.visibility = View.GONE // 결과를 다 가져왔으면, 프로그레스바 가리기
+                }
             }
         }
 
@@ -204,10 +215,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                                 .roundToInt()
                         requestLayout()
 
-                        // 검색 타입 바꾸면 에딧텍스트 비우기
-                        setOnClickListener {
-                            searchBarEditText.text.clear()
-                        }
                     }
                 }
             } else { // 주차장 번호로 검색하는 경우
@@ -240,14 +247,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                             resources.getDimension(R.dimen.search_bar_icon_glasses_button_size)
                                 .roundToInt()
                         requestLayout()
-
-                        // 검색 타입 바꾸면 에딧텍스트 비우기
-                        setOnClickListener {
-                            searchBarEditText.text.clear()
-                        }
                     }
                 }
             }
+
+            // 검색 타입 바꾸면 에딧텍스트 비우기
+            binding.searchBarContainer.searchBarEditText.text.clear()
         }
 
         binding.searchBarContainer.voiceButton.setOnClickListener {
@@ -267,17 +272,25 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                     binding.searchBarContainer.searchBarEditText.windowToken,
                     0
                 )
-                it.show() // 음성인식 다이얼로그 show()
-                mRecognizer =
-                    SpeechRecognizer.createSpeechRecognizer(this) // 새로운 SpeechRecognizer를 만드는 팩토리 메서드
-                mRecognizer?.setRecognitionListener(getRecognitionListener())
-                mRecognizer?.startListening(
-                    // 여분의 키
-                    Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).putExtra(
-                        RecognizerIntent.EXTRA_CALLING_PACKAGE,
-                        packageName
-                    ).putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR") // 한국어 설정
-                )
+
+                // 키보드 닫는 시간을 위해 0.5초 뒤에 다이얼로그 보여주기
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(500L)
+                    it.show()
+                    if (mRecognizer == null) {
+                        mRecognizer =
+                            SpeechRecognizer.createSpeechRecognizer(baseContext) // 새로운 SpeechRecognizer를 만드는 팩토리 메서드
+                        mRecognizer?.setRecognitionListener(getRecognitionListener())
+                    }
+
+                    mRecognizer?.startListening(
+                        // 여분의 키
+                        Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).putExtra(
+                            RecognizerIntent.EXTRA_CALLING_PACKAGE,
+                            packageName
+                        ).putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR") // 한국어 설정
+                    )
+                }
             }
         }
     }

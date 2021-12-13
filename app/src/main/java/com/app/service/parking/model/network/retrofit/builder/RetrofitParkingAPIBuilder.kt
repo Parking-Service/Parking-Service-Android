@@ -66,4 +66,34 @@ object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
             })
         }
 
+
+    // 검색어를 바탕으로 주차장 리스트 플로우를 가져옴
+    suspend fun getParkingLotsByNumber(
+        number: String
+    ): Flow<ArrayList<Lot>> =
+
+        // 데이터를 가져올 동안, 코루틴 잠시 일시 중지
+        suspendCancellableCoroutine { continuation ->
+            val api = getRetrofit().create(ParkingLotAPI::class.java)
+            api.getLotsByNumber(number).enqueue(object : Callback<ArrayList<Lot>> {
+                override fun onResponse(call: Call<ArrayList<Lot>>, response: Response<ArrayList<Lot>>) {
+                    val parkingList: ArrayList<Lot>? = response.body()
+                    parkingList?.forEach { lot ->
+                        // 주차장 이름 출력
+                        Timber.d("주차장 명 : ${lot.parkName}")
+                    }
+
+                    // 주차장 데이터를 반환하면서 코루틴 재게
+                    // 가져온 주차장 리스트를 플로우로 변환
+                    parkingList?.let { continuation.resume(flowOf(it), null) }
+
+                }
+
+                override fun onFailure(call: Call<ArrayList<Lot>>, t: Throwable) {
+                    Timber.e("데이터 불러오기 실패 : ${t.message}")
+                    continuation.resumeWithException(Exception("데이터를 불러오기에 실패했습니다."))
+                }
+            })
+        }
+
 }
