@@ -11,12 +11,10 @@ import android.speech.SpeechRecognizer
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.service.parking.R
 import com.app.service.parking.custom.RecordBottomSheetDialog
 import com.app.service.parking.databinding.ActivitySearchBinding
@@ -29,7 +27,6 @@ import com.app.service.parking.model.type.SearchMode
 import com.app.service.parking.util.PermissionHelper
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
-import okhttp3.Dispatcher
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.roundToInt
 
@@ -86,9 +83,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
                         viewModel.deleteItem(position)
                     }
                     else -> { // resId가 지정되어 있지 않은 경우 레이아웃 전체를 클릭한 것으로 간주
-                        startActivity(Intent(this@SearchActivity, ReviewActivity::class.java).putExtra("model",
-                            viewModel.searchResult.value?.get(position)
-                        ))
+                        startActivity(
+                            Intent(this@SearchActivity, ReviewActivity::class.java).putExtra(
+                                "model",
+                                viewModel.searchResult.value?.get(position)
+                            )
+                        )
                     }
                 }
             }

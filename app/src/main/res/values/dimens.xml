@@ -91,6 +91,7 @@
     <dimen name="profile_nickname_text_size">16sp</dimen>
     <dimen name="profile_id_text_size">14sp</dimen>
 
+    <!-- Record dialog -->
     <dimen name="record_bottom_sheet_dialog_padding_top">12dp</dimen>
     <dimen name="record_bottom_sheet_dialog_padding_bottom">24dp</dimen>
     <dimen name="record_bottom_sheet_dialog_padding_horizontal">16dp</dimen>
@@ -98,6 +99,11 @@
     <dimen name="record_bottom_sheet_content_margin_top">16dp</dimen>
     <dimen name="record_bottom_sheet_subtitle_bg_radius">20dp</dimen>
     <dimen name="record_bottom_sheet_subtitle_bg_padding">10dp</dimen>
+
+    <!-- Navigation dialog -->
+    <dimen name="navi_name_text_size">18sp</dimen>
+    <dimen name="navi_button_margin_top">12dp</dimen>
+    <dimen name="navi_button_margin_left">12dp</dimen>
 
     <!-- layout_search_bar.xml -->
     <dimen name="search_bar_padding_horizontal">16dp</dimen>

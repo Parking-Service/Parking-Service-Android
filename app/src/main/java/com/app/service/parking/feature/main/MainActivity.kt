@@ -49,14 +49,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
     override fun onResume() {
         super.onResume()
-        if (!binding.mainContainer.root.contains(mapView)) {
+        if (binding.mainContainer.root.contains(mapView).not()) {
             binding.mainContainer.root.addView(mapView)
         }
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
-        //binding.mainContainer.root.removeAllViews()
+        binding.mainContainer.root.removeAllViews()
     }
 
     override fun initActivity() {
@@ -272,7 +273,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         }
     }
 
-    // 드로워 레이아웃 및 네비게이션 초기화
+    // 드로워 레이아웃 및 내비게이션 초기화
     private fun initDrawerLayout() {
         binding.navigationView.setNavigationItemSelectedListener(this)
     }
@@ -291,6 +292,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 }
             }
             searchBarContainer.searchBar.setOnClickListener {
+                if(binding.mainContainer.root.contains(mapView)) {
+                    binding.mainContainer.root.removeView(mapView)
+                }
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
             }
         }
@@ -408,7 +412,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         }
     }
 
-    // 드로워 레이아웃의 네비게이션 메뉴 아이템을 선택했을 때의 리스너
+    // 드로워 레이아웃의 내비게이션 메뉴 아이템을 선택했을 때의 리스너
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 

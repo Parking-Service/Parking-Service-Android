@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="dialog"
+            type="com.app.service.parking.custom.NaviBottomSheetDialog" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/record_bottom_sheet_dialog_padding_horizontal"
+        android:paddingTop="@dimen/record_bottom_sheet_dialog_padding_top"
+        android:paddingBottom="@dimen/record_bottom_sheet_dialog_padding_bottom">
+
+        <TextView
+            android:id="@id/logo_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bottom_sheet_dialog_app_name"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/record_bottom_sheet_content_margin_top"
+            android:text="@string/navi_bottom_sheet_dialog_title"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo_text_view" />
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--내비게이션 버튼 목록-->
+        <!-- 카카오 내비게이션 -->
+        <LinearLayout
+            android:id="@+id/kakao_navi_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:onClick="@{dialog::onClickNaviButton}"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_navi_kakao" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/navi_button_margin_left"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="@string/kakao_navi"
+                android:textColor="@color/dialogTitle"
+                android:textSize="@dimen/navi_name_text_size" />
+        </LinearLayout>
+
+        <!-- 네이버 내비게이션 -->
+        <LinearLayout
+            android:id="@+id/naver_navi_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/navi_button_margin_top"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:onClick="@{dialog::onClickNaviButton}"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/kakao_navi_button">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_navi_naver" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/navi_button_margin_left"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="@string/naver_navi"
+                android:textColor="@color/dialogTitle"
+                android:textSize="@dimen/navi_name_text_size" />
+        </LinearLayout>
+
+        <!-- T-map 내비게이션 -->
+        <LinearLayout
+            android:id="@+id/tmap_navi_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/navi_button_margin_top"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:onClick="@{dialog::onClickNaviButton}"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/naver_navi_button">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_navi_tmap" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/navi_button_margin_left"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="@string/tmap_navi"
+                android:textColor="@color/dialogTitle"
+                android:textSize="@dimen/navi_name_text_size" />
+        </LinearLayout>
+
+        <!-- 원 내비게이션 -->
+        <LinearLayout
+            android:id="@+id/one_navi_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/navi_button_margin_top"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:onClick="@{dialog::onClickNaviButton}"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tmap_navi_button">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_navi_one" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/navi_button_margin_left"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="@string/one_navi"
+                android:textColor="@color/dialogTitle"
+                android:textSize="@dimen/navi_name_text_size" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
