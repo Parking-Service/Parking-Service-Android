@@ -6,12 +6,12 @@
 
 # 어따세워
 
-![KakaoTalk_20211215_011856221](https://user-images.githubusercontent.com/56534241/146037486-b094a98c-bfa9-4c93-8b08-623023906432.jpg)
-![KakaoTalk_20211215_011856221_01](https://user-images.githubusercontent.com/56534241/146037492-9f9db45f-cce1-4258-99cf-15e40944551f.jpg)
-![KakaoTalk_20211215_011856221_02](https://user-images.githubusercontent.com/56534241/146037493-65b85c05-a236-45d4-a10c-019f57f7a22a.jpg)
-![KakaoTalk_20211215_011856221_03](https://user-images.githubusercontent.com/56534241/146037497-07bfc3a8-7e02-4cdc-8f46-e079936d82f3.jpg)
-![KakaoTalk_20211215_011856221_04](https://user-images.githubusercontent.com/56534241/146037500-e6164a85-4868-4363-a46b-ad56dce07e02.jpg)
-![KakaoTalk_20211215_011856221_05](https://user-images.githubusercontent.com/56534241/146037501-e02b7d32-576c-4a2c-957d-6aed8655dd74.jpg)
+<img style="display=inline" src="https://user-images.githubusercontent.com/56534241/146037486-b094a98c-bfa9-4c93-8b08-623023906432.jpg" width="300" height="520" />
+<img style="display=inline" src="https://user-images.githubusercontent.com/56534241/146037492-9f9db45f-cce1-4258-99cf-15e40944551f.jpg" width="300" height="520"/>
+<img style="display=inline" src="https://user-images.githubusercontent.com/56534241/146037493-65b85c05-a236-45d4-a10c-019f57f7a22a.jpg" width="300" height="520"/>
+<img style="display=inline" src="https://user-images.githubusercontent.com/56534241/146037497-07bfc3a8-7e02-4cdc-8f46-e079936d82f3.jpg" width="300" height="520"/>
+<img style="display=inline" src="https://user-images.githubusercontent.com/56534241/146037500-e6164a85-4868-4363-a46b-ad56dce07e02.jpg" width="300" height="520"/>
+<img style="display=inline" src="https://user-images.githubusercontent.com/56534241/146037501-e02b7d32-576c-4a2c-957d-6aed8655dd74.jpg" width="300" height="520"/>
 <br/>
 
 + [개발 인원] - 2인 개발 (안드로이드, 백엔드) / 서비스 프로젝트
