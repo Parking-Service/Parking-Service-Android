@@ -50,20 +50,20 @@
 ## 📱 InApp 스크린샷
 <br>
 <p align="center" display="inline">
-  <img src="https://user-images.githubusercontent.com/56534241/146037486-b094a98c-bfa9-4c93-8b08-623023906432.jpg" width="280" height="500" />
-  <img src="https://user-images.githubusercontent.com/56534241/146037492-9f9db45f-cce1-4258-99cf-15e40944551f.jpg" width="280" height="500"/>
-  <img src="https://user-images.githubusercontent.com/56534241/146037493-65b85c05-a236-45d4-a10c-019f57f7a22a.jpg" width="280" height="500"/>
-  <img src="https://user-images.githubusercontent.com/56534241/146037497-07bfc3a8-7e02-4cdc-8f46-e079936d82f3.jpg" width="280" height="500"/>
-  <img src="https://user-images.githubusercontent.com/56534241/146037500-e6164a85-4868-4363-a46b-ad56dce07e02.jpg" width="280" height="500"/>
-  <img src="https://user-images.githubusercontent.com/56534241/146037501-e02b7d32-576c-4a2c-957d-6aed8655dd74.jpg" width="280" height="500"/>
+  <img src="https://user-images.githubusercontent.com/56534241/146037486-b094a98c-bfa9-4c93-8b08-623023906432.jpg" width="260" height="490" />
+  <img src="https://user-images.githubusercontent.com/56534241/146037492-9f9db45f-cce1-4258-99cf-15e40944551f.jpg" width="260" height="490"/>
+  <img src="https://user-images.githubusercontent.com/56534241/146037493-65b85c05-a236-45d4-a10c-019f57f7a22a.jpg" width="260" height="490"/>
+  <img src="https://user-images.githubusercontent.com/56534241/146037497-07bfc3a8-7e02-4cdc-8f46-e079936d82f3.jpg" width="260" height="490"/>
+  <img src="https://user-images.githubusercontent.com/56534241/146037500-e6164a85-4868-4363-a46b-ad56dce07e02.jpg" width="260" height="490"/>
+  <img src="https://user-images.githubusercontent.com/56534241/146037501-e02b7d32-576c-4a2c-957d-6aed8655dd74.jpg" width="260" height="490"/>
 </p><br><br>
 
 ## 🎥 InApp GIF
 <br>
 <p align="center" display="inline">
-  <img src="https://user-images.githubusercontent.com/56534241/146184033-8ff4ad24-b05c-4f8a-929d-54b4f491c542.gif" width="280" height="500" />
-  <img src="https://user-images.githubusercontent.com/56534241/146184052-cdc67d08-7e3d-4b2f-add3-a44cde80566d.gif" width="280" height="500" />
-  <img src="https://user-images.githubusercontent.com/56534241/146184058-132baf77-428e-4f55-b56a-31760f551fc9.gif" width="280" height="500" />
+  <img src="https://user-images.githubusercontent.com/56534241/146184033-8ff4ad24-b05c-4f8a-929d-54b4f491c542.gif" width="260" height="490" />
+  <img src="https://user-images.githubusercontent.com/56534241/146184052-cdc67d08-7e3d-4b2f-add3-a44cde80566d.gif" width="260" height="490" />
+  <img src="https://user-images.githubusercontent.com/56534241/146184058-132baf77-428e-4f55-b56a-31760f551fc9.gif" width="260" height="490" />
   <br><br><br>
   <strong> * 현재 개발 중인 단계를 기록한 화면입니다. *<br>
     프로젝트가 진행됨에 따라 실행 영상은 지속 업데이트될 예정입니다! </strong>
