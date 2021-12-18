@@ -25,6 +25,6 @@ interface ParkingLotAPI {
     // 전화번호로 검색
     @GET("/lots/tel")
     fun getLotsByNumber(
-        @Query("number") number: String
+        @Query("num") number: String
     ): Call<ArrayList<Lot>>
 }

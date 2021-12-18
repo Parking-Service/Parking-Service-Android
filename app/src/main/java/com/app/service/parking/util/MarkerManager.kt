@@ -30,12 +30,12 @@ class MarkerManager {
     }
 
     // 맵상에 마커를 추가한다.
-    fun addMarker(mapView: MapView, marker: MapPOIItem) {
-        mapView.addPOIItem(marker)
+    fun addMarker(mapView: MapView?, marker: MapPOIItem) {
+        mapView?.addPOIItem(marker)
     }
 
     // 맵상의 마커를 모두 제거한다.
-    fun removeAllMarkers(mapView: MapView) {
-        mapView.removeAllPOIItems()
+    fun removeAllMarkers(mapView: MapView?) {
+        mapView?.removeAllPOIItems()
     }
 }

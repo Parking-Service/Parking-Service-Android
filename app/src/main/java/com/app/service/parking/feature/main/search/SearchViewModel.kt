@@ -46,15 +46,19 @@ class SearchViewModel(private val repository: ParkingLotRepository) : BaseViewMo
     val searchResult = _searchQuery
         .debounce(debounceTime)
         .flatMapLatest { query ->
-            // 검색 쿼리가 2글자 이상일 때
-            if (query.isNullOrBlank().not() && query.length > 1) {
-                if(searchMode.value == SearchMode.TEXT) { // 텍스트로 검색한 경우
+            if(searchMode.value == SearchMode.TEXT) { // 텍스트로 검색한 경우
+              // 검색 쿼리가 2글자 이상일 때
+                if (query.isNullOrBlank().not() && query.length > 1) {
                     getLotsFlowByQuery(query) // 검색어를 바탕으로 주차장 리스트 플로우를 가져온다.
                 }else { // 전화번호로 검색한 경우
-                    getLotsFlowByNumber(query) // 전화번호를 바탕으로 주차장 리스트 플로우를 가져온다.
+                    flowOf(ArrayList()) // 조건이 만족하지 않는다면 빈 리스트를 반환한다.
                 }
-            } else {
-                flowOf(ArrayList()) // 값이 비어 있다면 빈 리스트를 반환한다.
+            } else { // 전화번호로 검색한 경우 SearchMode.Number
+                if (query.isNullOrBlank().not() && query.length > 2) {
+                    getLotsFlowByNumber(query) // 전화번호를 바탕으로 주차장 리스트 플로우를 가져온다.
+                }else {
+                    flowOf(ArrayList()) // 조건이 만족하지 않는다면 빈 리스트를 반환한다.
+                }
             }
         }
         .flowOn(Dispatchers.Default)

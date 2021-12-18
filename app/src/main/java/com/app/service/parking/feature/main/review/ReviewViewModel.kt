@@ -5,5 +5,4 @@ import com.app.service.parking.model.dto.Lot
 
 class ReviewViewModel : BaseViewModel() {
     var lotModel: Lot? = null
-
 }

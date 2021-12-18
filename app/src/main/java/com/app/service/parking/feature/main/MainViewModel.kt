@@ -33,7 +33,7 @@ class MainViewModel : BaseViewModel() {
 
     @ExperimentalCoroutinesApi
     @FlowPreview
-    val lotData = _location
+    var lotData = _location
         .debounce(debounceTime)
         .flatMapLatest { location ->
             val latitude = location.first

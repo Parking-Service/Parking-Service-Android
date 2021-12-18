@@ -2,6 +2,7 @@ package com.app.service.parking.feature.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -122,6 +123,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
     // googleSignInClient와 같은 로그인에 필요한 '객체'를 전달받기 위한 콜백
     override fun onSignIn(loginType: LoginType, result: ResultType) {
         if(result == ResultType.CANCELED) {
+            Log.d("onSignIn","로그인 취소")
             viewModel.isLoading.value = false // 로그인 로딩 종료
             return
         }

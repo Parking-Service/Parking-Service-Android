@@ -11,10 +11,11 @@ import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.contains
 import com.app.service.parking.R
 import com.app.service.parking.custom.RecordBottomSheetDialog
 import com.app.service.parking.databinding.ActivityMainBinding
@@ -27,11 +28,7 @@ import com.app.service.parking.util.MarkerManager
 import com.app.service.parking.util.PermissionHelper
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapPoint.GeoCoordinate
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,21 +40,78 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
     override val layoutResId: Int = R.layout.activity_main
     override val viewModel: MainViewModel by viewModel()
-    lateinit var mapView: MapView
     var recordDialog: RecordBottomSheetDialog? = null
     var mRecognizer: SpeechRecognizer? = null
+    var mapViewContainer: RelativeLayout? = null
+    private lateinit var mapView: MapView
 
-    override fun onResume() {
-        super.onResume()
-        if (!binding.mainContainer.root.contains(mapView)) {
-            binding.mainContainer.root.addView(mapView)
+    override fun onRestart() {
+        super.onRestart()
+        try {
+
+            mapView = MapView(this).also {
+
+                mapViewContainer = RelativeLayout(this)
+                mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                binding.mainContainer.root.addView(mapViewContainer)
+                mapViewContainer?.addView(it)
+
+                it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater))
+                it.setCurrentLocationEventListener(object : MapView.CurrentLocationEventListener {
+                    // 현재 위치가 업데이트 되었을 때 실행되는 메소드
+                    // 단말의 현위치 좌표값을 통보받을 수 있다.
+                    override fun onCurrentLocationUpdate(
+                        mapView: MapView?,
+                        currentLocation: MapPoint?,
+                        accuracyInMeters: Float
+                    ) {
+                        // val geoLocation: GeoCoordinate = currentLocation?.mapPointGeoCoord!!
+
+                    }
+
+                    // 단말의 방향(Heading) 각도값을 통보받을 수 있다.
+                    override fun onCurrentLocationDeviceHeadingUpdate(
+                        mapView: MapView?,
+                        accuracyInMeters: Float
+                    ) {
+
+                    }
+
+                    // 현위치 갱신 작업에 실패한 경우 호출된다.
+                    override fun onCurrentLocationUpdateFailed(mapView: MapView?) {
+                        Timber.d("onCurrentLocationUpdate failed")
+                    }
+
+                    // 현위치 트랙킹 기능이 사용자에 의해 취소된 경우 호출된다.
+                    override fun onCurrentLocationUpdateCancelled(mapView: MapView?) {
+                        Timber.d("onCurrentLocationUpdate canceled")
+                    }
+                })
+
+                // 맵 뷰가 초기화 됐을때 리스너
+                it.setMapViewEventListener(this)
+
+                // SharedPreference에서 최근에 있던 위치의 위도, 경도를 가져옴
+                val latitude =
+                    ParkingPreference.getString(getString(R.string.latitude), "0.0")?.toDouble()
+                val longitude =
+                    ParkingPreference.getString(getString(R.string.longitude), "0.0")?.toDouble()
+
+                if (latitude != 0.0 || longitude != 0.0) {
+                    // 위도, 경도 지정
+                    viewModel.setLocation(Pair(latitude!!, longitude!!))
+                    it.setMapCenterPoint(mapPointWithGeoCoord(latitude, longitude), false)
+                }
+            }
+        } catch (re: RuntimeException) {
+            Log.d("에러발생", re.toString())
+            Timber.e(re.toString())
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //binding.mainContainer.root.removeAllViews()
-    }
 
     override fun initActivity() {
         binding.viewModel = viewModel
@@ -127,8 +181,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
     private fun setMapView() {
         val markerManager = MarkerManager()
+
         mapView = MapView(this).also {
-            binding.mainContainer.root.addView(it)
+
+            mapViewContainer = RelativeLayout(this)
+            mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            binding.mainContainer.root.addView(mapViewContainer)
+            mapViewContainer?.addView(it)
+
             it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater))
             it.setCurrentLocationEventListener(object : MapView.CurrentLocationEventListener {
                 // 현재 위치가 업데이트 되었을 때 실행되는 메소드
@@ -138,8 +201,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     currentLocation: MapPoint?,
                     accuracyInMeters: Float
                 ) {
-                    val geoLocation: GeoCoordinate = currentLocation?.mapPointGeoCoord!!
-                    showToast(geoLocation.latitude.toString())
+                    // val geoLocation: GeoCoordinate = currentLocation?.mapPointGeoCoord!!
+
                 }
 
                 // 단말의 방향(Heading) 각도값을 통보받을 수 있다.
@@ -147,7 +210,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     mapView: MapView?,
                     accuracyInMeters: Float
                 ) {
-                    showToast(accuracyInMeters.toString())
+
                 }
 
                 // 현위치 갱신 작업에 실패한 경우 호출된다.
@@ -163,12 +226,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
             // 맵 뷰가 초기화 됐을때 리스너
             it.setMapViewEventListener(this)
-            
-            // SharedPreference에서 최근에 있던 위치의 위도, 경도를 가져옴
-            val latitude = ParkingPreference.getString(getString(R.string.latitude), "0.0")?.toDouble()
-            val longitude = ParkingPreference.getString(getString(R.string.longitude), "0.0")?.toDouble()
 
-            if(latitude != 0.0 || longitude != 0.0) {
+            // SharedPreference에서 최근에 있던 위치의 위도, 경도를 가져옴
+            val latitude =
+                ParkingPreference.getString(getString(R.string.latitude), "0.0")?.toDouble()
+            val longitude =
+                ParkingPreference.getString(getString(R.string.longitude), "0.0")?.toDouble()
+
+            if (latitude != 0.0 || longitude != 0.0) {
                 // 위도, 경도 지정
                 viewModel.setLocation(Pair(latitude!!, longitude!!))
                 it.setMapCenterPoint(mapPointWithGeoCoord(latitude, longitude), false)
@@ -179,9 +244,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 markerManager.removeAllMarkers(it) // 현재 맵 상의 마커를 모두 지운다.
                 lotData?.forEach { lot ->
                     // 새로운 마커를 생성하고 맵상에 추가한다.
-                    var fee = if(lot.basicFee == "0") { // 기본 비용이 없으면(default값 0원) 하루당 비용 보여주기
+                    var fee = if (lot.basicFee == "0") { // 기본 비용이 없으면(default값 0원) 하루당 비용 보여주기
                         lot.feePerDay
-                    } else{ // 기본 비용이 있으면 기본 비용으로 보여주기
+                    } else { // 기본 비용이 있으면 기본 비용으로 보여주기
                         lot.basicFee
                     }
                     val marker = markerManager.createMarker(
@@ -272,7 +337,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         }
     }
 
-    // 드로워 레이아웃 및 네비게이션 초기화
+    // 드로워 레이아웃 및 내비게이션 초기화
     private fun initDrawerLayout() {
         binding.navigationView.setNavigationItemSelectedListener(this)
     }
@@ -291,6 +356,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 }
             }
             searchBarContainer.searchBar.setOnClickListener {
+                MarkerManager().removeAllMarkers(mapView)
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
             }
         }
@@ -329,14 +395,19 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
             // 말하기 시작할 준비가되면 호출
             override fun onReadyForSpeech(params: Bundle?) {}
+
             // 말하기 시작했을 때 호출
             override fun onBeginningOfSpeech() {}
+
             // 입력받는 소리의 크기를 알려줌
             override fun onRmsChanged(dB: Float) {}
+
             // 말을 시작하고 인식이 된 단어를 buffer에 담음
             override fun onBufferReceived(p0: ByteArray?) {}
+
             // 말하기가 끝났을 때
             override fun onEndOfSpeech() {}
+
             // 에러 발생
             override fun onError(error: Int) {
                 /*val message: String = when (error) {
@@ -373,8 +444,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 )
                 dismissVoiceDialog()
             }
+
             // 부분 인식 결과를 사용할 수 있을 때 호출
             override fun onPartialResults(p0: Bundle?) {}
+
             // 향후 이벤트를 추가하기 위해 예약
             override fun onEvent(p0: Int, p1: Bundle?) {}
         }
@@ -408,7 +481,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         }
     }
 
-    // 드로워 레이아웃의 네비게이션 메뉴 아이템을 선택했을 때의 리스너
+    // 드로워 레이아웃의 내비게이션 메뉴 아이템을 선택했을 때의 리스너
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 
@@ -424,11 +497,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         val location = mapPoint?.mapPointGeoCoord // 좌표 객체
         val latitude: Double = location?.latitude ?: 0.0 // 위도
         val longitude: Double = location?.longitude ?: 0.0 // 경도
-        
+
         // Preference에 가장 최근 위도, 경도 저장
         ParkingPreference.putValue(getString(R.string.latitude), latitude.toString())
         ParkingPreference.putValue(getString(R.string.longitude), longitude.toString())
-        
+
         // 현재 좌표 지정(마커를 찍기 위함)
         viewModel.setLocation(Pair(latitude, longitude))
     }

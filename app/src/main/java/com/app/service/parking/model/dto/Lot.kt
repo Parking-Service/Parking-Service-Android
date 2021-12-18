@@ -74,7 +74,7 @@ data class Lot(
     val operDay: String,
     @Expose
     @SerializedName("weekdayOperOpenHhmm")
-    val weekdyOpenTime: String,
+    val weekdayOpenTime: String,
     @Expose
     @SerializedName("weekdayOperCloseHhmm")
     val weekdayCloseTime: String,
@@ -141,4 +141,53 @@ data class Lot(
     @Expose
     @SerializedName("insttNm") // 기관명
     val insttNm: String
-) : Serializable
+) : Serializable {
+
+    // *영업시간
+    val weekdayOperTime: String // 평일
+        get() = "$weekdayOpenTime ~ $weekdayCloseTime"
+    val saturOperTime: String // 토요일
+        get() = "$saturdayOpenTime ~ $saturdayCloseTime"
+    val weekendOperTime: String // 토요일
+        get() = "$holidayOpenTime ~ $holidayCloseTime"
+    val basicFeeWon: String //주차기본요금
+        get() {
+            return if (basicFee?.isNullOrEmpty()) {
+                "${basicFee}원"
+            } else {
+                "0원"
+            }
+        }
+    val additionalFee: String // 추가비용
+        get() {
+            return if (addUnitTime.isNullOrEmpty()) {
+                "- 분당 - 원"
+            } else {
+                "${addUnitTime}분당 ${addUnitFee}원"
+            }
+        }
+    val oneDayParkTime: String // 1일 주차권 요금 시간
+        get() {
+            return if (parkTimePerDay.isNullOrBlank()) {
+                "- 시간"
+            } else {
+                "${parkTimePerDay}시간"
+            }
+        }
+    val oneDayParkFee: String // 1일 주차권 요금 비용
+        get() {
+            return if (feePerDay.isNullOrBlank()) {
+                "0원"
+            } else {
+                "${feePerDay}원"
+            }
+        }
+    val oneMonthParkFee: String // 월 정기권 요금
+        get() {
+            return if (feePerMonth.isNullOrBlank()) {
+                "0원"
+            } else {
+                "${feePerMonth}원"
+            }
+        }
+}

@@ -19,7 +19,7 @@
             android:id="@id/logo_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/record_bottom_sheet_dialog_app_name"
+            android:text="@string/bottom_sheet_dialog_app_name"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
