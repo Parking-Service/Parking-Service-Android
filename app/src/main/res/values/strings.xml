@@ -47,6 +47,7 @@
     
     <string name="clipboard_label">주차장 주소</string>
     <string name="clipboard_success">클립보드에 주소 복사가 완료되었습니다!</string>
+    <string name="clipboard_failed">주소 정보가 없어 복사에 실패하였습니다.</string>
     <string name="choose_app">앱을 선택해주세요.</string>
 
     <!-- marker -->
