@@ -19,7 +19,7 @@ import timber.log.Timber
 
 class MainViewModel : BaseViewModel() {
 
-    val _location = MutableStateFlow(Pair<Double, Double>(0.0, 0.0))
+    private val _location = MutableStateFlow(Pair<Double, Double>(0.0, 0.0))
     val fabStatus = MutableLiveData<LocationFabStatus>() // fab버튼 상태 라이브 데이터
     var isMovedMyLocation = false
     var backPressInterval = 2000 // 뒤로가기 시간 interval
