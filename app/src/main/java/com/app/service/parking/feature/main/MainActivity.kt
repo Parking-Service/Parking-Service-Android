@@ -16,6 +16,7 @@ import android.widget.RelativeLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import com.app.service.parking.R
 import com.app.service.parking.custom.RecordBottomSheetDialog
 import com.app.service.parking.databinding.ActivityMainBinding
@@ -50,8 +51,36 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     var mapViewContainer: RelativeLayout? = null
     private lateinit var mapView: MapView
 
+
+    // 지도를 드래그하면 새로운 위도, 경도를 가져옴 ->
+    // 해당 좌표를 바탕으로 서버에 주차장 데이터 요청 ->
+    // 주차장 데이터를 가져오면 MutableLiveData를 업데이트 해줌 ->
+    // 데이터의 변화에 따라 새로운 마커를 등록할 수 있도록 하기 위한 Observer
+    private val lotObserver = Observer<ArrayList<Lot>?> { lotData ->
+        val markerManager = MarkerManager()
+
+        markerManager.removeAllMarkers(mapView) // 현재 맵 상의 마커를 모두 지운다.
+        lotData?.forEach { lot ->
+            // 새로운 마커를 생성하고 맵상에 추가한다.
+            var fee = if (lot.basicFee == "0") { // 기본 비용이 없으면(default값 0원) 하루당 비용 보여주기
+                lot.feePerDay
+            } else { // 기본 비용이 있으면 기본 비용으로 보여주기
+                lot.basicFee
+            }
+            val marker = markerManager.createMarker(
+                lot.hashCode(),
+                lot.feeType,
+                fee,
+                lot.latitude.toDouble(),
+                lot.longitude.toDouble()
+            )
+            markerManager.addMarker(mapView, marker)
+        }
+    }
+
     override fun onRestart() {
         super.onRestart()
+
         try {
             mapView = MapView(this).also {
                 mapViewContainer = RelativeLayout(this)
@@ -106,11 +135,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 if (latitude != 0.0 || longitude != 0.0) {
                     // 위도, 경도 지정
                     viewModel.setLocation(Pair(latitude!!, longitude!!))
-                    it.setMapCenterPoint(mapPointWithGeoCoord(latitude, longitude), false)
                 }
+
+                // 주차장 데이터 리스트가 추가되거나, 변경되면 마커를 새로 찍음.
+                viewModel.lotData.observe(this, lotObserver)
             }
         } catch (re: RuntimeException) {
-            Log.d("에러발생", re.toString())
+            Timber.tag("에러발생").d(re.toString())
             Timber.e(re.toString())
         }
     }
@@ -183,7 +214,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     }
 
     private fun setMapView() {
-        val markerManager = MarkerManager()
 
         mapView = MapView(this).also {
 
@@ -243,25 +273,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             }
 
             // 주차장 데이터 리스트가 추가되거나, 변경되면 마커를 새로 찍음.
-            viewModel.lotData.observe(this, { lotData ->
-                markerManager.removeAllMarkers(it) // 현재 맵 상의 마커를 모두 지운다.
-                lotData?.forEach { lot ->
-                    // 새로운 마커를 생성하고 맵상에 추가한다.
-                    var fee = if (lot.basicFee == "0") { // 기본 비용이 없으면(default값 0원) 하루당 비용 보여주기
-                        lot.feePerDay
-                    } else { // 기본 비용이 있으면 기본 비용으로 보여주기
-                        lot.basicFee
-                    }
-                    val marker = markerManager.createMarker(
-                        lot.hashCode(),
-                        lot.feeType,
-                        fee,
-                        lot.latitude.toDouble(),
-                        lot.longitude.toDouble()
-                    )
-                    markerManager.addMarker(it, marker)
-                }
-            })
+            viewModel.lotData.observe(this, lotObserver)
         }
 
         // GPS 활성화를 위한 펄미션 체크
