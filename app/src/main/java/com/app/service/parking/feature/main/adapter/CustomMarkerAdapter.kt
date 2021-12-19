@@ -1,19 +1,19 @@
 package com.app.service.parking.feature.main.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ItemFreeMarkerBinding
 import com.app.service.parking.databinding.ItemPayMarkerBinding
+import com.app.service.parking.feature.listener.POIItemClickListener
 import com.app.service.parking.global.App
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import java.text.DecimalFormat
 
-class CustomMarkerAdapter(val context: Context, inflater: LayoutInflater) : CalloutBalloonAdapter {
+class CustomMarkerAdapter(val context: Context, inflater: LayoutInflater, val listener: POIItemClickListener) : CalloutBalloonAdapter {
     // 무료 주차장 마커 바인딩
     private val freeBinding = DataBindingUtil.inflate<ItemFreeMarkerBinding>(
         inflater,
@@ -53,6 +53,7 @@ class CustomMarkerAdapter(val context: Context, inflater: LayoutInflater) : Call
         val intent = Intent(context, ReviewActivity::class.java)
         context.startActivity(intent)*/
         // itemName = 가격
+        listener.onClick(marker)
         val type = marker?.itemName?.split("@")?.get(1)
         return if (type.equals("무료")) { // 가격
             freeBinding.root
