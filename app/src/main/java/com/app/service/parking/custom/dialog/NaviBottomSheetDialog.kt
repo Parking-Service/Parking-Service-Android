@@ -1,4 +1,4 @@
-package com.app.service.parking.custom
+package com.app.service.parking.custom.dialog
 
 import android.app.Activity
 import android.content.ActivityNotFoundException

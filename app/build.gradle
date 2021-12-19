@@ -143,4 +143,9 @@ dependencies {
 
     // Bottom Sheet Dialog
     implementation "com.arthurivanets.bottomsheet:bottomsheets-core:1.0.0"
+
+    // JSoup
+    implementation 'org.jsoup:jsoup:1.13.1'
+
+    implementation project(':lib')
 }
