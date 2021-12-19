@@ -128,27 +128,38 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
         val longitude = viewModel.lotModel?.longitude?.toDouble() // 경도
         val markerManager = MarkerManager()
         // 카카오 맵 뷰 초기화
-        mapView = MapView(this).also {
-            // 위치 데이터가 존재한다면
-            if(latitude != null && longitude != null) {
+        if (intent.getBooleanExtra("isShowMap", true)) {
+            mapView = MapView(this).also {
+                // 위치 데이터가 존재한다면
+                if (latitude != null && longitude != null) {
 
-                mapViewContainer = RelativeLayout(this)
-                mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                binding.kakaoMapContainer.addView(mapViewContainer)
-                mapViewContainer?.addView(it)
+                    mapViewContainer = RelativeLayout(this)
+                    mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                    )
+                    binding.kakaoMapContainer.addView(mapViewContainer)
+                    mapViewContainer?.addView(it)
 
-                markerManager.removeAllMarkers(it) // 기존 마커 모두 제거
-                it.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), false) // 해당 좌표로 지도 중심 이동
-                it.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff // 지도 고정을 위해 트래킹 모드 종료
-                val marker = markerManager.createMarker(
-                    viewModel.lotModel?.feeType, // 요금 타입
-                    viewModel.lotModel?.basicFeeWon, // 기본 요금
-                    latitude,
-                    longitude
-                )
-                markerManager.addMarker(it, marker)
+                    markerManager.removeAllMarkers(it) // 기존 마커 모두 제거
+                    it.setMapCenterPoint(
+                        MapPoint.mapPointWithGeoCoord(latitude, longitude),
+                        false
+                    ) // 해당 좌표로 지도 중심 이동
+                    it.currentLocationTrackingMode =
+                        MapView.CurrentLocationTrackingMode.TrackingModeOff // 지도 고정을 위해 트래킹 모드 종료
+                    val marker = markerManager.createMarker(
+                        type = viewModel.lotModel?.feeType, // 요금 타입
+                        fee = viewModel.lotModel?.basicFeeWon, // 기본 요금
+                        latitude = latitude,
+                        longitude = longitude
+                    )
+                    markerManager.addMarker(it, marker)
+                }
+                it.setOnTouchListener { _, _ -> true } // 지도 터치 방지
             }
-            it.setOnTouchListener { _,_ -> true } // 지도 터치 방지
+        } else {
+            binding.kakaoMapContainer.visibility = View.GONE
         }
     }
 }

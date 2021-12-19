@@ -20,14 +20,18 @@ import com.app.service.parking.R
 import com.app.service.parking.custom.RecordBottomSheetDialog
 import com.app.service.parking.databinding.ActivityMainBinding
 import com.app.service.parking.feature.base.BaseActivity
+import com.app.service.parking.feature.listener.POIItemClickListener
 import com.app.service.parking.feature.main.adapter.CustomMarkerAdapter
+import com.app.service.parking.feature.main.review.ReviewActivity
 import com.app.service.parking.feature.main.search.SearchActivity
+import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.type.LocationFabStatus
 import com.app.service.parking.util.MarkerManager
 import com.app.service.parking.util.PermissionHelper
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
+import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
@@ -36,7 +40,8 @@ import timber.log.Timber
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
-    NavigationView.OnNavigationItemSelectedListener, MapView.MapViewEventListener {
+    NavigationView.OnNavigationItemSelectedListener, MapView.MapViewEventListener,
+    POIItemClickListener {
 
     override val layoutResId: Int = R.layout.activity_main
     override val viewModel: MainViewModel by viewModel()
@@ -48,9 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     override fun onRestart() {
         super.onRestart()
         try {
-
             mapView = MapView(this).also {
-
                 mapViewContainer = RelativeLayout(this)
                 mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -59,7 +62,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 binding.mainContainer.root.addView(mapViewContainer)
                 mapViewContainer?.addView(it)
 
-                it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater))
+                it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater, this))
                 it.setCurrentLocationEventListener(object : MapView.CurrentLocationEventListener {
                     // 현재 위치가 업데이트 되었을 때 실행되는 메소드
                     // 단말의 현위치 좌표값을 통보받을 수 있다.
@@ -192,7 +195,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             binding.mainContainer.root.addView(mapViewContainer)
             mapViewContainer?.addView(it)
 
-            it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater))
+            it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater, this))
             it.setCurrentLocationEventListener(object : MapView.CurrentLocationEventListener {
                 // 현재 위치가 업데이트 되었을 때 실행되는 메소드
                 // 단말의 현위치 좌표값을 통보받을 수 있다.
@@ -250,6 +253,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                         lot.basicFee
                     }
                     val marker = markerManager.createMarker(
+                        lot.hashCode(),
                         lot.feeType,
                         fee,
                         lot.latitude.toDouble(),
@@ -357,6 +361,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             }
             searchBarContainer.searchBar.setOnClickListener {
                 MarkerManager().removeAllMarkers(mapView)
+                binding.mainContainer.root.removeView(mapViewContainer)
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
             }
         }
@@ -436,6 +441,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             // 말을 하면 ArrayList에 단어를 넣고 textView에 단어를 이어줌
             override fun onResults(results: Bundle?) {
                 val matches = results!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                MarkerManager().removeAllMarkers(mapView)
+                binding.mainContainer.root.removeView(mapViewContainer)
                 startActivity(
                     Intent(
                         this@MainActivity,
@@ -521,4 +528,27 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     override fun onMapViewDragEnded(mapView: MapView?, mapPoint: MapPoint?) {}
 
     override fun onMapViewMoveFinished(mapView: MapView?, mapPoint: MapPoint?) {}
+
+    /* POIItemClickListener */
+    override fun onClick(marker: MapPOIItem?) {
+        var findModel: Lot? = null
+        viewModel.lotData.value?.forEach { lot ->
+            Log.d("태그", "${lot.hashCode()} vs ${marker?.tag}")
+            if (marker?.tag == lot.hashCode()) {
+                findModel = lot
+                return@forEach
+            }
+        }
+
+        findModel?.let {
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    ReviewActivity::class.java
+                )
+                    .putExtra("model", it)
+                    .putExtra("isShowMap", false)
+            )
+        }
+    }
 }
