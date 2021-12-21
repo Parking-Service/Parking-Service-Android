@@ -19,9 +19,12 @@
         android:theme="@style/Theme.FoodPlace"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".feature.main.favorite.FavoriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".feature.main.search.SearchActivity"
             android:exported="false"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
             android:name=".feature.main.review.ReviewActivity"
             android:exported="true"
@@ -32,9 +35,7 @@
             android:exported="true"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.FoodPlace.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.FoodPlace.NoActionBar"></activity>
         <activity
             android:name=".feature.base.BaseActivity"
             android:exported="true" />

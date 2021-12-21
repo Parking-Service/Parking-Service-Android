@@ -8,21 +8,29 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.lifecycle.ViewModelProvider
 import com.app.service.parking.R
 import com.app.service.parking.custom.dialog.NaviBottomSheetDialog
 import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.model.dto.Lot
+import com.app.service.parking.model.repository.local.db.AppDB
+import com.app.service.parking.model.repository.local.entity.EntityFavorite
+import com.app.service.parking.model.repository.local.repository.FavoriteRepository
 import com.app.service.parking.util.MarkerManager
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
     override val layoutResId: Int = R.layout.activity_review
-    override val viewModel: ReviewViewModel by viewModel()
+    override val viewModel: ReviewViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ReviewViewModel.Factory(FavoriteRepository(AppDB.getDatabase(this)))
+        )[ReviewViewModel::class.java]
+    }
     lateinit var mapView: MapView // 카카오 맵 뷰
     private var naviBottomSheetDialog: NaviBottomSheetDialog? = null
     var mapViewContainer: RelativeLayout? = null
@@ -45,6 +53,39 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     private fun initView() {
         initMapView()
         with(binding) {
+            favoriteButton.setOnClickListener {
+                with(viewModel?.lotModel) {
+                    viewModel?.insertFavoriteLot(
+                        EntityFavorite(
+                            this?.parkCode!!,
+                            parkName,
+                            newAddr,
+                            oldAddr,
+                            operDay,
+                            weekdayOpenTime,
+                            weekdayCloseTime,
+                            saturdayOpenTime,
+                            saturdayCloseTime,
+                            holidayOpenTime,
+                            holidayCloseTime,
+                            feeType,
+                            basicParkTime,
+                            basicFee,
+                            addUnitTime,
+                            addUnitFee,
+                            parkTimePerDay,
+                            feePerDay,
+                            feePerMonth,
+                            payType,
+                            uniqueness,
+                            phoneNumber,
+                            latitude,
+                            longitude
+                        )
+                    )
+                }
+            }
+
             // 전화버튼 클릭리스너
             callButton.setOnClickListener {
                 startActivity(
@@ -117,6 +158,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     private fun setParkModel() {
         viewModel.lotModel = intent.getSerializableExtra("model") as Lot
         binding.model = viewModel.lotModel // 데이터바인딩 모델 세팅
+        binding.viewModel = viewModel
     }
 
     private fun initMapView() {

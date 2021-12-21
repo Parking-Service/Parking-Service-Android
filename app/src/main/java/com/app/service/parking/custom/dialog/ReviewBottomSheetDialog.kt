@@ -7,11 +7,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -21,17 +19,20 @@ import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.extension.showToast
 import com.app.service.parking.feature.main.review.ReviewViewModel
 import com.app.service.parking.model.dto.Lot
-import com.app.service.parking.util.MarkerManager
-import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapView
-import org.jsoup.Jsoup
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.app.service.parking.model.repository.local.db.AppDB
+import com.app.service.parking.model.repository.local.entity.EntityFavorite
+import com.app.service.parking.model.repository.local.repository.FavoriteRepository
 
 
 class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment() {
 
     lateinit var binding: ActivityReviewBinding
-    val viewModel: ReviewViewModel by viewModel()
+    val viewModel: ReviewViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ReviewViewModel.Factory(FavoriteRepository(AppDB.getDatabase(requireContext())))
+        )[ReviewViewModel::class.java]
+    }
     private var naviBottomSheetDialog: NaviBottomSheetDialog? = null
 
     override fun onAttach(context: Context) {
@@ -52,7 +53,7 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
         binding.lifecycleOwner = this
         binding.model = viewModel.lotModel // 데이터바인딩 모델 세팅
         initView()
-        model = null // 해당 Model은 ViewModel에 전달하였으므로 null로 초기화하여 메모리를 아껴준다.
+        model = null // 해당 Model은 ViewModel에 전달하였으므로 null로 초기화하여 메모리 절약
 
         return binding.root
     }
@@ -61,6 +62,39 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
     private fun initView() {
         initMapView()
         with(binding) {
+            favoriteButton.setOnClickListener {
+                with(viewModel?.lotModel) {
+                    viewModel?.insertFavoriteLot(
+                        EntityFavorite(
+                            this?.parkCode!!,
+                            parkName,
+                            newAddr,
+                            oldAddr,
+                            operDay,
+                            weekdayOpenTime,
+                            weekdayCloseTime,
+                            saturdayOpenTime,
+                            saturdayCloseTime,
+                            holidayOpenTime,
+                            holidayCloseTime,
+                            feeType,
+                            basicParkTime,
+                            basicFee,
+                            addUnitTime,
+                            addUnitFee,
+                            parkTimePerDay,
+                            feePerDay,
+                            feePerMonth,
+                            payType,
+                            uniqueness,
+                            phoneNumber,
+                            latitude,
+                            longitude
+                        )
+                    )
+                }
+            }
+
             // 전화버튼 클릭리스너
             callButton.setOnClickListener {
                 startActivity(

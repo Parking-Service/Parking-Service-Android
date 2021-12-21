@@ -22,7 +22,7 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
             modules(listOf(userRepositoryModule, parkingRepositoryModule))
-            modules(listOf(loginViewModelModule, ReviewViewModelModule, MainViewModelModule, SearchViewModelModule))
+            modules(listOf(loginViewModelModule, MainViewModelModule, SearchViewModelModule))
         }
     }
 
