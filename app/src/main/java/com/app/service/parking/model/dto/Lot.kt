@@ -1,5 +1,6 @@
 package com.app.service.parking.model.dto
 
+import androidx.room.Entity
 import com.app.service.parking.R
 import com.app.service.parking.global.App
 import com.google.gson.annotations.Expose

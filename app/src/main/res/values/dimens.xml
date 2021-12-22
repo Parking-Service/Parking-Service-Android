@@ -105,6 +105,9 @@
     <dimen name="navi_button_margin_top">12dp</dimen>
     <dimen name="navi_button_margin_left">12dp</dimen>
 
+    <!-- Review BottomSheetDialog -->
+    <dimen name="demo_sheet_rounded_corner">16dp</dimen>
+
     <!-- layout_search_bar.xml -->
     <dimen name="search_bar_padding_horizontal">16dp</dimen>
     <dimen name="search_bar_general_icon_button_size">20dp</dimen>

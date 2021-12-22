@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -64,7 +65,7 @@ dependencies {
 
     // room
     implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
@@ -143,4 +144,9 @@ dependencies {
 
     // Bottom Sheet Dialog
     implementation "com.arthurivanets.bottomsheet:bottomsheets-core:1.0.0"
+
+    // JSoup
+    implementation 'org.jsoup:jsoup:1.13.1'
+
+    implementation project(':lib')
 }

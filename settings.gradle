@@ -8,4 +8,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ParkingService"
-include ':app'
+include ':app', ':lib'
+project(':lib').projectDir = new File('module/superbottomsheet-master/lib')

@@ -16,7 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.app.service.parking.R
-import com.app.service.parking.custom.RecordBottomSheetDialog
+import com.app.service.parking.custom.dialog.RecordBottomSheetDialog
 import com.app.service.parking.databinding.ActivitySearchBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.listener.RecyclerItemClickListener

@@ -6,7 +6,7 @@
 
         <variable
             name="dialog"
-            type="com.app.service.parking.custom.NaviBottomSheetDialog" />
+            type="com.app.service.parking.custom.dialog.NaviBottomSheetDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

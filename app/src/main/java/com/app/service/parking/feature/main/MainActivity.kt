@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -18,12 +17,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import com.app.service.parking.R
-import com.app.service.parking.custom.RecordBottomSheetDialog
+import com.app.service.parking.custom.dialog.RecordBottomSheetDialog
+import com.app.service.parking.custom.dialog.ReviewBottomSheetDialog
 import com.app.service.parking.databinding.ActivityMainBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.listener.POIItemClickListener
 import com.app.service.parking.feature.main.adapter.CustomMarkerAdapter
-import com.app.service.parking.feature.main.review.ReviewActivity
+import com.app.service.parking.feature.main.favorite.FavoriteActivity
 import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.preference.ParkingPreference
@@ -50,7 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     var mRecognizer: SpeechRecognizer? = null
     var mapViewContainer: RelativeLayout? = null
     private lateinit var mapView: MapView
-
 
     // 지도를 드래그하면 새로운 위도, 경도를 가져옴 ->
     // 해당 좌표를 바탕으로 서버에 주차장 데이터 요청 ->
@@ -503,7 +502,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     // 드로워 레이아웃의 내비게이션 메뉴 아이템을 선택했을 때의 리스너
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
+            R.id.menu_favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
         }
         return false
     }
@@ -545,22 +544,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     override fun onClick(marker: MapPOIItem?) {
         var findModel: Lot? = null
         viewModel.lotData.value?.forEach { lot ->
-            Log.d("태그", "${lot.hashCode()} vs ${marker?.tag}")
+            //Log.d("태그", "${lot.hashCode()} vs ${marker?.tag}")
             if (marker?.tag == lot.hashCode()) {
                 findModel = lot
                 return@forEach
             }
         }
 
-        findModel?.let {
-            startActivity(
-                Intent(
-                    this@MainActivity,
-                    ReviewActivity::class.java
-                )
-                    .putExtra("model", it)
-                    .putExtra("isShowMap", false)
-            )
+        findModel?.let { lotModel ->
+            val reviewDialog = ReviewBottomSheetDialog(lotModel)
+            reviewDialog.show(supportFragmentManager, "ReviewDialog")
         }
     }
 }

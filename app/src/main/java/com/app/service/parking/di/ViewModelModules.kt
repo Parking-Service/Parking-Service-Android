@@ -13,12 +13,6 @@ val loginViewModelModule = module {
     }
 }
 
-val ReviewViewModelModule = module {
-    viewModel {
-        ReviewViewModel()
-    }
-}
-
 val MainViewModelModule = module {
     viewModel {
         MainViewModel()

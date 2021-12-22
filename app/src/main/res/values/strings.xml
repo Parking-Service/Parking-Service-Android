@@ -44,7 +44,7 @@
     <string name="parking_fee_per_month">월 정기권 요금</string>
     <string name="parking_review">이용자 리뷰</string>
     <string name="parking_review_more">더 보기 ></string>
-    
+
     <string name="clipboard_label">주차장 주소</string>
     <string name="clipboard_success">클립보드에 주소 복사가 완료되었습니다!</string>
     <string name="clipboard_failed">주소 정보가 없어 복사에 실패하였습니다.</string>
@@ -87,7 +87,7 @@
     <string name="one_navi">원 내비게이션</string>
     <string name="no_app">해당 어플리케이션이 설치되어 있지 않아 플레이스토어로 이동합니다.</string>
 
-    
+
     <!-- Recognition Error Type -->
     <string name="error_audio">오디오 에러가 발생했습니다.</string>
     <string name="error_client">응답이 길어 인식이 어렵습니다.\n다시 시도해주시기 바랍니다.</string>
@@ -116,4 +116,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- Favorite Activity -->
+    <string name="favorite_toolbar_title">즐겨찾는 주차장</string>
 </resources>
