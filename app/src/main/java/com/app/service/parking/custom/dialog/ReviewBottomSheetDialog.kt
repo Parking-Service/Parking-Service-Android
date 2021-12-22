@@ -30,7 +30,7 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
     val viewModel: ReviewViewModel by lazy {
         ViewModelProvider(
             this,
-            ReviewViewModel.Factory(FavoriteRepository(AppDB.getDatabase(requireContext())))
+            ReviewViewModel.Factory(FavoriteRepository.getInstance(AppDB.getDatabase(requireContext()))!!)
         )[ReviewViewModel::class.java]
     }
     private var naviBottomSheetDialog: NaviBottomSheetDialog? = null
@@ -64,7 +64,7 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
         with(binding) {
             favoriteButton.setOnClickListener {
                 with(viewModel?.lotModel) {
-                    viewModel?.insertFavoriteLot(
+                    viewModel?.insertLot(
                         EntityFavorite(
                             this?.parkCode!!,
                             parkName,

@@ -23,6 +23,7 @@ import com.app.service.parking.databinding.ActivityMainBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.listener.POIItemClickListener
 import com.app.service.parking.feature.main.adapter.CustomMarkerAdapter
+import com.app.service.parking.feature.main.favorite.FavoriteActivity
 import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.preference.ParkingPreference
@@ -501,7 +502,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
     // 드로워 레이아웃의 내비게이션 메뉴 아이템을 선택했을 때의 리스너
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
+            R.id.menu_favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
         }
         return false
     }

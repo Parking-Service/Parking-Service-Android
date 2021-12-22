@@ -1,18 +1,18 @@
 package com.app.service.parking.feature.main.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.service.parking.R
-import com.app.service.parking.databinding.ItemSearchBinding
+import com.app.service.parking.databinding.ItemFavoriteBinding
 import com.app.service.parking.feature.base.BaseDiffUtil
 import com.app.service.parking.feature.listener.RecyclerItemClickListener
 import com.app.service.parking.model.dto.Lot
 import timber.log.Timber
-import java.lang.IndexOutOfBoundsException
 
 class FavoriteRVAdapter(val listener: RecyclerItemClickListener) :
     RecyclerView.Adapter<FavoriteRVAdapter.ViewHolder>() {
@@ -23,11 +23,12 @@ class FavoriteRVAdapter(val listener: RecyclerItemClickListener) :
         setHasStableIds(true)
     }
 
-    inner class ViewHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.model = lots[position] // 바인딩 모델 지정
             binding.root.setOnClickListener { listener.onClick(position) } // 주소 리스트 아이템을 클릭했을 때 작동
             binding.deleteButton.setOnClickListener {
+                Log.d("dddd", position.toString())
                 listener.onClick(
                     position,
                     R.id.delete_button
@@ -38,7 +39,7 @@ class FavoriteRVAdapter(val listener: RecyclerItemClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemSearchBinding.inflate(
+            ItemFavoriteBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -47,7 +48,7 @@ class FavoriteRVAdapter(val listener: RecyclerItemClickListener) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(holder.layoutPosition)
     }
 
     override fun getItemCount(): Int {

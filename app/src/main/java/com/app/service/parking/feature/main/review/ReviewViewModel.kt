@@ -8,6 +8,7 @@ import com.app.service.parking.feature.base.BaseViewModel
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.repository.local.entity.EntityFavorite
 import com.app.service.parking.model.repository.local.repository.FavoriteRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ReviewViewModel(val repository: FavoriteRepository) : BaseViewModel() {
@@ -24,12 +25,12 @@ class ReviewViewModel(val repository: FavoriteRepository) : BaseViewModel() {
     var lotModel: Lot? = null
 
     // 주차장 즐겨찾기 추가
-    fun insertFavoriteLot(entity: EntityFavorite) = viewModelScope.launch {
+    fun insertLot(entity: EntityFavorite) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(entity)
     }
     
     // 주차장 즐겨찾기 삭제
-    fun deleteFavoriteLot(entity: EntityFavorite) = viewModelScope.launch {
+    fun deleteLot(entity: EntityFavorite) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(entity)
     }
 

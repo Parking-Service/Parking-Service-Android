@@ -9,6 +9,7 @@ import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.repository.local.DBConst
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(tableName = DBConst.TABLE_NAME_USER_FAVORITE)
 data class EntityFavorite(
@@ -61,4 +62,4 @@ data class EntityFavorite(
     var latitude: String,
     @ColumnInfo(name=("longitude")) // 경도
     var longitude: String
-)
+): Serializable

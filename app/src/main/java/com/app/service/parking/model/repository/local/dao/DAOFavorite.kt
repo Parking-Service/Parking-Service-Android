@@ -1,6 +1,7 @@
 package com.app.service.parking.model.repository.local.dao
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.app.service.parking.model.repository.local.DBConst
 import com.app.service.parking.model.repository.local.entity.EntityFavorite

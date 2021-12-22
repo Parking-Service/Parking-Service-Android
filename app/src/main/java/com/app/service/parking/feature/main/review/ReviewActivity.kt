@@ -55,7 +55,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
         with(binding) {
             favoriteButton.setOnClickListener {
                 with(viewModel?.lotModel) {
-                    viewModel?.insertFavoriteLot(
+                    viewModel?.insertLot(
                         EntityFavorite(
                             this?.parkCode!!,
                             parkName,
