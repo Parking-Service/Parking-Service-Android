@@ -1,14 +1,15 @@
 package com.app.service.parking.model.repository.local.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.app.service.parking.model.repository.local.db.AppDB
-import com.app.service.parking.model.repository.local.entity.EntityFavorite
+import com.app.service.parking.model.repository.entity.Favorite
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class FavoriteRepository(mDatabase: AppDB) {
 
     private val dao = mDatabase.getDAOFavorite()
-    val allFavorite: LiveData<List<EntityFavorite>> = dao.getAll()
+    val allFavorite: LiveData<List<Favorite>> = dao.getAll()
 
     companion object {
         private var instance: FavoriteRepository? = null
@@ -22,11 +23,15 @@ class FavoriteRepository(mDatabase: AppDB) {
         }
     }
 
-    suspend fun insert(entity: EntityFavorite) {
+    fun selectByParkCode(parkCode: String): Favorite {
+        return dao.selectByParkCode(parkCode)
+    }
+
+    fun insert(entity: Favorite) {
         dao.insert(entity)
     }
 
-    suspend fun delete(entity: EntityFavorite) {
+    fun delete(entity: Favorite) {
         dao.delete(entity)
     }
 }

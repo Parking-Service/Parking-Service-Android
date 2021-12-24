@@ -168,6 +168,7 @@
                         app:layout_constraintRight_toLeftOf="@+id/visited_button">
 
                         <ImageView
+                            android:id="@+id/favorite_image_view"
                             android:layout_width="@dimen/review_title_button_image_size"
                             android:layout_height="@dimen/review_title_button_image_size"
                             android:layout_marginBottom="@dimen/review_title_button_image_margin_bottom"

@@ -6,10 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.app.service.parking.model.repository.local.DBConst
 import com.app.service.parking.model.repository.local.dao.DAOFavorite
-import com.app.service.parking.model.repository.local.entity.EntityFavorite
+import com.app.service.parking.model.repository.entity.Favorite
 
 
-@Database(entities = [EntityFavorite::class], version = 1, exportSchema = false)
+@Database(entities = [Favorite::class], version = 1, exportSchema = false)
 abstract class AppDB : RoomDatabase() {
 
     abstract fun getDAOFavorite(): DAOFavorite

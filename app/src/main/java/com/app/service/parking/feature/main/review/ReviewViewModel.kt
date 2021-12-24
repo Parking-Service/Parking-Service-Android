@@ -1,12 +1,9 @@
 package com.app.service.parking.feature.main.review
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.app.service.parking.feature.base.BaseViewModel
 import com.app.service.parking.model.dto.Lot
-import com.app.service.parking.model.repository.local.entity.EntityFavorite
+import com.app.service.parking.model.repository.entity.Favorite
 import com.app.service.parking.model.repository.local.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,23 +16,64 @@ class ReviewViewModel(val repository: FavoriteRepository) : BaseViewModel() {
         }
     }
 
+    // 즐겨찾기 DB에서 가져올 Lot 데이터
+    // 즐겨찾기를 안 해서 Null일 수 있는 상황을 가정하여 Nullable
+    val favoriteLot = MutableLiveData<Favorite?>()
+    // 즐겨찾기 여부
+    val isFavorite = MutableLiveData(false)
+
     // 즐겨찾기 데이터
-    private var allUser: LiveData<List<EntityFavorite>> = repository.allFavorite
+    private var allUser: LiveData<List<Favorite>> = repository.allFavorite
     // 주차장 데이터 모델
     var lotModel: Lot? = null
 
     // 주차장 즐겨찾기 추가
-    fun insertLot(entity: EntityFavorite) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(entity)
+    fun insertLot() = viewModelScope.launch(Dispatchers.IO) {
+        with(lotModel) {
+            val entity = Favorite(
+                this?.parkCode!!,
+                parkName,
+                newAddr,
+                oldAddr,
+                operDay,
+                weekdayOpenTime,
+                weekdayCloseTime,
+                saturdayOpenTime,
+                saturdayCloseTime,
+                holidayOpenTime,
+                holidayCloseTime,
+                feeType,
+                basicParkTime,
+                basicFee,
+                addUnitTime,
+                addUnitFee,
+                parkTimePerDay,
+                feePerDay,
+                feePerMonth,
+                payType,
+                uniqueness,
+                phoneNumber,
+                latitude,
+                longitude
+            )
+
+            repository.insert(entity)
+        }
+
+
+    }
+
+    fun getByParkCode() = viewModelScope.launch(Dispatchers.IO) {
+        favoriteLot.postValue(repository.selectByParkCode(lotModel!!.parkCode))
     }
     
     // 주차장 즐겨찾기 삭제
-    fun deleteLot(entity: EntityFavorite) = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteLot(entity: Favorite) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(entity)
     }
 
     // 주차장 즐겨찾기 데이터 가져오기
-    fun getAllFavorites(): LiveData<List<EntityFavorite>> {
+    fun getAllFavorites(): LiveData<List<Favorite>> {
         return allUser
     }
 }

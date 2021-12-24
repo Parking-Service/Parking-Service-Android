@@ -48,7 +48,7 @@ class FavoriteRVAdapter(val listener: RecyclerItemClickListener) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(holder.layoutPosition)
+        holder.bind(holder.adapterPosition)
     }
 
     override fun getItemCount(): Int {

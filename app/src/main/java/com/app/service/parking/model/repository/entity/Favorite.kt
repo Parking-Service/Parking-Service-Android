@@ -1,18 +1,15 @@
-package com.app.service.parking.model.repository.local.entity
+package com.app.service.parking.model.repository.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.app.service.parking.R
 import com.app.service.parking.global.App
-import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.repository.local.DBConst
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 @Entity(tableName = DBConst.TABLE_NAME_USER_FAVORITE)
-data class EntityFavorite(
+data class Favorite(
     @PrimaryKey
     @ColumnInfo(name=("prkplceNo")) // 주차장관리번호 (eg. 156-2-000043)
     var parkCode: String,
