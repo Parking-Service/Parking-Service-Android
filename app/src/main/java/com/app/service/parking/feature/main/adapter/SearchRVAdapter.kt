@@ -49,7 +49,7 @@ class SearchRVAdapter(val listener: RecyclerItemClickListener) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind(holder.adapterPosition)
     }
 
     override fun getItemCount(): Int {

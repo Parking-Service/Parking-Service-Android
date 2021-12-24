@@ -55,6 +55,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
 
         // 건너뛰기 버튼
         binding.skipTextButton.setOnClickListener {
+            ParkingPreference.putValue(PreferenceConst.LOGIN_TYPE.name, LoginType.SKIP.name)
             startMainActivity()
         }
     }
@@ -74,6 +75,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
                 viewModel.setIsFirebaseSignIn() // 파이어베이스 Auth로 로그인 되어 있는지 확인
             } LoginType.KAKAO_TALK.name -> { // 마지막 로그인 타입이 카카오톡이라면
                 viewModel.setIsKakaoSignIn() // 카카오톡으로 로그인 되어 있는지 확인
+            } LoginType.SKIP.name -> {
+                viewModel.isSignedIn.value = true
             }
         }
     }
@@ -110,6 +113,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), ILog
             LoginType.FACEBOOK -> LoginManager.getInstance()
                 .logInWithReadPermissions(this, listOf("public_profile", "email"))
             LoginType.KAKAO_TALK -> {
+                Log.d("ddd","ddd")
                 if (UserApiClient.instance.isKakaoTalkLoginAvailable(this@LoginActivity)) { // 카카오톡이 설치되어 있는 경우
                     // 카카오톡 앱을 통한 로그인 시도
                     UserApiClient.instance.loginWithKakaoTalk(this@LoginActivity, callback = viewModel.kakaoLoginCallback)

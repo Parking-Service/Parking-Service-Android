@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.service.parking.feature.base.BaseViewModel
 import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.model.dto.Lot
-import com.app.service.parking.model.network.retrofit.builder.RetrofitParkingAPIBuilder
+import com.app.service.parking.model.network.retrofit.builder.ParkingAPIBuilder
 import com.app.service.parking.model.type.LocationFabStatus
 import com.app.service.parking.util.GPSStatus
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +56,7 @@ class MainViewModel : BaseViewModel() {
     private suspend fun getLotData(latitude: Double, longitude: Double): ArrayList<Lot>? {
         try {
             val data = withContext(viewModelScope.coroutineContext) {
-                RetrofitParkingAPIBuilder.getParkingLots(latitude, longitude)
+                ParkingAPIBuilder.getParkingLots(latitude, longitude)
             }
             return data
         } catch (e: Exception) {

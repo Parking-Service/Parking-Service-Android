@@ -33,7 +33,7 @@ import timber.log.Timber
 class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
 
     private var loginCallback: ILoginCallback? = null
-    var callbackManager = CallbackManager.Factory.create()
+    var callbackManager: CallbackManager = CallbackManager.Factory.create()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     var isLoading = MutableLiveData<Boolean>(false) // 현재 로딩중인지 확인하는 live data
     var isSignedIn = MutableLiveData<Boolean>(false) // 로그인 되어있는지 확인하는 live data (true로 변경시 메인액티비티 실행하기 위한 필드)
@@ -53,9 +53,9 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
         loginCallback?.onClickLoginButton(null, LoginType.KAKAO_TALK)
     }
 
-    val kakaoLoginCallback : (OAuthToken?, Throwable?) -> Unit = { token, error ->
+    val kakaoLoginCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) { // 에러가 존재한다면 실패
-            Timber.e("카카오 로그인 실패- ${error.cause}")
+            Timber.e("카카오 로그인 실패 - ${error.cause}")
             if(error.cause == null) {
                 loginCallback?.onSignIn(LoginType.KAKAO_TALK, ResultType.CANCELED)
             } else {

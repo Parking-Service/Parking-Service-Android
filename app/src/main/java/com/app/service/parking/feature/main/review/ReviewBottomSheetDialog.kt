@@ -1,4 +1,4 @@
-package com.app.service.parking.custom.dialog
+package com.app.service.parking.feature.main.review
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -10,21 +10,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
 import com.app.service.parking.R
+import com.app.service.parking.custom.dialog.NaviBottomSheetDialog
 import com.app.service.parking.databinding.ActivityReviewBinding
-import com.app.service.parking.extension.showToast
-import com.app.service.parking.feature.main.review.ReviewViewModel
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.repository.local.db.AppDB
-import com.app.service.parking.model.repository.local.entity.EntityFavorite
 import com.app.service.parking.model.repository.local.repository.FavoriteRepository
+import com.bumptech.glide.Glide
 
 
-class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment() {
+class ReviewBottomSheetDialog(var model: Lot? = null) : SuperBottomSheetFragment() {
 
     lateinit var binding: ActivityReviewBinding
     val viewModel: ReviewViewModel by lazy {
@@ -37,11 +37,17 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        // ViewModel의 주차장 모델 설정
         viewModel.lotModel = model
+        // 주차장 코드로 즐겨찾기 모델 가져오기
+        viewModel.getByParkCode()
     }
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(
             LayoutInflater.from(requireContext()),
@@ -49,50 +55,52 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
             container,
             false
         )
-
-        binding.lifecycleOwner = this
-        binding.model = viewModel.lotModel // 데이터바인딩 모델 세팅
-        initView()
+        setBindingData() // 바인딩 데이터 세팅
+        initView() // 뷰 초기화
         model = null // 해당 Model은 ViewModel에 전달하였으므로 null로 초기화하여 메모리 절약
 
         return binding.root
     }
 
+    private fun setBindingData() {
+        binding.lifecycleOwner = this // Lifecycle 지정
+        binding.model = viewModel.lotModel // 데이터바인딩 모델 세팅
+    }
 
     private fun initView() {
         initMapView()
         with(binding) {
-            favoriteButton.setOnClickListener {
-                with(viewModel?.lotModel) {
-                    viewModel?.insertLot(
-                        EntityFavorite(
-                            this?.parkCode!!,
-                            parkName,
-                            newAddr,
-                            oldAddr,
-                            operDay,
-                            weekdayOpenTime,
-                            weekdayCloseTime,
-                            saturdayOpenTime,
-                            saturdayCloseTime,
-                            holidayOpenTime,
-                            holidayCloseTime,
-                            feeType,
-                            basicParkTime,
-                            basicFee,
-                            addUnitTime,
-                            addUnitFee,
-                            parkTimePerDay,
-                            feePerDay,
-                            feePerMonth,
-                            payType,
-                            uniqueness,
-                            phoneNumber,
-                            latitude,
-                            longitude
-                        )
-                    )
+            // 즐겨찾기 여부에 따른 아이콘 설정
+            viewModel?.isFavorite?.observe(requireActivity()) { isFavorite ->
+                if (isFavorite) { // 즐겨찾기에 추가되어 있으면
+                    Glide.with(requireContext()).load(R.drawable.ic_review_favorite)
+                        .into(favoriteImageView)
+                } else {
+                    Glide.with(requireContext()).load(R.drawable.ic_review_unfavorite)
+                        .into(favoriteImageView)
                 }
+            }
+
+            // 즐겨찾기 Entity가 DB에 있으면 '즐겨찾기를 추가한 주차장 데이터'이므로
+            // isFavorite를 true로 설정하고, 없으면 false로 설정한다.
+            viewModel?.favoriteLot?.observe(requireActivity()) { favoriteEntity ->
+                viewModel?.isFavorite?.value = (favoriteEntity != null)
+            }
+
+            favoriteButton.setOnClickListener {
+                // 즐겨찾기가 추가되어 있는 경우
+                if (viewModel?.isFavorite?.value == true) {
+                    // 즐겨찾기 여부 변경
+                    viewModel?.isFavorite?.value = false
+                    // 즐겨찾기 해제
+                    viewModel?.favoriteLot?.value?.let { entity -> viewModel?.deleteLot(entity) }
+                } else { // 즐겨찾기 해제되어 있는 경우
+                    // 즐겨찾기 여부 변경
+                    viewModel?.isFavorite?.value = true
+                    // 즐겨찾기 추가
+                    viewModel?.insertLot()
+                }
+
             }
 
             // 전화버튼 클릭리스너
@@ -118,7 +126,11 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
                     }
                     else -> {
                         // 주차장 주소가 없음
-                        requireContext().showToast(getString(R.string.clipboard_failed)) // 실패 토스트 출력
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.clipboard_failed),
+                            Toast.LENGTH_LONG
+                        ).show() // 실패 토스트 출력
                         return@setOnClickListener
                     }
                 }
@@ -129,8 +141,12 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
                 )
                 // 클립보드에 저장
                 clipboard.setPrimaryClip(clipData)
-                // 성공 토스트 출력
-                requireContext().showToast(getString(R.string.clipboard_success))
+                // 클립보드 저장 성공 토스트 출력
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.clipboard_success),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             // 내비게이션 버튼 클릭
             navigationButton.setOnClickListener {
@@ -140,16 +156,17 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
                         setAddress(model?.oldAddr)
                     }
                 }
+                dismiss() // Review Dialog 종료
                 naviBottomSheetDialog?.show()
             }
             // 길찾기 버튼
             findRoadButton.setOnClickListener {
                 val uri = Uri.parse("geo:${model?.latitude},${model?.longitude}")
-                val intent = Intent (Intent.ACTION_VIEW, uri)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
 
-            if(model?.newAddr.isNullOrBlank()) {
+            if (model?.newAddr.isNullOrBlank()) {
                 binding.parkingLotRoadNameTextView.visibility = View.GONE
             }
         }
@@ -164,7 +181,8 @@ class ReviewBottomSheetDialog(var model: Lot ?= null) : SuperBottomSheetFragment
         }
     }*/
 
-    override fun getCornerRadius() = requireContext().resources.getDimension(R.dimen.demo_sheet_rounded_corner)
+    override fun getCornerRadius() =
+        requireContext().resources.getDimension(R.dimen.demo_sheet_rounded_corner)
 
     override fun getStatusBarColor() = Color.RED
 

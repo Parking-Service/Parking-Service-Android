@@ -15,9 +15,9 @@ import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.repository.local.db.AppDB
-import com.app.service.parking.model.repository.local.entity.EntityFavorite
 import com.app.service.parking.model.repository.local.repository.FavoriteRepository
 import com.app.service.parking.util.MarkerManager
+import com.bumptech.glide.Glide
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
@@ -38,6 +38,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setParkModel() // Intent로 받은 주차장 데이터로 초기화
+        setBindingData() // 데이터 바인딩 설정
         initView() // 뷰 초기화
     }
 
@@ -53,37 +54,36 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     private fun initView() {
         initMapView()
         with(binding) {
-            favoriteButton.setOnClickListener {
-                with(viewModel?.lotModel) {
-                    viewModel?.insertLot(
-                        EntityFavorite(
-                            this?.parkCode!!,
-                            parkName,
-                            newAddr,
-                            oldAddr,
-                            operDay,
-                            weekdayOpenTime,
-                            weekdayCloseTime,
-                            saturdayOpenTime,
-                            saturdayCloseTime,
-                            holidayOpenTime,
-                            holidayCloseTime,
-                            feeType,
-                            basicParkTime,
-                            basicFee,
-                            addUnitTime,
-                            addUnitFee,
-                            parkTimePerDay,
-                            feePerDay,
-                            feePerMonth,
-                            payType,
-                            uniqueness,
-                            phoneNumber,
-                            latitude,
-                            longitude
-                        )
-                    )
+
+            // 즐겨찾기 여부에 따른 아이콘 설정
+            viewModel?.isFavorite?.observe(this@ReviewActivity) { isFavorite ->
+                if(isFavorite) { // 즐겨찾기에 추가되어 있으면
+                    Glide.with(this@ReviewActivity).load(R.drawable.ic_review_favorite).into(favoriteImageView)
+                } else {
+                    Glide.with(this@ReviewActivity).load(R.drawable.ic_review_unfavorite).into(favoriteImageView)
                 }
+            }
+
+            // 즐겨찾기 Entity가 DB에 있으면 '즐겨찾기를 추가한 주차장 데이터'이므로
+            // isFavorite를 true로 설정하고, 없으면 false로 설정한다.
+            viewModel?.favoriteLot?.observe(this@ReviewActivity) { favoriteEntity ->
+                viewModel?.isFavorite?.value = (favoriteEntity != null)
+            }
+
+            favoriteButton.setOnClickListener {
+                // 즐겨찾기가 추가되어 있는 경우
+                if(viewModel?.isFavorite?.value == true) {
+                    // 즐겨찾기 여부 변경
+                    viewModel?.isFavorite?.value = false
+                    // 즐겨찾기 해제
+                    viewModel?.favoriteLot?.value?.let { entity -> viewModel?.deleteLot(entity) }
+                } else { // 즐겨찾기 해제되어 있는 경우
+                    // 즐겨찾기 여부 변경
+                    viewModel?.isFavorite?.value = true
+                    // 즐겨찾기 추가
+                    viewModel?.insertLot()
+                }
+
             }
 
             // 전화버튼 클릭리스너
@@ -156,9 +156,15 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     }
 
     private fun setParkModel() {
+        // Search Activity에서 검색 데이터로 받은 주차장 모델로 초기화
         viewModel.lotModel = intent.getSerializableExtra("model") as Lot
+        // 주차장 코드로 즐겨찾기 모델 가져오기
+        viewModel.getByParkCode()
+    }
+
+    private fun setBindingData() {
         binding.model = viewModel.lotModel // 데이터바인딩 모델 세팅
-        binding.viewModel = viewModel
+        binding.viewModel = viewModel // ViewModel 바인딩
     }
 
     private fun initMapView() {
@@ -171,7 +177,6 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
             mapView = MapView(this).also {
                 // 위치 데이터가 존재한다면
                 if (latitude != null && longitude != null) {
-
                     mapViewContainer = RelativeLayout(this)
                     mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,

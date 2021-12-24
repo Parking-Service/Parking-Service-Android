@@ -16,7 +16,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_round_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FoodPlace"
+        android:theme="@style/Theme.ParkingService"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".feature.main.favorite.FavoriteActivity"
@@ -36,7 +36,7 @@
             android:exported="true"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.FoodPlace.NoActionBar"></activity>
+            android:theme="@style/Theme.ParkingService.NoActionBar"></activity>
         <activity
             android:name=".feature.base.BaseActivity"
             android:exported="true" />

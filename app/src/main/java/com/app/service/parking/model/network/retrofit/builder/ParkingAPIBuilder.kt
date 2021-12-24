@@ -11,7 +11,7 @@ import retrofit2.Response
 import timber.log.Timber
 import kotlin.coroutines.resumeWithException
 
-object RetrofitParkingAPIBuilder : BaseRetrofitBuilder() {
+object ParkingAPIBuilder : BaseRetrofitBuilder() {
 
     // 위도, 경도를 바탕으로 주차장 리스트를 가져옴
     suspend fun getParkingLots(latitude: Double, longitude: Double) =

@@ -18,7 +18,7 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import com.app.service.parking.R
 import com.app.service.parking.custom.dialog.RecordBottomSheetDialog
-import com.app.service.parking.custom.dialog.ReviewBottomSheetDialog
+import com.app.service.parking.feature.main.review.ReviewBottomSheetDialog
 import com.app.service.parking.databinding.ActivityMainBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.listener.POIItemClickListener
