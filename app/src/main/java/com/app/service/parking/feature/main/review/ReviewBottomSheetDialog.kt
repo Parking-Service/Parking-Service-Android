@@ -33,6 +33,7 @@ class ReviewBottomSheetDialog(var model: Lot? = null) : SuperBottomSheetFragment
             ReviewViewModel.Factory(FavoriteRepository.getInstance(AppDB.getDatabase(requireContext()))!!)
         )[ReviewViewModel::class.java]
     }
+
     private var naviBottomSheetDialog: NaviBottomSheetDialog? = null
 
     override fun onAttach(context: Context) {
@@ -55,16 +56,21 @@ class ReviewBottomSheetDialog(var model: Lot? = null) : SuperBottomSheetFragment
             container,
             false
         )
-        setBindingData() // 바인딩 데이터 세팅
-        initView() // 뷰 초기화
         model = null // 해당 Model은 ViewModel에 전달하였으므로 null로 초기화하여 메모리 절약
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setBindingData() // 바인딩 데이터 세팅
+        initView() // 뷰 초기화
+    }
+
     private fun setBindingData() {
         binding.lifecycleOwner = this // Lifecycle 지정
         binding.model = viewModel.lotModel // 데이터바인딩 모델 세팅
+        binding.viewModel = viewModel // viewModel 바인딩
     }
 
     private fun initView() {
@@ -170,21 +176,8 @@ class ReviewBottomSheetDialog(var model: Lot? = null) : SuperBottomSheetFragment
                 binding.parkingLotRoadNameTextView.visibility = View.GONE
             }
         }
+
     }
-
-    /*override fun onBackPressed() {
-        // 내비게이션 선택 다이얼로그가 열려있으면
-        if (naviBottomSheetDialog?.isShown == true) {
-            naviBottomSheetDialog?.dismiss() // 다이얼로그를 닫고,
-        } else { // 아무것도 열려있지 않으면
-            super.onBackPressed() // 뒤로가기
-        }
-    }*/
-
-    override fun getCornerRadius() =
-        requireContext().resources.getDimension(R.dimen.demo_sheet_rounded_corner)
-
-    override fun getStatusBarColor() = Color.RED
 
     private fun initMapView() {
         binding.kakaoMapContainer.visibility = View.GONE

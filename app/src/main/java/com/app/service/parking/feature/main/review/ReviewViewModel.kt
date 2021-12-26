@@ -1,5 +1,6 @@
 package com.app.service.parking.feature.main.review
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.app.service.parking.feature.base.BaseViewModel
 import com.app.service.parking.model.dto.Lot
@@ -7,6 +8,7 @@ import com.app.service.parking.model.repository.entity.Favorite
 import com.app.service.parking.model.repository.local.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ReviewViewModel(val repository: FavoriteRepository) : BaseViewModel() {
 

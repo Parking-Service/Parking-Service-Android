@@ -1,5 +1,6 @@
 package com.app.service.parking.model.repository.local.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.app.service.parking.model.repository.local.db.AppDB
 import com.app.service.parking.model.repository.entity.Favorite

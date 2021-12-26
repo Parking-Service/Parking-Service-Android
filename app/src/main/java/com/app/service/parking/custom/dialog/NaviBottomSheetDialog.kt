@@ -18,7 +18,7 @@ import com.arthurivanets.bottomsheets.config.Config
 
 class NaviBottomSheetDialog(
     hostActivity: Activity,
-    config: BaseConfig = Config.Builder(hostActivity).build()
+    config: BaseConfig = Config.Builder(hostActivity.baseContext).build()
 ) : BaseBottomSheet(hostActivity, config) {
 
     lateinit var binding: LayoutNavChoiceBottomSheetBinding
