@@ -57,10 +57,12 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
             // 즐겨찾기 여부에 따른 아이콘 설정
             viewModel?.isFavorite?.observe(this@ReviewActivity) { isFavorite ->
-                if(isFavorite) { // 즐겨찾기에 추가되어 있으면
-                    Glide.with(this@ReviewActivity).load(R.drawable.ic_review_favorite).into(favoriteImageView)
+                if (isFavorite) { // 즐겨찾기에 추가되어 있으면
+                    Glide.with(this@ReviewActivity).load(R.drawable.ic_review_favorite)
+                        .into(favoriteImageView)
                 } else {
-                    Glide.with(this@ReviewActivity).load(R.drawable.ic_review_unfavorite).into(favoriteImageView)
+                    Glide.with(this@ReviewActivity).load(R.drawable.ic_review_unfavorite)
+                        .into(favoriteImageView)
                 }
             }
 
@@ -72,7 +74,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
             favoriteButton.setOnClickListener {
                 // 즐겨찾기가 추가되어 있는 경우
-                if(viewModel?.isFavorite?.value == true) {
+                if (viewModel?.isFavorite?.value == true) {
                     // 즐겨찾기 여부 변경
                     viewModel?.isFavorite?.value = false
                     // 즐겨찾기 해제
@@ -136,11 +138,11 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
             // 길찾기 버튼
             findRoadButton.setOnClickListener {
                 val uri = Uri.parse("geo:${model?.latitude},${model?.longitude}")
-                val intent = Intent (Intent.ACTION_VIEW, uri)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
 
-            if(model?.newAddr.isNullOrBlank()) {
+            if (model?.newAddr.isNullOrBlank()) {
                 binding.parkingLotRoadNameTextView.visibility = View.GONE
             }
         }
