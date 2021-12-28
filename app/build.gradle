@@ -111,7 +111,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
     implementation 'com.google.android.gms:play-services-base:17.6.0'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'

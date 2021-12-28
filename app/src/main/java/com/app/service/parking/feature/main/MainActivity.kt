@@ -87,7 +87,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
-                binding.mainContainer.root.addView(mapViewContainer)
+                binding.mainContainer.mainContentContainer.addView(mapViewContainer)
                 mapViewContainer?.addView(it)
 
                 it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater, this))
@@ -221,7 +221,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            binding.mainContainer.root.addView(mapViewContainer)
+            binding.mainContainer.mainContentContainer.addView(mapViewContainer)
             mapViewContainer?.addView(it)
 
             it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater, this))
@@ -372,7 +372,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             }
             searchBarContainer.searchBar.setOnClickListener {
                 MarkerManager().removeAllMarkers(mapView)
-                binding.mainContainer.root.removeView(mapViewContainer)
+                binding.mainContainer.mainContentContainer.removeView(mapViewContainer)
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
             }
         }
@@ -453,7 +453,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             override fun onResults(results: Bundle?) {
                 val matches = results!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                 MarkerManager().removeAllMarkers(mapView)
-                binding.mainContainer.root.removeView(mapViewContainer)
+                binding.mainContainer.mainContentContainer.removeView(mapViewContainer)
                 startActivity(
                     Intent(
                         this@MainActivity,
