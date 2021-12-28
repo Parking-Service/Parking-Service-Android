@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:background="@color/white"
-                style="@style/ToolbarStyleDark"/>
+                style="@style/FavoriteToolbarStyle"/>
         </com.google.android.material.appbar.AppBarLayout>
 
         <View

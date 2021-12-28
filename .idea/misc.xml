@@ -9,10 +9,12 @@
         <entry key="..\:/android_project/FoodPlace/app/src/main/res/layout/fragment_base.xml" value="0.203125" />
         <entry key="..\:/android_project/FoodPlace/app/src/main/res/layout/fragment_food_place_dialog.xml" value="0.33" />
         <entry key="..\:/android_project/FoodPlace/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.37407407407407406" />
+        <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable-hdpi/bg_photo_add.xml" value="0.38385416666666666" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/shadow_drop.xml" value="0.21145833333333333" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_favorite.xml" value="0.2" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_review.xml" value="0.33" />
+        <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_review_write.xml" value="0.33" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/content_main.xml" value="0.209375" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/item_favorite.xml" value="0.2078125" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/layout_nav_choice_bottom_sheet.xml" value="0.33" />

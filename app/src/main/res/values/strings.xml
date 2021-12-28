@@ -50,6 +50,18 @@
     <string name="clipboard_failed">주소 정보가 없어 복사에 실패하였습니다.</string>
     <string name="choose_app">앱을 선택해주세요.</string>
 
+
+    <!-- ReviewWriteActivity -->
+    <string name="permission_read_denied_1">갤러리에서 사진을 가져오려면 권한이 필요해요!</string>
+    <string name="permission_read_denied_2">설정(앱 정보)에서 권한을 허용해주세요!</string>
+    <string name="review_write">리뷰 작성</string>
+    <string name="rate_good">좋아요!</string>
+    <string name="rate_normal">평범해요!</string>
+    <string name="rate_bad">나빠요!</string>
+    <string name="rate_edit_text_hint">%d님, 이용하신 주차장은 어떠셨나요? 주차장의 가격이나 시설, 서비스에 대해 리뷰를 작성해주세요!</string>
+    <string name="review_done_text">완료 (%d/10000)</string>
+
+
     <!-- marker -->
     <string name="free">무료 주차장</string>
     <string name="pay">유료</string>

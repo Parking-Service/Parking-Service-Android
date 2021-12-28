@@ -20,6 +20,7 @@ import com.app.service.parking.util.MarkerManager
 import com.bumptech.glide.Glide
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import timber.log.Timber
 
 
 class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
@@ -37,13 +38,13 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setParkModel() // Intent로 받은 주차장 데이터로 초기화
-        setBindingData() // 데이터 바인딩 설정
-        initView() // 뷰 초기화
+        initActivity()
     }
 
     override fun initActivity() {
-
+        setParkModel() // Intent로 받은 주차장 데이터로 초기화
+        setBindingData() // 데이터 바인딩 설정
+        initView() // 뷰 초기화
     }
 
     override fun finish() {
@@ -145,6 +146,10 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
             if (model?.newAddr.isNullOrBlank()) {
                 binding.parkingLotRoadNameTextView.visibility = View.GONE
             }
+
+            writeReviewButton.setOnClickListener {
+                startActivity(Intent(this@ReviewActivity, ReviewWriteActivity::class.java))
+            }
         }
     }
 
@@ -176,34 +181,40 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
         val markerManager = MarkerManager()
         // 카카오 맵 뷰 초기화
         if (intent.getBooleanExtra("isShowMap", true)) {
-            mapView = MapView(this).also {
-                // 위치 데이터가 존재한다면
-                if (latitude != null && longitude != null) {
-                    mapViewContainer = RelativeLayout(this)
-                    mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT
-                    )
-                    binding.kakaoMapContainer.addView(mapViewContainer)
-                    mapViewContainer?.addView(it)
+            try {
+                mapView = MapView(this).also {
+                    // 위치 데이터가 존재한다면
+                    if (latitude != null && longitude != null) {
+                        mapViewContainer = RelativeLayout(this)
+                        mapViewContainer?.layoutParams = RelativeLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT
+                        )
+                        binding.kakaoMapContainer.addView(mapViewContainer)
+                        mapViewContainer?.addView(it)
 
-                    markerManager.removeAllMarkers(it) // 기존 마커 모두 제거
-                    it.setMapCenterPoint(
-                        MapPoint.mapPointWithGeoCoord(latitude, longitude),
-                        false
-                    ) // 해당 좌표로 지도 중심 이동
-                    it.currentLocationTrackingMode =
-                        MapView.CurrentLocationTrackingMode.TrackingModeOff // 지도 고정을 위해 트래킹 모드 종료
-                    val marker = markerManager.createMarker(
-                        type = viewModel.lotModel?.feeType, // 요금 타입
-                        fee = viewModel.lotModel?.basicFeeWon, // 기본 요금
-                        latitude = latitude,
-                        longitude = longitude
-                    )
-                    markerManager.addMarker(it, marker)
+                        markerManager.removeAllMarkers(it) // 기존 마커 모두 제거
+                        it.setMapCenterPoint(
+                            MapPoint.mapPointWithGeoCoord(latitude, longitude),
+                            false
+                        ) // 해당 좌표로 지도 중심 이동
+                        it.currentLocationTrackingMode =
+                            MapView.CurrentLocationTrackingMode.TrackingModeOff // 지도 고정을 위해 트래킹 모드 종료
+                        val marker = markerManager.createMarker(
+                            type = viewModel.lotModel?.feeType, // 요금 타입
+                            fee = viewModel.lotModel?.basicFeeWon, // 기본 요금
+                            latitude = latitude,
+                            longitude = longitude
+                        )
+                        markerManager.addMarker(it, marker)
+                    }
+                    it.setOnTouchListener { _, _ -> true } // 지도 터치 방지
                 }
-                it.setOnTouchListener { _, _ -> true } // 지도 터치 방지
+            }catch (re: RuntimeException){
+                Timber.tag("에러발생").d(re.toString())
+                Timber.e(re.toString())
             }
+
         } else {
             binding.kakaoMapContainer.visibility = View.GONE
         }

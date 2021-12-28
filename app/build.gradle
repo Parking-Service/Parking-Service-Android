@@ -42,6 +42,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -108,7 +111,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxkotlin:3.0.0'
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
     implementation 'com.google.android.gms:play-services-base:17.6.0'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
@@ -147,6 +150,9 @@ dependencies {
 
     // JSoup
     implementation 'org.jsoup:jsoup:1.13.1'
+
+    // Image Picker Library
+    implementation 'com.werb.pickphotoview:pickphotoview:0.4.8'  // Last Version
 
     implementation project(':lib')
 }

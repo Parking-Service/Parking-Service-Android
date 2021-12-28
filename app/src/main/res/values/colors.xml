@@ -66,4 +66,8 @@
     <color name="circleImageViewBorderColor">#CDCDCD</color>
     <!-- Divider background -->
     <color name="dividerColor">#CDCDCD</color>
+
+    <!-- Review Write Activity -->
+    <color name="unselectedRateColor">#CDCDCD</color>
+    <color name="seleectedRateColor">@color/colorPrimary</color>
 </resources>

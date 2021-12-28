@@ -87,7 +87,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
-                binding.mainContainer.root.addView(mapViewContainer)
+                binding.mainContainer.mainContentContainer.addView(mapViewContainer)
                 mapViewContainer?.addView(it)
 
                 it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater, this))
@@ -158,7 +158,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == PermissionHelper.PERMISSIONS_LOCATION_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_LOCATION.size) {
+        if (requestCode == PermissionHelper.PERMISSION_LOCATION_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_LOCATION.size) {
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
             var isGranted = true
 
@@ -185,7 +185,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     showToast(getString(R.string.permission_location_denied_2))
                 }
             }
-        } else if (requestCode == PermissionHelper.PERMISSIONS_RECORD_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_RECORD.size) {
+        } else if (requestCode == PermissionHelper.PERMISSION_RECORD_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_RECORD.size) {
             var isGranted = true
 
             // 모든 퍼미션을 허용했는지 체크합니다.
@@ -221,7 +221,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            binding.mainContainer.root.addView(mapViewContainer)
+            binding.mainContainer.mainContentContainer.addView(mapViewContainer)
             mapViewContainer?.addView(it)
 
             it.setCalloutBalloonAdapter(CustomMarkerAdapter(this, layoutInflater, this))
@@ -372,7 +372,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             }
             searchBarContainer.searchBar.setOnClickListener {
                 MarkerManager().removeAllMarkers(mapView)
-                binding.mainContainer.root.removeView(mapViewContainer)
+                binding.mainContainer.mainContentContainer.removeView(mapViewContainer)
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
             }
         }
@@ -453,7 +453,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             override fun onResults(results: Bundle?) {
                 val matches = results!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                 MarkerManager().removeAllMarkers(mapView)
-                binding.mainContainer.root.removeView(mapViewContainer)
+                binding.mainContainer.mainContentContainer.removeView(mapViewContainer)
                 startActivity(
                     Intent(
                         this@MainActivity,

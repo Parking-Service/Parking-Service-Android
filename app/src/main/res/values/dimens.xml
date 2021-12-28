@@ -142,4 +142,13 @@
     <dimen name="text_button_size">15sp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- activity_review_write.xml -->
+    <dimen name="rate_container_padding_vertical">16dp</dimen>
+    <dimen name="rate_text_margin_top">6dp</dimen>
+    <dimen name="review_edit_text_padding_horizontal">12dp</dimen>
+    <dimen name="review_edit_text_padding_vertical">10dp</dimen>
+    <dimen name="review_text_size">15sp</dimen>
+    <dimen name="review_done_text_size">16sp</dimen>
+    <dimen name="review_done_btn_padding_vertical">18dp</dimen>
 </resources>
