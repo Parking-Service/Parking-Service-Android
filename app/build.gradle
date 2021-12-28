@@ -42,6 +42,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -147,6 +150,9 @@ dependencies {
 
     // JSoup
     implementation 'org.jsoup:jsoup:1.13.1'
+
+    // Image Picker Library
+    implementation 'com.werb.pickphotoview:pickphotoview:0.4.8'  // Last Version
 
     implementation project(':lib')
 }

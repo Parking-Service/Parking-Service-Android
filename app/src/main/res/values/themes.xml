@@ -29,14 +29,26 @@
         <item name="android:textSize">@dimen/navigation_menu_text_size</item>
     </style>
 
-    <style name="ToolbarStyleDark" parent="Widget.AppCompat.Toolbar">
+    <style name="FavoriteToolbarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="titleTextAppearance">@style/ToolbarTitleStyle.Dark</item>
     </style>
 
-    <!-- Toolbar의 타이틀 텍스트-->
+    <!-- Favorite Activity Toolbar의 타이틀 텍스트-->
     <style name="ToolbarTitleStyle.Dark" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">@color/toolbarTitleColor</item> <!-- Toolbar의 타이틀 텍스트 색상-->
-        <item name="android:textSize">17sp</item> <!-- Toolbar의 타이틀 텍스트 사이즈-->
+        <item name="android:textSize">17sp</item> <!-- Toolbar의 타이틀 텍스트 사이즈-->1
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ReviewWriteToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="titleTextAppearance">@style/ToolbarTitleStyle.ColorPrimary</item>
+    </style>
+
+    <!-- Review Write Toolbar의 타이틀 텍스트-->
+    <style name="ToolbarTitleStyle.ColorPrimary" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@color/colorPrimary</item> <!-- Toolbar의 타이틀 텍스트 색상-->
+        <item name="android:textSize">17sp</item> <!-- Toolbar의 타이틀 텍스트 사이즈-->1
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

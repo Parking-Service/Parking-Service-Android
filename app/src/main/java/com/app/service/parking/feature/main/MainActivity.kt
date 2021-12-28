@@ -158,7 +158,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == PermissionHelper.PERMISSIONS_LOCATION_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_LOCATION.size) {
+        if (requestCode == PermissionHelper.PERMISSION_LOCATION_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_LOCATION.size) {
             // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
             var isGranted = true
 
@@ -185,7 +185,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
                     showToast(getString(R.string.permission_location_denied_2))
                 }
             }
-        } else if (requestCode == PermissionHelper.PERMISSIONS_RECORD_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_RECORD.size) {
+        } else if (requestCode == PermissionHelper.PERMISSION_RECORD_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_RECORD.size) {
             var isGranted = true
 
             // 모든 퍼미션을 허용했는지 체크합니다.

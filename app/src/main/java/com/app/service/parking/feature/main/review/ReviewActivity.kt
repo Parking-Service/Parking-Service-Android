@@ -37,13 +37,13 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setParkModel() // Intent로 받은 주차장 데이터로 초기화
-        setBindingData() // 데이터 바인딩 설정
-        initView() // 뷰 초기화
+        initActivity()
     }
 
     override fun initActivity() {
-
+        setParkModel() // Intent로 받은 주차장 데이터로 초기화
+        setBindingData() // 데이터 바인딩 설정
+        initView() // 뷰 초기화
     }
 
     override fun finish() {
@@ -144,6 +144,10 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
             if (model?.newAddr.isNullOrBlank()) {
                 binding.parkingLotRoadNameTextView.visibility = View.GONE
+            }
+
+            writeReviewButton.setOnClickListener {
+                startActivity(Intent(this@ReviewActivity, ReviewWriteActivity::class.java))
             }
         }
     }

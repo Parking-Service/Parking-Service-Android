@@ -63,7 +63,7 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
     }
 
     // binding 객체를 가져오는 메소드
-    fun getViewDataBinding(): T? = viewDataBinding
+    private fun getViewDataBinding(): T? = viewDataBinding
 
     private fun createInternetCheckDialog() {
         val snackbar = Snackbar.make(viewDataBinding?.root!!, getString(R.string.snack_bar_content_internet_disconnected), Snackbar.LENGTH_INDEFINITE)

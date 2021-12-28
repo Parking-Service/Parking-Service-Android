@@ -361,7 +361,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if (requestCode == PermissionHelper.PERMISSIONS_RECORD_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_RECORD.size) {
+        if (requestCode == PermissionHelper.PERMISSION_RECORD_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_RECORD.size) {
             var isGranted = true
 
             // 모든 퍼미션을 허용했는지 체크합니다.
