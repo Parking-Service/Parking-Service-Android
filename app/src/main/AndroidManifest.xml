@@ -96,16 +96,6 @@
             </intent-filter>
         </activity>
 
-        <provider
-            android:name="com.werb.pickphotoview.provider.PickProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/pick_file_paths"/>
-        </provider>
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_native_key" />

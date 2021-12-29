@@ -1,5 +1,6 @@
 package com.app.service.parking.model.dto
 
+import android.net.Uri
 import com.google.gson.annotations.SerializedName
 
 data class Review(
@@ -10,6 +11,6 @@ data class Review(
     @SerializedName("reviewRate") var rate: Short?,
     @SerializedName("reviewDate") var created: Long?,
     @SerializedName("reviewText") var reviewText: String?,
-    @SerializedName("likeCount") var likecount: Short?,
-    @SerializedName("reviewImageUrl") var imgPath: String?
+    @SerializedName("likeCount") var likeCount: Short?,
+    @SerializedName("reviewImageUrl") var imgPath: Uri?
 )

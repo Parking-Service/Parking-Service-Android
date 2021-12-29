@@ -1,64 +1,270 @@
 package com.app.service.parking.feature.main.review
 
-import android.content.pm.PackageManager
-import android.os.Bundle
+import android.app.AlertDialog
+import android.content.res.ColorStateList
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.MenuItem
-import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.content.ContextCompat
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ActivityReviewWriteBinding
 import com.app.service.parking.feature.base.BaseActivity
-import com.app.service.parking.model.repository.local.db.AppDB
-import com.app.service.parking.model.repository.local.repository.FavoriteRepository
-import com.app.service.parking.util.PermissionHelper
-import com.app.service.parking.feature.main.MainActivity
+import com.app.service.parking.model.dto.Lot
+import com.app.service.parking.model.dto.Review
+import com.app.service.parking.model.network.retrofit.builder.ReviewAPIBuilder.uploadReview
+import com.app.service.parking.model.preference.ParkingPreference
+import com.app.service.parking.model.preference.PreferenceConst
+import com.app.service.parking.model.type.RateStatus
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import gun0912.tedimagepicker.builder.TedImagePicker
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-import com.werb.pickphotoview.PickPhotoView
 
-
-
-
-class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewViewModel>() {
+class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWriteViewModel>() {
 
     override val layoutResId: Int = R.layout.activity_review_write
-    override val viewModel: ReviewViewModel by lazy {
-        ViewModelProvider(
-            this,
-            ReviewViewModel.Factory(FavoriteRepository(AppDB.getDatabase(this)))
-        )[ReviewViewModel::class.java]
-    }
+    override val viewModel: ReviewWriteViewModel by viewModel()
+    val reviewViewModel: ReviewViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        checkPermission() // 파일 읽기 권한이 있는지 확인
-        initActivity()
-    }
 
     override fun initActivity() {
+        setParkModel()
+        setImagePicker()
         setBindingData()
         initView()
     }
 
     private fun setBindingData() {
-        binding.viewModel = viewModel // ViewModel 바인딩
+        binding.reviewWriteViewModel = viewModel // ReviewWriteViewModel 바인딩
+        binding.reviewViewModel = reviewViewModel // ReviewViewModel 바인딩
+        binding.rateStatus = viewModel.rateStatus.value // 리뷰 상태 바인딩
+    }
+
+    private fun setParkModel() {
+        // Search Activity에서 검색 데이터로 받은 주차장 모델로 초기화
+        reviewViewModel.lotModel = intent.getSerializableExtra("model") as Lot
     }
 
     private fun initView() {
         with(binding) {
             setSupportActionBar(toolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true) // 뒤로가기 버튼 활성화
+
+            viewModel.reviewText.observe(this@ReviewWriteActivity) {
+                reviewDoneButton.text =
+                    getString(R.string.review_done_text, viewModel.reviewText.value?.length)
+            }
+
+
+            // EditText Hint에 닉네임 설정
+            with(reviewEditText) {
+                hint = getString(
+                    R.string.rate_edit_text_hint, ParkingPreference.getString(
+                        PreferenceConst.NICKNAME.name
+                    )
+                )
+
+                // Text Watcher 설정
+                addTextChangedListener(object : TextWatcher {
+                    // 입력하기 전에 호출
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int
+                    ) {
+                    }
+
+                    // 타이핑되는 텍스트에 변화가 있으면 호출
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int
+                    ) {
+                        viewModel.reviewText.value = s.toString()
+                    }
+
+                    // 입력이 끝날 때 호출
+                    override fun afterTextChanged(s: Editable?) {}
+                })
+            }
+
+            // 리뷰 상태 관찰
+            viewModel.rateStatus.observe(this@ReviewWriteActivity) { rateStatus ->
+                when (rateStatus) {
+                    // 좋아요 누른경우
+                    RateStatus.GOOD -> {
+                        // 좋아요 버튼 활성화
+                        rateGoodText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.colorPrimary
+                            )
+                        )
+                        rateGoodImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.colorPrimary
+                            )
+                        )
+                        // 나머지 버튼 비활성화
+                        rateNormalText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateNormalImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateBadText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateBadImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                    }
+                    // 평범해요 누른 경우
+                    RateStatus.NORMAL -> {
+                        // 평범해요 버튼 활성화
+                        rateNormalText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.colorPrimary
+                            )
+                        )
+                        rateNormalImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.colorPrimary
+                            )
+                        )
+                        // 나머지 버튼 비활성화
+                        rateGoodText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateGoodImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateBadText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateBadImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                    }
+                    // 별로에요 누른 경우
+                    RateStatus.BAD -> {
+                        // 별로에요 버튼 활성화
+                        rateBadText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.colorPrimary
+                            )
+                        )
+                        rateBadImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.colorPrimary
+                            )
+                        )
+                        // 나머지 버튼 비활성화
+                        rateNormalText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateNormalImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateGoodText.setTextColor(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                        rateGoodImage.imageTintList = ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                this@ReviewWriteActivity,
+                                R.color.unselectedRateColor
+                            )
+                        )
+                    }
+                }
+            }
         }
     }
 
-    // 파일 읽기 권한 확인
-    private fun checkPermission() {
-        PermissionHelper.checkReadExternalPermission(this@ReviewWriteActivity) {
+    private fun setImagePicker() {
+        // 갤러리에서 이미지 피커 실행
+        TedImagePicker.with(this)
+            .startMultiImage { uriList ->
+                // 가져온 이미지 Uri로 업데이트
+                viewModel.imgUriList.clear()
+                viewModel.imgUriList.addAll(uriList)
+                CoroutineScope(Dispatchers.IO).launch {
+                    uploadReview(
+                        Review(
+                            userUid = "a11rEv1B1Ubi3yY7pbw53rtxyhm2",
+                            parkCode = "000-1-000018",
+                            name = "BuNa",
+                            rate = 3,
+                            created = 0L,
+                            reviewText = "테스트",
+                            likeCount = 123,
+                            imgPath = uriList.get(0)
+                        ), uriList.get(0)
+                    )
+                }
+            }
+    }
 
-        }
+    override fun onBackPressed() {
+        // 뒤로가기를 누르면 종료할 것인지 Alert Dialog로 질문+
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.write_review_alert_title))
+            .setMessage(getString(R.string.write_review_alert_message))
+            .setPositiveButton(
+                getString(R.string.ok)
+            ) { _, _ -> finish() }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
+                dialog.dismiss()
+            }.create().show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> { // Toolbar의 Back키 눌렀을 때 동작
                 finish() // 액티비티 종료
                 return true
@@ -67,52 +273,4 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewViewM
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if(requestCode == PermissionHelper.PERMISSION_READ_EXTERNAL_REQUEST_CODE && grantResults.size == PermissionHelper.REQUIRED_PERMISSION_READ.size) {
-            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
-            var isGranted = true
-
-            // 모든 퍼미션을 허용했는지 체크합니다.
-            for (result in grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    isGranted = false
-                    break
-                }
-            }
-            if (isGranted) { // 권한을 허용했다면
-                // 갤러리 사진 피커 보여주기
-                PickPhotoView.Builder(this)
-                    .setPickPhotoSize(1) // select image size
-                    .setClickSelectable(true) // click one image immediately close and return image
-                    .setShowCamera(true) // is show camera
-                    .setSpanCount(3) // span count
-                    .setLightStatusBar(true) // lightStatusBar used in Android M or higher
-                    .setStatusBarColor(R.color.white) // statusBar color
-                    .setToolbarColor(R.color.white) // toolbar color
-                    .setToolbarTextColor(R.color.black) // toolbar text color
-                    .setSelectIconColor(R.color.colorPrimary) // select icon color
-                    .setShowGif(false) // is show gif
-                    .start()
-
-            } else { // 사용자가 읽기 권한을 허용하지 않았다면
-                // 사용자가 권한을 직접 거부한 경우
-                if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        this,
-                        PermissionHelper.REQUIRED_PERMISSION_LOCATION[0]
-                    )
-                ) {
-                    showToast(getString(R.string.permission_read_denied_1)) // 위치 권한이 거부되었다는 토스트 출력
-                    finish() // 화면을 닫아 리뷰 작성 취소
-                } else { // 사용자가 직접 권한을 거부한게 아닌, 수동적으로 거부된 상황이라면
-                    showToast(getString(R.string.permission_read_denied_2))
-                }
-            }
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
 }

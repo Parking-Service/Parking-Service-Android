@@ -8,30 +8,23 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.lifecycle.ViewModelProvider
 import com.app.service.parking.R
 import com.app.service.parking.custom.dialog.NaviBottomSheetDialog
 import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.model.dto.Lot
-import com.app.service.parking.model.repository.local.db.AppDB
-import com.app.service.parking.model.repository.local.repository.FavoriteRepository
 import com.app.service.parking.util.MarkerManager
 import com.bumptech.glide.Glide
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 
 class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
     override val layoutResId: Int = R.layout.activity_review
-    override val viewModel: ReviewViewModel by lazy {
-        ViewModelProvider(
-            this,
-            ReviewViewModel.Factory(FavoriteRepository(AppDB.getDatabase(this)))
-        )[ReviewViewModel::class.java]
-    }
+    override val viewModel: ReviewViewModel by viewModel()
     lateinit var mapView: MapView // 카카오 맵 뷰
     private var naviBottomSheetDialog: NaviBottomSheetDialog? = null
     var mapViewContainer: RelativeLayout? = null
@@ -148,7 +141,12 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
             }
 
             writeReviewButton.setOnClickListener {
-                startActivity(Intent(this@ReviewActivity, ReviewWriteActivity::class.java))
+                startActivity(
+                    Intent(this@ReviewActivity, ReviewWriteActivity::class.java).putExtra(
+                        "model",
+                        viewModel!!.lotModel
+                    )
+                )
             }
         }
     }
@@ -210,7 +208,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
                     }
                     it.setOnTouchListener { _, _ -> true } // 지도 터치 방지
                 }
-            }catch (re: RuntimeException){
+            } catch (re: RuntimeException) {
                 Timber.tag("에러발생").d(re.toString())
                 Timber.e(re.toString())
             }

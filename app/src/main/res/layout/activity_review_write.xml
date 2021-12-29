@@ -6,9 +6,14 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="reviewViewModel"
             type="com.app.service.parking.feature.main.review.ReviewViewModel" />
-
+        <variable
+            name="reviewWriteViewModel"
+            type="com.app.service.parking.feature.main.review.ReviewWriteViewModel" />
+        <variable
+            name="rateStatus"
+            type="com.app.service.parking.model.type.RateStatus" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,15 +64,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/rate_normal_button"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> reviewWriteViewModel.changeRateStatus(0)}">
 
                 <ImageView
+                    android:id="@+id/rate_good_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_rate_good"
                     app:tint="@color/unselectedRateColor" />
 
                 <TextView
+                    android:id="@+id/rate_good_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rate_text_margin_top"
@@ -89,15 +97,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/rate_good_button"
                 app:layout_constraintRight_toLeftOf="@+id/rate_bad_button"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> reviewWriteViewModel.changeRateStatus(1)}">
 
                 <ImageView
+                    android:id="@+id/rate_normal_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_rate_normal"
                     app:tint="@color/unselectedRateColor" />
 
                 <TextView
+                    android:id="@+id/rate_normal_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rate_text_margin_top"
@@ -119,15 +130,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/rate_normal_button"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> reviewWriteViewModel.changeRateStatus(2)}">
 
                 <ImageView
+                    android:id="@+id/rate_bad_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/ic_rate_bad"
                     app:tint="@color/unselectedRateColor" />
 
                 <TextView
+                    android:id="@+id/rate_bad_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rate_text_margin_top"

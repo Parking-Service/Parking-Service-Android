@@ -2,6 +2,7 @@ package com.app.service.parking.model.network.retrofit.builder
 
 import android.net.Uri
 import android.util.Log
+import androidx.core.net.toFile
 import com.app.service.parking.model.dto.Review
 import com.app.service.parking.model.network.retrofit.api.ReviewAPI
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -11,22 +12,19 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Multipart
 import timber.log.Timber
 import java.io.File
 
 object ReviewAPIBuilder : BaseRetrofitBuilder() {
 
-
-
     /* POST 방식
      서버에 리뷰 저장
      */
-    suspend fun uploadReview(review: Review, imgPath: String) {
+    suspend fun uploadReview(review: Review, imgUri: Uri) {
         suspendCancellableCoroutine<Unit> { continuation ->
             val api = getRetrofit().create(ReviewAPI::class.java)
-            val fileBody = RequestBody.create(MediaType.parse("image/*"), File(imgPath))
-            val filePart = MultipartBody.Part.createFormData("img", System.currentTimeMillis().toString(), fileBody)
+            val fileBody = RequestBody.create(MediaType.parse("image/jpeg"), imgUri.toFile())
+            val filePart = MultipartBody.Part.createFormData("img", System.currentTimeMillis().toString()+".jpg", fileBody)
 
             api.putReview(review.userUid, review.parkCode, filePart, review.reviewText, review.rate).enqueue(object :
                 Callback<Void> {
@@ -37,17 +35,17 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
                     } else {
                         val error = response.errorBody()?.string()
                         if(error == "100") {
-                            Timber.tag("User Register Response").d("Failed by error 100")
+                            Timber.tag("Review Upload Response").d("Failed by error 100")
                         } else {
-                            Timber.tag("User Register Response").d("Failed by other")
+                            Timber.tag("Review Upload Response").d("Failed by other")
                         }
                     }
                     continuation.resume(Unit, null)
-                    Log.d("Coroutine", "register response")
+                    Log.d("Coroutine", "Review Upload response")
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Timber.tag("User Register Response").d("Failed")
+                    Timber.tag("Review Upload Response").d("Failed")
                     Log.d("Coroutine", "Retrofit")
                     continuation.resume(Unit, null)
                 }

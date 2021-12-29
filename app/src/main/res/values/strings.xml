@@ -11,6 +11,7 @@
 
     <!-- others -->
     <string name="ok">확인</string>
+    <string name="cancel">취소</string>
 
     <!-- login activity -->
     <string name="skip">건너뛰기</string>
@@ -57,9 +58,11 @@
     <string name="review_write">리뷰 작성</string>
     <string name="rate_good">좋아요!</string>
     <string name="rate_normal">평범해요!</string>
-    <string name="rate_bad">나빠요!</string>
-    <string name="rate_edit_text_hint">%d님, 이용하신 주차장은 어떠셨나요? 주차장의 가격이나 시설, 서비스에 대해 리뷰를 작성해주세요!</string>
+    <string name="rate_bad">별로에요!</string>
+    <string name="rate_edit_text_hint">%s님, 이용하신 주차장은 어떠셨나요? 주차장의 가격이나 시설, 서비스에 대해 리뷰를 작성해주세요!</string>
     <string name="review_done_text">완료 (%d/10000)</string>
+    <string name="write_review_alert_title">작성하시던 리뷰가 사라져요!</string>
+    <string name="write_review_alert_message">그래도 괜찮으신가요?</string>
 
 
     <!-- marker -->
