@@ -81,6 +81,8 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
 
                         // Preference에 닉네임 저장
                         ParkingPreference.putValue(PreferenceConst.NICKNAME.name, user?.kakaoAccount?.profile?.nickname!!)
+                        // Preference에 유저 Uid 저장
+                        ParkingPreference.putValue(PreferenceConst.UID.name, user?.id.toString())
 
                         Timber.d("Register completed, Trying Signining Kakao Talk ...")
                         loginCallback?.onSignIn(
@@ -135,6 +137,8 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
                 userRepository.register(User(auth.uid!!, auth.currentUser?.email, auth.currentUser?.displayName!!, LoginType.GOOGLE.name))
                 // Preference에 닉네임 저장
                 ParkingPreference.putValue(PreferenceConst.NICKNAME.name, auth.currentUser?.displayName!!)
+                // Preference에 유저 Uid 저장
+                ParkingPreference.putValue(PreferenceConst.UID.name, auth.currentUser?.uid)
 
                 Timber.d("Register completed, Trying Signining google...")
                 isLoading.value = false // 로딩바 멈추기
@@ -186,6 +190,8 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
                         userRepository.register(User(auth.uid!!, auth.currentUser?.email, auth.currentUser?.displayName!!, LoginType.FACEBOOK.name))
                         // Preference에 닉네임 저장
                         ParkingPreference.putValue(PreferenceConst.NICKNAME.name, auth.currentUser?.displayName!!)
+                        // Preference에 유저 Uid 저장
+                        ParkingPreference.putValue(PreferenceConst.UID.name, auth.currentUser?.uid)
 
                         Timber.d("Register completed, Trying Signining Facebook...")
                         loginCallback?.onSignIn(LoginType.FACEBOOK, ResultType.SUCCESS)

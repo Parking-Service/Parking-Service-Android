@@ -34,7 +34,7 @@ val ReviewViewModelModule = module {
 
 val ReviewWriteModelModule = module {
     viewModel {
-        ReviewWriteViewModel()
+        ReviewWriteViewModel(get())
     }
 }
 

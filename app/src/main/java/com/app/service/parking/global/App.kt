@@ -22,7 +22,7 @@ class App : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
-            modules(listOf(userRepositoryModule, parkingRepositoryModule, favoriteRepositoryModule))
+            modules(listOf(userRepositoryModule, parkingRepositoryModule, favoriteRepositoryModule, reviewRepository))
             modules(listOf(loginViewModelModule, MainViewModelModule, SearchViewModelModule, ReviewViewModelModule, ReviewWriteModelModule))
         }
     }

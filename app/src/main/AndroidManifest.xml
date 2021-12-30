@@ -24,7 +24,8 @@
         <activity
             android:name=".feature.main.review.ReviewWriteActivity"
             android:exported="false"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|adjustUnspecified"/>
 
         <activity
             android:name=".feature.main.favorite.FavoriteActivity"

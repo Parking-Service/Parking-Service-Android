@@ -20,7 +20,7 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
     abstract val layoutResId: Int
     abstract val viewModel: S
     abstract fun initActivity()
-    private var networkStatusSnackbar: Snackbar? = null
+    private var networkStatusSnackBar: Snackbar? = null
     private val compositeDisposable = CompositeDisposable()
     val binding: T by lazy {
         getViewDataBinding()!!
@@ -76,12 +76,12 @@ abstract class BaseActivity<T: ViewDataBinding, S: BaseViewModel> : AppCompatAct
 
     // 인터넷 연결 상태 확인을 위한 스낵바를 띄우는 메소드
     private fun showInternetCheckDialog() {
-        networkStatusSnackbar?.show()
+        networkStatusSnackBar?.show()
     }
 
     // 인터넷 연결 상태 확인을 위한 snackbar를 닫는 메소드
     private fun dismissInternetCheckDialog() {
-        networkStatusSnackbar?.dismiss()
+        networkStatusSnackBar?.dismiss()
     }
 
     // 토스트 띄우기

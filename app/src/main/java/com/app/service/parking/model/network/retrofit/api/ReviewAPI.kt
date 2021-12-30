@@ -9,10 +9,10 @@ interface ReviewAPI {
     // 리뷰 저장
     @Multipart
     @POST("/review/upload")
-    fun putReview(
+    fun uploadReview(
         @Part("uid") reviewerUid: String?,
         @Part("parkCode") parkCode: String?,
-        @Part img: MultipartBody.Part?,
+        @Part imgList: ArrayList<MultipartBody.Part>?,
         @Part("text") reviewText: String?,
         @Part("rate") reviewRate: Short?
     ): Call<Void>

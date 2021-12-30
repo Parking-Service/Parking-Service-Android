@@ -6,22 +6,18 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ActivityReviewWriteBinding
+import com.app.service.parking.databinding.ViewPickedPhotoBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.model.dto.Lot
-import com.app.service.parking.model.dto.Review
-import com.app.service.parking.model.network.retrofit.builder.ReviewAPIBuilder.uploadReview
 import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.preference.PreferenceConst
 import com.app.service.parking.model.type.RateStatus
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import gun0912.tedimagepicker.builder.TedImagePicker
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -34,7 +30,7 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
 
     override fun initActivity() {
         setParkModel()
-        setImagePicker()
+        showImagePicker()
         setBindingData()
         initView()
     }
@@ -55,18 +51,51 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true) // 뒤로가기 버튼 활성화
 
-            viewModel.reviewText.observe(this@ReviewWriteActivity) {
+            // 리뷰 텍스트 관찰
+            viewModel.reviewText.observe(this@ReviewWriteActivity) { text ->
+                val reviewLength = text.length // 리뷰 길이
                 reviewDoneButton.text =
-                    getString(R.string.review_done_text, viewModel.reviewText.value?.length)
+                    getString(R.string.review_done_text, reviewLength) // 리뷰 내용이 변함에 따라 현재 글자수 변경
+                // 글자수가 1글자 이상일 때 버튼 활성화, 내용이 없으면 비활성화
+                reviewDoneButton.isEnabled = reviewLength > 0
+                reviewDoneButton.isClickable = reviewLength > 0
             }
 
+            // 이미지 리스트 라이브 데이터를 관찰한다.
+            viewModel.imgUriLiveList.observe(this@ReviewWriteActivity) { uriList ->
+                // 데이터에 변동이 있다면, 이미지 현재 개수로 갱신
+                photoCountText.text = "${uriList.size} / ${viewModel.imageOriginMaxCount}"
+            }
+            
+            viewModel.isUploadSuccess.observe(this@ReviewWriteActivity) { isSuccess ->
+                uploadProgressBar.visibility = View.GONE // 결과 반환시 프로그레스바 사라지게 하기
+                if(isSuccess) { // 업로드 성공시
+                    // 성공 문구 출력 후, 액티비티 종료
+                    showToast(getString(R.string.review_upload_success))
+                    finish()
+                }else { // 업로드 실패시
+                    // 실패 문구 출력
+                    showToast(getString(R.string.review_upload_failed))
+                }
+            }
+
+            // 사진 추가 버튼 클릭시
+            photoAddButton.setOnClickListener {
+                showImagePicker() // 이미지 피커를 보여준다.
+            }
+
+            // 작성 완료 버튼 클릭시
+            reviewDoneButton.setOnClickListener {
+                uploadProgressBar.visibility = View.VISIBLE // 프로그레스 바를 보여준다.
+                reviewViewModel?.lotModel?.let { lot -> reviewWriteViewModel?.uploadReview(lot) } // 서버에 리뷰를 등록한다.
+            }
 
             // EditText Hint에 닉네임 설정
             with(reviewEditText) {
                 hint = getString(
                     R.string.rate_edit_text_hint, ParkingPreference.getString(
                         PreferenceConst.NICKNAME.name
-                    )
+                    ) ?: getString(R.string.default_user_nickname)
                 )
 
                 // Text Watcher 설정
@@ -226,32 +255,52 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
         }
     }
 
-    private fun setImagePicker() {
-        // 갤러리에서 이미지 피커 실행
-        TedImagePicker.with(this)
-            .startMultiImage { uriList ->
-                // 가져온 이미지 Uri로 업데이트
-                viewModel.imgUriList.clear()
-                viewModel.imgUriList.addAll(uriList)
-                CoroutineScope(Dispatchers.IO).launch {
-                    uploadReview(
-                        Review(
-                            userUid = "a11rEv1B1Ubi3yY7pbw53rtxyhm2",
-                            parkCode = "000-1-000018",
-                            name = "BuNa",
-                            rate = 3,
-                            created = 0L,
-                            reviewText = "테스트",
-                            likeCount = 123,
-                            imgPath = uriList.get(0)
-                        ), uriList.get(0)
-                    )
+    private fun showImagePicker() {
+        // 이미지 최대 선택개수
+        val originMaxCount = viewModel.imageOriginMaxCount // 이미지 원래 최대개수
+        val imgMaxCount =
+            originMaxCount - (viewModel.imgUriList.size) // 현재 선택한 이미지 내에서, 더 선택할 수 있는 이미지 개수
+
+        // 이미지 개수가 더 선택할 수 있는 값이라면
+        if (imgMaxCount > 0) {
+            // 갤러리에서 이미지 피커 실행
+            TedImagePicker.with(this)
+                .max(imgMaxCount, getString(R.string.image_max_toast, imgMaxCount))
+                .startMultiImage { uriList ->
+                    // 가져온 이미지 Uri로 업데이트
+                    //viewModel.imgUriList.clear() // 기존 이미지 Uri 리스트 초기화
+                    viewModel.imgUriList.addAll(uriList) // 새로운 이미지 Uri 추가
+                    viewModel.imgUriLiveList.value = viewModel.imgUriList // 리스트 라이브 데이터 데이터 변경
+
+                    uriList.forEach { imgUri ->
+                        // 이미지 Uri을 사용하여 포토 바인딩 객체 생성
+                        with(
+                            ViewPickedPhotoBinding.inflate(
+                                layoutInflater,
+                                binding.scrollInnerView,
+                                false
+                            )
+                        ) {
+                            Glide.with(this@ReviewWriteActivity).load(imgUri)
+                                .into(this.photoImageView) // Uri
+                            this.photoDeleteButton.setOnClickListener { // 삭제 버튼 클릭시
+                                viewModel.imgUriList.remove(imgUri) // 이미지 리스트에서 해당 Uri 제거
+                                binding.scrollInnerView.removeView(this.root) // 스크롤뷰에서 이미지 제거
+                                viewModel.imgUriLiveList.value =
+                                    viewModel.imgUriList // 리스트 라이브 데이터 데이터 변경
+                            }
+                            binding.scrollInnerView.addView(this.root) // 스크롤뷰 내부의 LinearLayout에 PhotoView를 추가한다.
+                        }
+
+                    }
                 }
-            }
+        } else { // 더 이상 선택하지 못하는 경우 (이미지를 최대개수만큼 선택함)
+            showToast(getString(R.string.image_max_toast, originMaxCount))
+        }
     }
 
     override fun onBackPressed() {
-        // 뒤로가기를 누르면 종료할 것인지 Alert Dialog로 질문+
+        // 뒤로가기를 누르면 종료할 것인지 Alert Dialog로 질문
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.write_review_alert_title))
             .setMessage(getString(R.string.write_review_alert_message))
