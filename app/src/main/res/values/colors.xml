@@ -69,5 +69,6 @@
 
     <!-- Review Write Activity -->
     <color name="unselectedRateColor">#CDCDCD</color>
-    <color name="seleectedRateColor">@color/colorPrimary</color>
+    <color name="selectedRateColor">@color/colorPrimary</color>
+    <color name="photoFrameStrokeColor">#33535353</color>
 </resources>

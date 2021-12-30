@@ -1,6 +1,5 @@
 package com.app.service.parking.feature.main.review
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.app.service.parking.feature.base.BaseViewModel
 import com.app.service.parking.model.dto.Lot
@@ -8,15 +7,8 @@ import com.app.service.parking.model.repository.entity.Favorite
 import com.app.service.parking.model.repository.local.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ReviewViewModel(val repository: FavoriteRepository) : BaseViewModel() {
-
-    class Factory(val repository: FavoriteRepository): ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ReviewViewModel(repository) as T
-        }
-    }
 
     // 즐겨찾기 DB에서 가져올 Lot 데이터
     // 즐겨찾기를 안 해서 Null일 수 있는 상황을 가정하여 Nullable

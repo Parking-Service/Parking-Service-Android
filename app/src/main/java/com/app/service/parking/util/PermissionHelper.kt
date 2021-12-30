@@ -19,11 +19,9 @@ import com.app.service.parking.global.App
 object PermissionHelper {
     const val PERMISSION_LOCATION_REQUEST_CODE = 100
     const val PERMISSION_RECORD_REQUEST_CODE = 200
-    const val PERMISSION_READ_EXTERNAL_REQUEST_CODE = 300
 
     val REQUIRED_PERMISSION_LOCATION = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
     val REQUIRED_PERMISSION_RECORD = arrayOf(Manifest.permission.RECORD_AUDIO)
-    val REQUIRED_PERMISSION_READ = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
 
     fun hasGPSPermission(activity: MainActivity): Boolean {
         val hasFineLocationPermission = ContextCompat.checkSelfPermission(
@@ -65,32 +63,6 @@ object PermissionHelper {
                 ActivityCompat.requestPermissions(
                     activity, REQUIRED_PERMISSION_LOCATION,
                     PERMISSION_LOCATION_REQUEST_CODE
-                )
-            }
-        }
-    }
-
-    // 갤러리 참조를 위해 읽기 쓰기 펄미션 체크
-    fun checkReadExternalPermission(activity: Activity, granted: () -> Unit) {
-        val hasFineReadPermission = ContextCompat.checkSelfPermission(activity, REQUIRED_PERMISSION_READ[0])
-
-        if(hasFineReadPermission == PackageManager.PERMISSION_GRANTED) {
-            granted
-        } else {
-            // 이전에 권한을 거부한 적이 있는 경우
-            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, REQUIRED_PERMISSION_READ[0])) {
-                // 권한 요청이 필요하다는 Toast를 보여줌.
-                activity.showToast(App.context?.getString(R.string.permission_location_alert, App.context?.getString(R.string.app_name))!!)
-                // 사용자게에 펄미션 요청, 요청 결과는 onRequestPermissionResult에서 수신
-                ActivityCompat.requestPermissions(
-                    activity, REQUIRED_PERMISSION_READ,
-                    PERMISSION_READ_EXTERNAL_REQUEST_CODE
-                )
-            } else { // 처음 권한 허용을 요청받은 경우
-                // 사용자게에 펄미션 요청, 요청 결과는 onRequestPermissionResult에서 수신
-                ActivityCompat.requestPermissions(
-                    activity, REQUIRED_PERMISSION_READ,
-                    PERMISSION_READ_EXTERNAL_REQUEST_CODE
                 )
             }
         }

@@ -1,5 +1,6 @@
 package com.app.service.parking.global
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.app.service.parking.R
@@ -21,8 +22,8 @@ class App : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
-            modules(listOf(userRepositoryModule, parkingRepositoryModule))
-            modules(listOf(loginViewModelModule, MainViewModelModule, SearchViewModelModule))
+            modules(listOf(userRepositoryModule, parkingRepositoryModule, favoriteRepositoryModule, reviewRepository))
+            modules(listOf(loginViewModelModule, MainViewModelModule, SearchViewModelModule, ReviewViewModelModule, ReviewWriteModelModule))
         }
     }
 
@@ -32,6 +33,7 @@ class App : Application() {
     }
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         var context: Context? = null
             private set
     }

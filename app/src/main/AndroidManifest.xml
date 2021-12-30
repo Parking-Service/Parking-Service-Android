@@ -24,7 +24,8 @@
         <activity
             android:name=".feature.main.review.ReviewWriteActivity"
             android:exported="false"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|adjustUnspecified"/>
 
         <activity
             android:name=".feature.main.favorite.FavoriteActivity"
@@ -95,16 +96,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-        <provider
-            android:name="com.werb.pickphotoview.provider.PickProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/pick_file_paths"/>
-        </provider>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

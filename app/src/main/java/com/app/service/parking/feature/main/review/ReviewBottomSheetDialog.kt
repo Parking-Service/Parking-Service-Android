@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
 import com.app.service.parking.R
 import com.app.service.parking.custom.dialog.NaviBottomSheetDialog
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.repository.local.db.AppDB
@@ -27,12 +28,7 @@ import com.bumptech.glide.Glide
 class ReviewBottomSheetDialog(var model: Lot? = null) : SuperBottomSheetFragment() {
 
     lateinit var binding: ActivityReviewBinding
-    val viewModel: ReviewViewModel by lazy {
-        ViewModelProvider(
-            this,
-            ReviewViewModel.Factory(FavoriteRepository.getInstance(AppDB.getDatabase(requireContext()))!!)
-        )[ReviewViewModel::class.java]
-    }
+    val viewModel: ReviewViewModel by viewModel()
 
     private var naviBottomSheetDialog: NaviBottomSheetDialog? = null
 

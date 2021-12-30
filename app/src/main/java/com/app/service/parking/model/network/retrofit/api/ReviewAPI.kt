@@ -7,15 +7,14 @@ import retrofit2.http.*
 
 interface ReviewAPI {
     // 리뷰 저장
-    @FormUrlEncoded
     @Multipart
     @POST("/review/upload")
-    fun putReview(
-        @Field("uid") reviewerUid: String?,
-        @Field("parkCode") parkCode: String?,
-        @Part reviewImgs: MultipartBody.Part?,
-        @Field("text") reviewText: String?,
-        @Field("rate") reviewRate: Short?
+    fun uploadReview(
+        @Part("uid") reviewerUid: String?,
+        @Part("parkCode") parkCode: String?,
+        @Part imgList: ArrayList<MultipartBody.Part>?,
+        @Part("text") reviewText: String?,
+        @Part("rate") reviewRate: Short?
     ): Call<Void>
 
     // 리뷰 업데이트
@@ -25,8 +24,8 @@ interface ReviewAPI {
     fun updateReview(
         @Query("reviewUid") id: Int?,
         @Part reviewImgs: MultipartBody.Part?,
-        @Field("text") reviewText: String?,
-        @Field("rate") reviewRate: Short?
+        @Part("text") reviewText: String?,
+        @Part("rate") reviewRate: Short?
     ): Call<Void>
 
     // 리뷰 리스트 가져오기

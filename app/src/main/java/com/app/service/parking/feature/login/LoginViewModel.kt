@@ -9,6 +9,8 @@ import com.app.service.parking.feature.login.type.LoginType
 import com.app.service.parking.feature.login.type.ResultType
 import com.app.service.parking.global.App
 import com.app.service.parking.model.dto.User
+import com.app.service.parking.model.preference.ParkingPreference
+import com.app.service.parking.model.preference.PreferenceConst
 import com.app.service.parking.model.repository.remote.UserRepository
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -77,6 +79,11 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
                             )
                         )
 
+                        // Preference에 닉네임 저장
+                        ParkingPreference.putValue(PreferenceConst.NICKNAME.name, user?.kakaoAccount?.profile?.nickname!!)
+                        // Preference에 유저 Uid 저장
+                        ParkingPreference.putValue(PreferenceConst.UID.name, user?.id.toString())
+
                         Timber.d("Register completed, Trying Signining Kakao Talk ...")
                         loginCallback?.onSignIn(
                             LoginType.KAKAO_TALK,
@@ -128,6 +135,10 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
 
                 // repository를 통해 회원가입 요구(중복 계정일 경우 백엔드에서 처리)
                 userRepository.register(User(auth.uid!!, auth.currentUser?.email, auth.currentUser?.displayName!!, LoginType.GOOGLE.name))
+                // Preference에 닉네임 저장
+                ParkingPreference.putValue(PreferenceConst.NICKNAME.name, auth.currentUser?.displayName!!)
+                // Preference에 유저 Uid 저장
+                ParkingPreference.putValue(PreferenceConst.UID.name, auth.currentUser?.uid)
 
                 Timber.d("Register completed, Trying Signining google...")
                 isLoading.value = false // 로딩바 멈추기
@@ -177,6 +188,10 @@ class LoginViewModel(val userRepository: UserRepository) : BaseViewModel() {
                     if (task.isSuccessful) { // 로그인 성공
                         // repository에게 회원가입 요청(중복 계정일 경우 백엔드에서 처리)
                         userRepository.register(User(auth.uid!!, auth.currentUser?.email, auth.currentUser?.displayName!!, LoginType.FACEBOOK.name))
+                        // Preference에 닉네임 저장
+                        ParkingPreference.putValue(PreferenceConst.NICKNAME.name, auth.currentUser?.displayName!!)
+                        // Preference에 유저 Uid 저장
+                        ParkingPreference.putValue(PreferenceConst.UID.name, auth.currentUser?.uid)
 
                         Timber.d("Register completed, Trying Signining Facebook...")
                         loginCallback?.onSignIn(LoginType.FACEBOOK, ResultType.SUCCESS)

@@ -151,8 +151,9 @@ dependencies {
     // JSoup
     implementation 'org.jsoup:jsoup:1.13.1'
 
-    // Image Picker Library
-    implementation 'com.werb.pickphotoview:pickphotoview:0.4.8'  // Last Version
+    // Ted Image Picker Library
+    implementation 'io.github.ParkSangGwon:tedimagepicker:1.2.7'
 
-    implementation project(':lib')
+    // Bottom sheet library module
+    implementation project(':superbottomsheet')
 }
