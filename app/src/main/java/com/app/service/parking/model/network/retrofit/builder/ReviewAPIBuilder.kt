@@ -48,7 +48,7 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
             ).enqueue(object :
                 Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    if (response.body() != null && response.isSuccessful) {
+                    if (response.isSuccessful) {
                         Timber.tag("Review Upload Response").d("Success")
                         Log.d("Review Upload Response", "${response.body()}")
                         continuation.resumeWith(Result.success(true))
@@ -69,7 +69,7 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
                     continuation.resumeWith(Result.failure(Exception("리뷰 업로드에 실패하였습니다."))) // 리뷰 업로드 실패시, 예외처리
                 }
             })
-        
+
         }
 
 
@@ -118,18 +118,19 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
     /* GET 방식
      서버로부터 주차장 코드를 바탕으로 리뷰 리스트 요청
      */
-    suspend fun getReviewList(parkCode: String) {
-        suspendCancellableCoroutine<Unit> { continuation ->
+    suspend fun getReviewList(parkCode: String) =
+        suspendCancellableCoroutine<ArrayList<Review>> { continuation ->
             val api = getRetrofit().create(ReviewAPI::class.java)
-            api.getReviewList(parkCode).enqueue(object :
-                Callback<List<Review>> {
+            api.getReviewList(parkCode, 5).enqueue(object :
+                Callback<ArrayList<Review>> {
                 override fun onResponse(
-                    call: Call<List<Review>>,
-                    response: Response<List<Review>>
+                    call: Call<ArrayList<Review>>,
+                    response: Response<ArrayList<Review>>
                 ) {
                     if (response.body() != null && response.isSuccessful) {
-                        Timber.tag("User Register Response").d("Success")
-                        Log.d("User Register Response", "${response.body()}")
+                        Timber.tag("Request Review List").d("Success")
+                        Log.d("Request Review List", "${response.body()}")
+                        continuation.resumeWith(Result.success(response.body()!!))
                     } else {
                         val error = response.errorBody()?.string()
                         if (error == "100") {
@@ -137,19 +138,18 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
                         } else {
                             Timber.tag("User Register Response").d("Failed by other")
                         }
+                        continuation.resumeWith(Result.failure(Exception("No found review List")));
                     }
-                    continuation.resume(Unit, null)
-                    Log.d("Coroutine", "register response")
+
                 }
 
-                override fun onFailure(call: Call<List<Review>>, t: Throwable) {
+                override fun onFailure(call: Call<ArrayList<Review>>, t: Throwable) {
                     Timber.tag("User Register Response").d("Failed")
                     Log.d("Coroutine", "Retrofit")
-                    continuation.resume(Unit, null)
+                    continuation.resumeWith(Result.failure(Exception("No found review List")));
                 }
             })
         }
-    }
 
 
     /* DELETE 방식

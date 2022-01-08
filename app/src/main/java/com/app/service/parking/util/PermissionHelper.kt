@@ -4,15 +4,12 @@ import android.Manifest
 import android.app.Activity
 
 import android.content.pm.PackageManager
-import android.os.Build.VERSION_CODES.M
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 import com.app.service.parking.R
 import com.app.service.parking.extension.showToast
 import com.app.service.parking.feature.main.MainActivity
-import com.app.service.parking.feature.main.review.ReviewWriteActivity
-import com.app.service.parking.feature.main.search.SearchActivity
 import com.app.service.parking.global.App
 
 

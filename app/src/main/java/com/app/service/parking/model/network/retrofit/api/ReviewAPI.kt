@@ -30,7 +30,7 @@ interface ReviewAPI {
 
     // 리뷰 리스트 가져오기
     @GET("/review")
-    fun getReviewList(@Query("parkCode") parkCode: String): Call<List<Review>>
+    fun getReviewList(@Query("parkCode") parkCode: String, @Query("num") num: Int? = null): Call<ArrayList<Review>>
 
     // 특정 리뷰 가져오기
     @GET("/review")

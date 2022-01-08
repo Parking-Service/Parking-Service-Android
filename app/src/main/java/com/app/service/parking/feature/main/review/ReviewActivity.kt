@@ -12,6 +12,9 @@ import com.app.service.parking.R
 import com.app.service.parking.custom.dialog.NaviBottomSheetDialog
 import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.feature.base.BaseActivity
+import com.app.service.parking.feature.listener.RecyclerItemClickListener
+import com.app.service.parking.feature.main.adapter.ReviewRVAdapter
+import com.app.service.parking.feature.main.review.write.ReviewWriteActivity
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.util.MarkerManager
 import com.bumptech.glide.Glide
@@ -28,6 +31,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     lateinit var mapView: MapView // 카카오 맵 뷰
     private var naviBottomSheetDialog: NaviBottomSheetDialog? = null
     var mapViewContainer: RelativeLayout? = null
+    private var rvAdapter: ReviewRVAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +63,24 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
                         .into(favoriteImageView)
                 }
             }
+
+            rvAdapter = ReviewRVAdapter(object: RecyclerItemClickListener {
+                // 리뷰 클릭했을 때 수행할 콜백백
+               override fun onClick(position: Int, resId: Int?) {
+
+                }
+            })
+            reviewRecyclerView.adapter = rvAdapter
+            reviewRecyclerView.layoutManager = ReviewRVAdapter.WrapContentLinearLayoutManager(this@ReviewActivity)
+
+
+            // 리뷰 리스트를 서버로부터 가져오면 갱신이 되므로 옵저빙하고 있다가 리사이클러뷰 갱신
+            viewModel?.userReviewList?.observe(this@ReviewActivity) { reviewList ->
+                rvAdapter?.updateItems(reviewList)
+            }
+
+            // 서버로부터 리뷰 리스트 요청
+            viewModel?.requestReviewList()
 
             // 즐겨찾기 Entity가 DB에 있으면 '즐겨찾기를 추가한 주차장 데이터'이므로
             // isFavorite를 true로 설정하고, 없으면 false로 설정한다.

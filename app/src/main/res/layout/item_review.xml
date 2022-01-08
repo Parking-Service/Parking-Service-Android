@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="model"
+            type="com.app.service.parking.model.dto.Review" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -36,7 +39,8 @@
                 android:id="@+id/nickname_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BuNa"
+                tools:text="BuNa"
+                android:text="@{model.name}"
                 android:textColor="@color/TitleTextColor"
                 android:textSize="@dimen/parking_lot_introduce_title"
                 app:layout_constraintLeft_toRightOf="@+id/profile_image_view"
@@ -47,7 +51,7 @@
                 android:id="@+id/review_date_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="2021년 12월 03일 16:15"
+                tools:text="2021년 12월 03일 16:15"
                 android:textColor="@color/minorDescTextColor"
                 android:textSize="@dimen/parking_lot_information_desc_text_size"
                 android:maxLines="2"
@@ -61,10 +65,11 @@
                 android:id="@+id/review_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="주차공간이 협소하고, 비용이 너무 비쌉니다. 아마 다시는 안 갈 것 같네요.."
+                tools:text="주차공간이 협소하고, 비용이 너무 비쌉니다. 아마 다시는 안 갈 것 같네요.."
                 android:textColor="@color/minorDescTextColor"
                 android:textSize="@dimen/parking_lot_information_desc_text_size"
                 android:maxLines="2"
+                android:text="@{model.reviewText}"
                 app:layout_constraintLeft_toRightOf="@+id/profile_image_view"
                 app:layout_constraintTop_toBottomOf="@+id/review_date_text_view"
                 app:layout_constraintRight_toRightOf="parent"
@@ -78,7 +83,7 @@
                 android:layout_height="@dimen/parking_lot_introduce_title"
                 android:numStars="5"
                 android:stepSize="1"
-                android:rating="3"
+                tools:rating="3"
                 android:isIndicator="true"
                 app:layout_constraintLeft_toRightOf="@+id/nickname_text_view"
                 android:layout_marginLeft="6dp"
