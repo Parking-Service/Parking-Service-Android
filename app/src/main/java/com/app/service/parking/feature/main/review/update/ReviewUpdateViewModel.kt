@@ -1,4 +1,4 @@
-package com.app.service.parking.feature.main.review
+package com.app.service.parking.feature.main.review.update
 
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +12,7 @@ import com.app.service.parking.model.repository.remote.ReviewRepository
 import com.app.service.parking.model.type.RateStatus
 import kotlinx.coroutines.launch
 
-class ReviewWriteViewModel(val repository: ReviewRepository) : BaseViewModel() {
+class ReviewUpdateViewModel(val repository: ReviewRepository) : BaseViewModel() {
     val imgUriLiveList = MutableLiveData<MutableList<Uri>>() // 갤러리에서 가져온 이미지 피커 LiveData Uri 리스트
     val imgUriList = mutableListOf<Uri>() // 갤러리에서 가져온 이미지 피커 Uri 리스트
     val rateStatus = MutableLiveData<RateStatus>(RateStatus.GOOD) // 평점 상태

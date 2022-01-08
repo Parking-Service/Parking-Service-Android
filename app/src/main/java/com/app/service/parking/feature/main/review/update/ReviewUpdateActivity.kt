@@ -1,17 +1,17 @@
-package com.app.service.parking.feature.main.review
+package com.app.service.parking.feature.main.review.update
 
 import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.app.service.parking.R
-import com.app.service.parking.databinding.ActivityReviewWriteBinding
+import com.app.service.parking.databinding.ActivityReviewUpdateBinding
 import com.app.service.parking.databinding.ViewPickedPhotoBinding
 import com.app.service.parking.feature.base.BaseActivity
+import com.app.service.parking.feature.main.review.ReviewViewModel
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.preference.PreferenceConst
@@ -21,11 +21,11 @@ import gun0912.tedimagepicker.builder.TedImagePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWriteViewModel>() {
+class ReviewUpdateActivity : BaseActivity<ActivityReviewUpdateBinding, ReviewUpdateViewModel>() {
 
-    override val layoutResId: Int = R.layout.activity_review_write
-    override val viewModel: ReviewWriteViewModel by viewModel()
-    val reviewViewModel: ReviewViewModel by viewModel()
+    override val layoutResId: Int = R.layout.activity_review_update
+    override val viewModel: ReviewUpdateViewModel by viewModel()
+    private val reviewViewModel: ReviewViewModel by viewModel()
 
 
     override fun initActivity() {
@@ -36,7 +36,7 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
     }
 
     private fun setBindingData() {
-        binding.reviewWriteViewModel = viewModel // ReviewWriteViewModel 바인딩
+        binding.reviewUpdateViewModel = viewModel // ReviewWriteViewModel 바인딩
         binding.reviewViewModel = reviewViewModel // ReviewViewModel 바인딩
         binding.rateStatus = viewModel.rateStatus.value // 리뷰 상태 바인딩
     }
@@ -52,7 +52,7 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
             supportActionBar?.setDisplayHomeAsUpEnabled(true) // 뒤로가기 버튼 활성화
 
             // 리뷰 텍스트 관찰
-            viewModel.reviewText.observe(this@ReviewWriteActivity) { text ->
+            viewModel.reviewText.observe(this@ReviewUpdateActivity) { text ->
                 val reviewLength = text.length // 리뷰 길이
                 reviewDoneButton.text =
                     getString(R.string.review_done_text, reviewLength) // 리뷰 내용이 변함에 따라 현재 글자수 변경
@@ -62,12 +62,12 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
             }
 
             // 이미지 리스트 라이브 데이터를 관찰한다.
-            viewModel.imgUriLiveList.observe(this@ReviewWriteActivity) { uriList ->
+            viewModel.imgUriLiveList.observe(this@ReviewUpdateActivity) { uriList ->
                 // 데이터에 변동이 있다면, 이미지 현재 개수로 갱신
                 photoCountText.text = "${uriList.size} / ${viewModel.imageOriginMaxCount}"
             }
             
-            viewModel.isUploadSuccess.observe(this@ReviewWriteActivity) { isSuccess ->
+            viewModel.isUploadSuccess.observe(this@ReviewUpdateActivity) { isSuccess ->
                 uploadProgressBar.visibility = View.GONE // 결과 반환시 프로그레스바 사라지게 하기
                 if(isSuccess) { // 업로드 성공시
                     // 성공 문구 출력 후, 액티비티 종료
@@ -87,7 +87,7 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
             // 작성 완료 버튼 클릭시
             reviewDoneButton.setOnClickListener {
                 uploadProgressBar.visibility = View.VISIBLE // 프로그레스 바를 보여준다.
-                reviewViewModel?.lotModel?.let { lot -> reviewWriteViewModel?.uploadReview(lot) } // 서버에 리뷰를 등록한다.
+                reviewViewModel?.lotModel?.let { lot -> reviewUpdateViewModel?.uploadReview(lot) } // 서버에 리뷰를 등록한다.
             }
 
             // EditText Hint에 닉네임 설정
@@ -125,45 +125,45 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
             }
 
             // 리뷰 상태 관찰
-            viewModel.rateStatus.observe(this@ReviewWriteActivity) { rateStatus ->
+            viewModel.rateStatus.observe(this@ReviewUpdateActivity) { rateStatus ->
                 when (rateStatus) {
                     // 좋아요 누른경우
                     RateStatus.GOOD -> {
                         // 좋아요 버튼 활성화
                         rateGoodText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.colorPrimary
                             )
                         )
                         rateGoodImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.colorPrimary
                             )
                         )
                         // 나머지 버튼 비활성화
                         rateNormalText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateNormalImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateBadText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateBadImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
@@ -173,38 +173,38 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
                         // 평범해요 버튼 활성화
                         rateNormalText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.colorPrimary
                             )
                         )
                         rateNormalImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.colorPrimary
                             )
                         )
                         // 나머지 버튼 비활성화
                         rateGoodText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateGoodImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateBadText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateBadImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
@@ -214,38 +214,38 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
                         // 별로에요 버튼 활성화
                         rateBadText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.colorPrimary
                             )
                         )
                         rateBadImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.colorPrimary
                             )
                         )
                         // 나머지 버튼 비활성화
                         rateNormalText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateNormalImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateGoodText.setTextColor(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
                         rateGoodImage.imageTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@ReviewWriteActivity,
+                                this@ReviewUpdateActivity,
                                 R.color.unselectedRateColor
                             )
                         )
@@ -281,7 +281,7 @@ class ReviewWriteActivity : BaseActivity<ActivityReviewWriteBinding, ReviewWrite
                                 false
                             )
                         ) {
-                            Glide.with(this@ReviewWriteActivity).load(imgUri)
+                            Glide.with(this@ReviewUpdateActivity).load(imgUri)
                                 .into(this.photoImageView) // Uri
                             this.photoDeleteButton.setOnClickListener { // 삭제 버튼 클릭시
                                 viewModel.imgUriList.remove(imgUri) // 이미지 리스트에서 해당 Uri 제거

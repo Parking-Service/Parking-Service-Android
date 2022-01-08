@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".feature.main.review.ReviewWriteActivity"
+            android:name=".feature.main.review.write.ReviewWriteActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|adjustUnspecified"/>
