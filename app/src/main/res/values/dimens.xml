@@ -28,6 +28,9 @@
     <dimen name="review_data_margin_between_text_icon">8dp</dimen>
     <dimen name="review_rate_text_size">32sp</dimen>
     <dimen name="review_rate_margin_bottom">14dp</dimen>
+    <dimen name="review_rate_margin_right">2dp</dimen>
+    <dimen name="review_rate_count_text_size">12sp</dimen>
+    <dimen name="review_rate_count_margin_bottom">22dp</dimen>
     <dimen name="review_layout_divider_margin_top">14dp</dimen>
     <dimen name="review_icon_button_container_padding_horizontal">20dp</dimen>
     <dimen name="review_title_button_text_size">12sp</dimen>
@@ -49,6 +52,7 @@
     <dimen name="icon_button_margin_between_icon_text">16dp</dimen>
 
     <dimen name="review_margin_horizontal">16dp</dimen>
+    <dimen name="review_margin_bottom">12dp</dimen>
     <dimen name="review_margin_vertical">6dp</dimen>
     <dimen name="review_card_view_radius">4dp</dimen>
     <dimen name="review_card_elevation">2dp</dimen>
@@ -72,6 +76,11 @@
     <dimen name="marker_icon_text_size">12dp</dimen>
     <dimen name="marker_fee_text_size">17dp</dimen>
     <dimen name="marker_margin_left">4dp</dimen>
+
+    <!-- bg_no_review.xml -->
+    <dimen name="bg_no_review_radius">8dp</dimen>
+    <dimen name="no_review_text_size">13sp</dimen>
+    <dimen name="no_review_padding_vertical">10sp</dimen>
 
     <!-- content_main_top.xml -->
     <dimen name="content_main_menu_bar_padding_horizontal">16dp</dimen>

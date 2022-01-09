@@ -45,6 +45,7 @@
     <string name="parking_fee_per_month">월 정기권 요금</string>
     <string name="parking_review">이용자 리뷰</string>
     <string name="parking_review_more">더 보기 ></string>
+    <string name="no_review_text">아직 작성된 리뷰가 없어요!\n주차장을 이용해보시고 솔직한 후기 부탁드립니다.</string>
 
     <string name="clipboard_label">주차장 주소</string>
     <string name="clipboard_success">클립보드에 주소 복사가 완료되었습니다!</string>

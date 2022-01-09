@@ -46,7 +46,7 @@ class ReviewUpdateViewModel(val repository: ReviewRepository) : BaseViewModel() 
                 // 레퍼지토리에 접근하여 리뷰 데이터 등록
                 repository.upload(
                     Review(
-                        userUid = ParkingPreference.getString(PreferenceConst.UID.name), // Preference로부터 유저 Uid를 가져온다.
+                        reviewerUid = ParkingPreference.getString(PreferenceConst.UID.name), // Preference로부터 유저 Uid를 가져온다.
                         parkCode = lot.parkCode, // 주차장 코드
                         name = ParkingPreference.getString(PreferenceConst.NICKNAME.name), // Preference로부터 유저 닉네임을 가져온다.
                         rate = rateValue, // 주차장 평점

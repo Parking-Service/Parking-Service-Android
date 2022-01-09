@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Review(
     @SerializedName("reviewUid") var reviewUid: Int? = null,
-    @SerializedName("reviewerUid") var userUid: String? = null,
+    @SerializedName("reviewerUid") var reviewerUid: String? = null,
     @SerializedName("parkCode") var parkCode: String? = null,
     @SerializedName("reviewerNickName") var name: String? = null,
     @SerializedName("reviewRate") var rate: Float? = null,

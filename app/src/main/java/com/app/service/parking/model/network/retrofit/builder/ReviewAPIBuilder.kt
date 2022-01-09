@@ -94,7 +94,7 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
 
             // 리뷰를 서버에 업로드 하도록 요청
             api.uploadReview(
-                review.userUid,
+                review.reviewerUid,
                 review.parkCode,
                 multiPartFile,
                 review.reviewText,

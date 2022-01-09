@@ -3,6 +3,7 @@ package com.app.service.parking.feature.main.review.write
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.app.service.parking.common.CommonConst
 import com.app.service.parking.feature.base.BaseViewModel
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.dto.Review
@@ -17,7 +18,7 @@ class ReviewWriteViewModel(val repository: ReviewRepository) : BaseViewModel() {
     val imgUriList = mutableListOf<Uri>() // 갤러리에서 가져온 이미지 피커 Uri 리스트
     val rateStatus = MutableLiveData<RateStatus>(RateStatus.GOOD) // 평점 상태
     var reviewText = MutableLiveData<String>("")
-    val imageOriginMaxCount = 5 // 이미지 최대 선택 개수
+    val imageOriginMaxCount = CommonConst.MAX_PHOTO_SIZE // 이미지 최대 선택 개수
     val isUploadSuccess = MutableLiveData<Boolean>()
 
     // 평점 상태 변경
@@ -46,7 +47,7 @@ class ReviewWriteViewModel(val repository: ReviewRepository) : BaseViewModel() {
                 // 레퍼지토리에 접근하여 리뷰 데이터 등록
                 repository.upload(
                     Review(
-                        userUid = ParkingPreference.getString(PreferenceConst.UID.name), // Preference로부터 유저 Uid를 가져온다.
+                        reviewerUid = ParkingPreference.getString(PreferenceConst.UID.name), // Preference로부터 유저 Uid를 가져온다.
                         parkCode = lot.parkCode, // 주차장 코드
                         name = ParkingPreference.getString(PreferenceConst.NICKNAME.name), // Preference로부터 유저 닉네임을 가져온다.
                         rate = rateValue, // 주차장 평점
