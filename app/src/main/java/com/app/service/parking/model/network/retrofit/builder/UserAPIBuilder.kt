@@ -39,8 +39,7 @@ object UserAPIBuilder : BaseRetrofitBuilder() {
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Timber.tag("User Register Response").d("Failed")
-                    Log.d("Coroutine", "Retrofit")
+                    Timber.tag("User Register Response").d("Failed by : ${t.message}")
                     continuation.resume(Unit, null)
                 }
             })

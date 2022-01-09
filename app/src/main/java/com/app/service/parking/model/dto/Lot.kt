@@ -1,46 +1,11 @@
 package com.app.service.parking.model.dto
 
-import androidx.room.Entity
 import com.app.service.parking.R
 import com.app.service.parking.global.App
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-/*
-data class ParkingLot(
-    @Expose
-    @SerializedName("response")
-    val response: Response
-)
-
-data class Response(
-    @Expose
-    @SerializedName("header")
-    val header: Header,
-    @Expose
-    @SerializedName("body")
-    val body: Body
-)
-
-data class Header(
-    @Expose
-    @SerializedName("resultCode")
-    val resultcode: String,
-    @Expose
-    @SerializedName("resultMsg")
-    val resultmsg: String
-)
-
-data class Body(
-    @Expose
-    @SerializedName("items")
-    val items: ArrayList<Lot>,
-    @Expose
-    @SerializedName("totalCount")
-    val totalcount: String
-)
-*/
 
 data class Lot(
     @Expose

@@ -7,6 +7,7 @@ import retrofit2.http.*
 
 interface ReviewAPI {
     // 리뷰 저장
+    // 이미지를 리스트로 등록하는 경우
     @Multipart
     @POST("/review/upload")
     fun uploadReview(
@@ -14,7 +15,19 @@ interface ReviewAPI {
         @Part("parkCode") parkCode: String?,
         @Part imgList: ArrayList<MultipartBody.Part>?,
         @Part("text") reviewText: String?,
-        @Part("rate") reviewRate: Short?
+        @Part("rate") reviewRate: Float?
+    ): Call<Void>
+
+    // 리뷰 저장
+    // 이미지를 하나 등록하는 경우
+    @Multipart
+    @POST("/review/upload")
+    fun uploadReview(
+        @Part("uid") reviewerUid: String?,
+        @Part("parkCode") parkCode: String?,
+        @Part imgList: MultipartBody.Part?,
+        @Part("text") reviewText: String?,
+        @Part("rate") reviewRate: Float?
     ): Call<Void>
 
     // 리뷰 업데이트
@@ -25,12 +38,12 @@ interface ReviewAPI {
         @Query("reviewUid") id: Int?,
         @Part reviewImgs: MultipartBody.Part?,
         @Part("text") reviewText: String?,
-        @Part("rate") reviewRate: Short?
+        @Part("rate") reviewRate: Float?
     ): Call<Void>
 
     // 리뷰 리스트 가져오기
     @GET("/review")
-    fun getReviewList(@Query("parkCode") parkCode: String, @Query("num") num: Int? = null): Call<ArrayList<Review>>
+    fun getReviewList(@Query("parkCode") parkCode: String): Call<List<Review>>
 
     // 특정 리뷰 가져오기
     @GET("/review")

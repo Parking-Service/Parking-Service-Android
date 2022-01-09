@@ -4,11 +4,11 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.app.service.parking.R
+import com.app.service.parking.common.CommonConst
 import com.app.service.parking.custom.dialog.NaviBottomSheetDialog
 import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.feature.base.BaseActivity
@@ -33,10 +33,6 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     var mapViewContainer: RelativeLayout? = null
     private var rvAdapter: ReviewRVAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initActivity()
-    }
 
     override fun initActivity() {
         setParkModel() // Intent로 받은 주차장 데이터로 초기화
@@ -64,19 +60,51 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
                 }
             }
 
-            rvAdapter = ReviewRVAdapter(object: RecyclerItemClickListener {
+            rvAdapter = ReviewRVAdapter(object : RecyclerItemClickListener {
                 // 리뷰 클릭했을 때 수행할 콜백백
-               override fun onClick(position: Int, resId: Int?) {
+                override fun onClick(position: Int, resId: Int?) {
 
                 }
             })
             reviewRecyclerView.adapter = rvAdapter
-            reviewRecyclerView.layoutManager = ReviewRVAdapter.WrapContentLinearLayoutManager(this@ReviewActivity)
+            reviewRecyclerView.layoutManager =
+                ReviewRVAdapter.WrapContentLinearLayoutManager(this@ReviewActivity)
 
 
             // 리뷰 리스트를 서버로부터 가져오면 갱신이 되므로 옵저빙하고 있다가 리사이클러뷰 갱신
             viewModel?.userReviewList?.observe(this@ReviewActivity) { reviewList ->
-                rvAdapter?.updateItems(reviewList)
+                rvAdapter?.updateItems(reviewList) // 리사이클러뷰 어댑터 갱신
+
+                val reviewSize = reviewList.size
+
+                if (reviewSize == 0) { // 리뷰가 없는 주차장의 경우
+                    // 리뷰가 없음을 알리는 화면 Visible로 변경
+                    noReviewView.visibility = View.VISIBLE
+                    reviewRecyclerView.visibility = View.GONE
+                    reviewMoreButton.visibility = View.GONE
+                    reviewRateCountTextView.visibility = View.GONE
+                    reviewRateTextView.text = "- "
+                } else { // 리뷰가 하나라도 있는 주차장의 경우
+                    // 리뷰 리스트를 보여주며 나머지 Visibility 세팅
+                    val averageRate: Float // 리뷰 총점을 개수로 나눈 값
+                    var totalRate = 0.0F // 리뷰 총점
+                    reviewList.forEach { review ->
+                        totalRate += (review.reviewRate ?: 0.0f)
+                    }
+                    averageRate = (totalRate / reviewSize)
+
+                    noReviewView.visibility = View.GONE
+                    reviewRecyclerView.visibility = View.VISIBLE
+                    reviewMoreButton.visibility = View.GONE
+                    reviewRateCountTextView.visibility = View.VISIBLE
+                    reviewRateTextView.visibility = View.VISIBLE
+                    reviewRateCountTextView.text = "/ $reviewSize"
+                    reviewRateTextView.text = String.format("%.1f", averageRate)
+
+                    if(reviewSize > CommonConst.LIMIT_REVIEW_SIZE) { // 총 리뷰 개수가 미리보기 리뷰보다 많은 경우
+                        reviewMoreButton.visibility = View.VISIBLE // 더보기를 보여준다.
+                    }
+                }
             }
 
             // 서버로부터 리뷰 리스트 요청

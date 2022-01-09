@@ -1,5 +1,6 @@
 package com.app.service.parking.model.network.retrofit.builder
 
+import android.util.Log
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.network.retrofit.api.ParkingLotAPI
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +23,6 @@ object ParkingAPIBuilder : BaseRetrofitBuilder() {
             api.getLotsByLocation(latitude, longitude).enqueue(object : Callback<ArrayList<Lot>> {
                 override fun onResponse(call: Call<ArrayList<Lot>>, response: Response<ArrayList<Lot>>) {
                     val parkingList = response.body()
-
                     // 주차장 데이터를 반환하면서 코루틴 재게
                     parkingList?.let { continuation.resumeWith(Result.success(it)) }
                 }

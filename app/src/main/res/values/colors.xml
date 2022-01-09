@@ -35,6 +35,9 @@
     <color name="reviewActivityCallIcon">#3C3C3C</color>
     <color name="coronaWarningBackground">#CECECE</color>
     <color name="coronaWarningIconTextColor">#595959</color>
+    <color name="reviewCountTextColor">#A1A1A1</color>
+    <color name="noReviewBackground">#FAFAFA</color>
+    <color name="noReviewTextColor">#494949</color>
 
     <!--Main Activity-->
     <color name="locationFabUnActive">#434343</color>

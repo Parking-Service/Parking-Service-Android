@@ -19,8 +19,9 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
 
     /* POST 방식
      서버에 리뷰 저장
+     멀티파트를 리스트로 보내는 경우
      */
-    suspend fun uploadReview(review: Review, imgsUri: List<Uri>) =
+    /*suspend fun uploadReview(review: Review, imgsUri: List<Uri>) =
         suspendCancellableCoroutine<Boolean> { continuation ->
             // 이미지를 전송하기 위한 MultiPart 리스트
             val multiPartFiles = arrayListOf<MultipartBody.Part>()
@@ -70,6 +71,58 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
                 }
             })
 
+        }*/
+
+
+    // 멀티파트를 단일로 보내는 경우
+    suspend fun uploadReview(review: Review, imgsUri: List<Uri>) =
+        suspendCancellableCoroutine<Boolean> { continuation ->
+
+            val api = getRetrofit().create(ReviewAPI::class.java)
+
+            // 전달받은 이미지 Uri를 반복문으로 돌려, Multipart를 만들고 ArrayList에 담아준다.
+
+            val fileBody = RequestBody.create(MediaType.parse("image/jpeg"), imgsUri[0].toFile())
+            val multiPartFile =
+                MultipartBody.Part.createFormData(
+                    "img",
+                    System.currentTimeMillis().toString() + ".jpg",
+                    fileBody
+
+                )
+
+
+            // 리뷰를 서버에 업로드 하도록 요청
+            api.uploadReview(
+                review.reviewerUid,
+                review.parkCode,
+                multiPartFile,
+                review.reviewText,
+                review.reviewRate
+            ).enqueue(object :
+                Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+                        Timber.tag("Review Upload Response").d("Success")
+                        Log.d("Review Upload Response", "${response.body()}")
+                        continuation.resumeWith(Result.success(true))
+                    } else {
+                        val error = response.errorBody()?.string()
+                        if (error == "100") {
+                            Timber.tag("Review Upload Response").d("Failed by error 100")
+                        } else {
+                            Timber.tag("Review Upload Response").d("Failed by other")
+                        }
+                        continuation.resumeWith(Result.failure(Exception("리뷰 업로드에 실패하였습니다."))) // 리뷰 업로드 실패시, 예외처리
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Timber.tag("Review Upload Response").d("Failed")
+                    continuation.resumeWith(Result.failure(Exception("리뷰 업로드에 실패하였습니다."))) // 리뷰 업로드 실패시, 예외처리
+                }
+            })
+
         }
 
 
@@ -86,7 +139,7 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
                 fileBody
             )
 
-            api.updateReview(review.reviewUid, filePart, review.reviewText, review.rate)
+            api.updateReview(review.reviewUid, filePart, review.reviewText, review.reviewRate)
                 .enqueue(object :
                     Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -107,7 +160,6 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
 
                     override fun onFailure(call: Call<Void>, t: Throwable) {
                         Timber.tag("User Register Response").d("Failed")
-                        Log.d("Coroutine", "Retrofit")
                         continuation.resume(Unit, null)
                     }
                 })
@@ -121,31 +173,32 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
     suspend fun getReviewList(parkCode: String) =
         suspendCancellableCoroutine<ArrayList<Review>> { continuation ->
             val api = getRetrofit().create(ReviewAPI::class.java)
-            api.getReviewList(parkCode, 5).enqueue(object :
-                Callback<ArrayList<Review>> {
+            api.getReviewList(parkCode).enqueue(object :
+                Callback<List<Review>> {
                 override fun onResponse(
-                    call: Call<ArrayList<Review>>,
-                    response: Response<ArrayList<Review>>
+                    call: Call<List<Review>>,
+                    response: Response<List<Review>>
                 ) {
                     if (response.body() != null && response.isSuccessful) {
                         Timber.tag("Request Review List").d("Success")
                         Log.d("Request Review List", "${response.body()}")
-                        continuation.resumeWith(Result.success(response.body()!!))
+                        val reviewList = ArrayList<Review>()
+                        reviewList.addAll(response.body()!!)
+                        continuation.resumeWith(Result.success(reviewList))
                     } else {
                         val error = response.errorBody()?.string()
                         if (error == "100") {
-                            Timber.tag("User Register Response").d("Failed by error 100")
+                            Timber.tag("Request Review List").d("Failed by error 100")
                         } else {
-                            Timber.tag("User Register Response").d("Failed by other")
+                            Timber.tag("Request Review List").d("Failed by other")
                         }
                         continuation.resumeWith(Result.failure(Exception("No found review List")));
                     }
 
                 }
 
-                override fun onFailure(call: Call<ArrayList<Review>>, t: Throwable) {
-                    Timber.tag("User Register Response").d("Failed")
-                    Log.d("Coroutine", "Retrofit")
+                override fun onFailure(call: Call<List<Review>>, t: Throwable) {
+                    Timber.tag("Request Review List").d("Failed by : ${t.message}")
                     continuation.resumeWith(Result.failure(Exception("No found review List")));
                 }
             })
@@ -178,7 +231,6 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     Timber.tag("User Register Response").d("Failed")
-                    Log.d("Coroutine", "Retrofit")
                     continuation.resume(Unit, null)
                 }
             })

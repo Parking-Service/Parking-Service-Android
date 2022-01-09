@@ -112,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rate_text_margin_top"
-                    android:text="@string/rate_good"
+                    android:text="@string/rate_normal"
                     android:textColor="@color/unselectedRateColor" />
 
             </LinearLayout>
@@ -145,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/rate_text_margin_top"
-                    android:text="@string/rate_good"
+                    android:text="@string/rate_bad"
                     android:textColor="@color/unselectedRateColor" />
 
             </LinearLayout>
