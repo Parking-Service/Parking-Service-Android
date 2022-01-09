@@ -49,8 +49,8 @@ class ReviewWriteViewModel(val repository: ReviewRepository) : BaseViewModel() {
                     Review(
                         reviewerUid = ParkingPreference.getString(PreferenceConst.UID.name), // Preference로부터 유저 Uid를 가져온다.
                         parkCode = lot.parkCode, // 주차장 코드
-                        name = ParkingPreference.getString(PreferenceConst.NICKNAME.name), // Preference로부터 유저 닉네임을 가져온다.
-                        rate = rateValue, // 주차장 평점
+                        reviewerNickName = ParkingPreference.getString(PreferenceConst.NICKNAME.name), // Preference로부터 유저 닉네임을 가져온다.
+                        reviewRate = rateValue, // 주차장 평점
                         reviewText = reviewText.value // 주차장에 대한 리뷰
                     ), imgUriList.toList())
                 isUploadSuccess.value = true // 결과 반환시 프로그레스바를 멈추기 위해 관찰 데이터 변경

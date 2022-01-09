@@ -98,7 +98,7 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
                 review.parkCode,
                 multiPartFile,
                 review.reviewText,
-                review.rate
+                review.reviewRate
             ).enqueue(object :
                 Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -139,7 +139,7 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
                 fileBody
             )
 
-            api.updateReview(review.reviewUid, filePart, review.reviewText, review.rate)
+            api.updateReview(review.reviewUid, filePart, review.reviewText, review.reviewRate)
                 .enqueue(object :
                     Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {

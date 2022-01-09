@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="BuNa"
-                android:text="@{model.name}"
+                android:text="@{model.reviewerNickName}"
                 android:textColor="@color/TitleTextColor"
                 android:textSize="@dimen/parking_lot_introduce_title"
                 app:layout_constraintLeft_toRightOf="@+id/profile_image_view"

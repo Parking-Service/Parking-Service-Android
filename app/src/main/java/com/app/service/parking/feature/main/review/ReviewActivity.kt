@@ -89,7 +89,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
                     val averageRate: Float // 리뷰 총점을 개수로 나눈 값
                     var totalRate = 0.0F // 리뷰 총점
                     reviewList.forEach { review ->
-                        totalRate += (review.rate ?: 0.0f)
+                        totalRate += (review.reviewRate ?: 0.0f)
                     }
                     averageRate = (totalRate / reviewSize)
 
