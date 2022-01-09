@@ -14,6 +14,9 @@ import com.app.service.parking.feature.listener.RecyclerItemClickListener
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.dto.Review
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ReviewRVAdapter(val listener: RecyclerItemClickListener) :
     RecyclerView.Adapter<ReviewRVAdapter.ViewHolder>() {
@@ -26,8 +29,13 @@ class ReviewRVAdapter(val listener: RecyclerItemClickListener) :
 
     inner class ViewHolder(val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            binding.model = reviewList[position] // 바인딩 모델 지정
+            val reviewItem = reviewList[position]
+            val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일 HH:mm")
+
+            binding.model = reviewItem // 바인딩 모델 지정
             binding.root.setOnClickListener { listener.onClick(position) } // 주소 리스트 아이템을 클릭했을 때 작동
+            binding.reviewRatingBar.rating = reviewItem.rate!! // 리뷰 래이팅 설정
+            binding.reviewDateTextView.text = dateFormat.format(Date(reviewItem.created!!)) // 리뷰 등록 일시
         }
     }
 

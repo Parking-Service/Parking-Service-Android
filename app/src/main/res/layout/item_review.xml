@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_marginHorizontal="@dimen/review_margin_horizontal"
         android:layout_marginVertical="@dimen/review_margin_vertical"
         android:clipToPadding="false"
@@ -78,10 +80,10 @@
                 android:ellipsize="end"/>
 
             <RatingBar
-                android:id="@+id/rate_"
+                android:id="@+id/review_rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/parking_lot_introduce_title"
-                android:numStars="5"
+                android:numStars="3"
                 android:stepSize="1"
                 tools:rating="3"
                 android:isIndicator="true"

@@ -33,11 +33,11 @@ class ReviewWriteViewModel(val repository: ReviewRepository) : BaseViewModel() {
     // 리뷰를 업로드하는 메서드
     fun uploadReview(lot: Lot) {
         // 평점을 수치화한다
-        val rateValue: Short = when (rateStatus.value) {
-            RateStatus.GOOD -> 5 // 좋아요 -> 5점
-            RateStatus.NORMAL -> 3 // 평범해요 -> 3점
-            RateStatus.BAD -> 1 // 별로에요 -> 1점
-            else -> 5 // Default -> 5점
+        val rateValue: Float = when (rateStatus.value) {
+            RateStatus.GOOD -> 3.0f // 좋아요 -> 5점
+            RateStatus.NORMAL -> 2.0f // 평범해요 -> 3점
+            RateStatus.BAD -> 1.0f // 별로에요 -> 1점
+            else -> 3.0f // Default -> 5점
         }
 
         // 주차장 리뷰 데이터를 서버에 전송하여 리뷰를 등록한다.

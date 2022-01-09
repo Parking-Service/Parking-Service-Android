@@ -31,6 +31,8 @@
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_review_write.xml" value="0.25" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/content_main.xml" value="0.209375" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/item_favorite.xml" value="0.2078125" />
+        <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/item_review.xml" value="0.33" />
+        <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/layout_main_nav_header.xml" value="0.17882472137791286" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/layout_nav_choice_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/layout_record_bottom_sheet.xml" value="0.36770833333333336" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/view_picked_photo.xml" value="0.36770833333333336" />

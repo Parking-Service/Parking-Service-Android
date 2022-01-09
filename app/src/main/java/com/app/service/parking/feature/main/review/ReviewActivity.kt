@@ -33,10 +33,6 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     var mapViewContainer: RelativeLayout? = null
     private var rvAdapter: ReviewRVAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initActivity()
-    }
 
     override fun initActivity() {
         setParkModel() // Intent로 받은 주차장 데이터로 초기화
