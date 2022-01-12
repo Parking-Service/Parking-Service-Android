@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -14,6 +15,7 @@ import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.feature.base.BaseActivity
 import com.app.service.parking.feature.listener.RecyclerItemClickListener
 import com.app.service.parking.feature.main.adapter.ReviewRVAdapter
+import com.app.service.parking.feature.main.review.update.ReviewUpdateActivity
 import com.app.service.parking.feature.main.review.write.ReviewWriteActivity
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.util.MarkerManager
@@ -57,6 +59,34 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
                 } else {
                     Glide.with(this@ReviewActivity).load(R.drawable.ic_review_unfavorite)
                         .into(favoriteImageView)
+                }
+            }
+
+            // 리뷰를 작성한 유저인지 판단하여
+            // 리뷰를 작성 or 수정 권한 부여
+            viewModel?.isUserWriteReview?.observe(this@ReviewActivity) { isUserWrite ->
+                if (isUserWrite) {
+                    reviewWriteText.text = getString(R.string.edit_review) // 텍스트를 리뷰 수정으로 변경
+                    // 리뷰 수정 버튼 클릭시 '리뷰 수정' 화면으로 이동
+                    writeReviewButton.setOnClickListener {
+                        startActivity(
+                            Intent(this@ReviewActivity, ReviewUpdateActivity::class.java).putExtra(
+                                "model",
+                                viewModel!!.lotModel
+                            )
+                        )
+                    }
+                } else {
+                    reviewWriteText.text = getString(R.string.write_review) // 텍스트를 리뷰 작성으로 변경
+                    // 리뷰 작성 버튼 클릭시 '리뷰 작성' 화면으로 이동
+                    writeReviewButton.setOnClickListener {
+                        startActivity(
+                            Intent(this@ReviewActivity, ReviewWriteActivity::class.java).putExtra(
+                                "model",
+                                viewModel!!.lotModel
+                            )
+                        )
+                    }
                 }
             }
 
@@ -190,14 +220,6 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
                 binding.parkingLotRoadNameTextView.visibility = View.GONE
             }
 
-            writeReviewButton.setOnClickListener {
-                startActivity(
-                    Intent(this@ReviewActivity, ReviewWriteActivity::class.java).putExtra(
-                        "model",
-                        viewModel!!.lotModel
-                    )
-                )
-            }
         }
     }
 

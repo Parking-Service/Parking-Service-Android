@@ -37,7 +37,7 @@
     <color name="coronaWarningIconTextColor">#595959</color>
     <color name="reviewCountTextColor">#A1A1A1</color>
     <color name="noReviewBackground">#FAFAFA</color>
-    <color name="noReviewTextColor">#494949</color>
+    <color name="noReviewTextColor">#3C3C3C</color>
 
     <!--Main Activity-->
     <color name="locationFabUnActive">#434343</color>

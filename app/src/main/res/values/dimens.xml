@@ -55,9 +55,9 @@
     <dimen name="review_margin_bottom">12dp</dimen>
     <dimen name="review_margin_vertical">6dp</dimen>
     <dimen name="review_card_view_radius">4dp</dimen>
-    <dimen name="review_card_elevation">2dp</dimen>
+    <dimen name="review_card_elevation">1dp</dimen>
     <dimen name="review_profile_size">40dp</dimen>
-    <dimen name="review_padding_vertical">12dp</dimen>
+    <dimen name="review_padding_vertical">10dp</dimen>
     <dimen name="review_padding_horizontal">12dp</dimen>
     <dimen name="review_more_button_margin_top">16dp</dimen>
 
@@ -80,7 +80,7 @@
     <!-- bg_no_review.xml -->
     <dimen name="bg_no_review_radius">8dp</dimen>
     <dimen name="no_review_text_size">13sp</dimen>
-    <dimen name="no_review_padding_vertical">10sp</dimen>
+    <dimen name="no_review_padding_vertical">14dp</dimen>
 
     <!-- content_main_top.xml -->
     <dimen name="content_main_menu_bar_padding_horizontal">16dp</dimen>
