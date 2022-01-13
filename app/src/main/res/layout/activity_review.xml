@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.app.service.parking.feature.main.review.ReviewViewModel" />
+            type="com.app.service.parking.presentation.review.main.ReviewViewModel" />
         <variable
             name="model"
             type="com.app.service.parking.model.dto.Lot" />
@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".feature.main.review.ReviewActivity">
+            tools:context=".presentation.review.main.ReviewActivity">
 
             <ImageView
                 android:id="@+id/parking_lot_image_view"
@@ -892,7 +892,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/parking_review_more"
-                    android:visibility="gone"
                     android:textColor="@color/colorPrimary"
                     android:clickable="true"
                     android:background="?attr/selectableItemBackgroundBorderless"

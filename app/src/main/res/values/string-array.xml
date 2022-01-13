@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="review_types">
+        <item>@string/rate_all</item>
+        <item>@string/rate_good</item>
+        <item>@string/rate_normal</item>
+        <item>@string/rate_bad</item>
+    </array>
+</resources>

@@ -7,10 +7,10 @@
 
         <variable
             name="reviewViewModel"
-            type="com.app.service.parking.feature.main.review.ReviewViewModel" />
+            type="com.app.service.parking.presentation.review.main.ReviewViewModel" />
         <variable
             name="reviewWriteViewModel"
-            type="com.app.service.parking.feature.main.review.write.ReviewWriteViewModel" />
+            type="com.app.service.parking.presentation.review.write.ReviewWriteViewModel" />
         <variable
             name="rateStatus"
             type="com.app.service.parking.model.type.RateStatus" />
@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.main.review.write.ReviewWriteActivity">
+        tools:context=".presentation.review.write.ReviewWriteActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/action_bar"

@@ -58,6 +58,7 @@
     <string name="permission_read_denied_1">갤러리에서 사진을 가져오려면 권한이 필요해요!</string>
     <string name="permission_read_denied_2">설정(앱 정보)에서 권한을 허용해주세요!</string>
     <string name="review_write">리뷰 작성</string>
+    <string name="rate_all">전체</string>
     <string name="rate_good">좋아요!</string>
     <string name="rate_normal">평범해요!</string>
     <string name="rate_bad">별로에요!</string>

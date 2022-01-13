@@ -7,14 +7,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.app.service.parking.feature.main.search.SearchViewModel" />
+            type="com.app.service.parking.presentation.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        tools:context=".feature.main.search.SearchActivity">
+        tools:context=".presentation.search.SearchActivity">
 
         <include
             android:id="@+id/search_bar_container"

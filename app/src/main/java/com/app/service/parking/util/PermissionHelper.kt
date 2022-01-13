@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 
 import com.app.service.parking.R
 import com.app.service.parking.extension.showToast
-import com.app.service.parking.feature.main.MainActivity
+import com.app.service.parking.presentation.main.MainActivity
 import com.app.service.parking.global.App
 
 

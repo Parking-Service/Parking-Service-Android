@@ -74,4 +74,9 @@
     <color name="unselectedRateColor">#CDCDCD</color>
     <color name="selectedRateColor">@color/colorPrimary</color>
     <color name="photoFrameStrokeColor">#33535353</color>
+
+    <!-- All Review Activity -->
+    <color name="allReviewBackground">#EDEDED</color>
+    <color name="unclickedTabColor">#B1B1B1</color>
+    <color name="clickedTabColor">@color/colorPrimary</color>
 </resources>
