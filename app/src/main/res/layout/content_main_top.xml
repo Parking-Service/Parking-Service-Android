@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.app.service.parking.feature.main.MainViewModel" />
+            type="com.app.service.parking.presentation.main.MainViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

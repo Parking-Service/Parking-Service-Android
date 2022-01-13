@@ -1,10 +1,12 @@
 package com.app.service.parking.di
 
-import com.app.service.parking.feature.login.LoginViewModel
-import com.app.service.parking.feature.main.MainViewModel
-import com.app.service.parking.feature.main.review.ReviewViewModel
-import com.app.service.parking.feature.main.review.write.ReviewWriteViewModel
-import com.app.service.parking.feature.main.search.SearchViewModel
+import com.app.service.parking.presentation.login.LoginViewModel
+import com.app.service.parking.presentation.main.MainViewModel
+import com.app.service.parking.presentation.review.all.AllReviewViewModel
+import com.app.service.parking.presentation.review.main.ReviewViewModel
+import com.app.service.parking.presentation.review.update.ReviewUpdateViewModel
+import com.app.service.parking.presentation.review.write.ReviewWriteViewModel
+import com.app.service.parking.presentation.search.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -35,6 +37,19 @@ val ReviewViewModelModule = module {
 val ReviewWriteModelModule = module {
     viewModel {
         ReviewWriteViewModel(get())
+    }
+}
+
+val ReviewUpdateViewModelModule = module {
+    viewModel {
+        ReviewUpdateViewModel(get())
+    }
+}
+
+
+val AllReviewModelModule = module {
+    viewModel {
+        AllReviewViewModel(get())
     }
 }
 

@@ -161,4 +161,7 @@
     <dimen name="review_done_text_size">16sp</dimen>
     <dimen name="review_done_btn_padding_vertical">18dp</dimen>
     <dimen name="photo_frame_margin_horizontal">12dp</dimen>
+
+    <!-- item_review_tab.xml -->
+    <dimen name="tab_text_margin_top">4dp</dimen>
 </resources>

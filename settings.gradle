@@ -10,3 +10,4 @@ dependencyResolutionManagement {
 rootProject.name = "ParkingService"
 include ':app', ':superbottomsheet'
 project(':superbottomsheet').projectDir = new File('module/superbottomsheet-master/lib')
+include ':imageviewpopup'

@@ -51,4 +51,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TabTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/white</item>                                <!-- 배경 -->
+        <item name="android:textColorPrimary">@color/clickedTabColor</item>       <!-- 탭바 선택된 텍스트 -->
+        <item name="android:textColorSecondary">@color/unclickedTabColor</item>     <!-- 기본 탭바 텍스트 -->
+        <item name="colorAccent">@color/colorPrimary</item>                    <!-- 하단 움직이는 바 색-->
+    </style>
+
 </resources>

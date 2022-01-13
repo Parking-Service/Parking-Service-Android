@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="reviewCount"
+            type="String" />
+        <variable
+            name="tabName"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/tab_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/review_count_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/unclickedTabColor"
+            tools:text="17"
+            android:text="@{reviewCount}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/rate_all"
+            android:textColor="@color/unclickedTabColor"
+            android:layout_marginTop="@dimen/tab_text_margin_top"
+            android:text="@{tabName}"/>
+
+    </LinearLayout>
+</layout>
