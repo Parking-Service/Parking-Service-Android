@@ -11,7 +11,11 @@ class ReviewRepository {
     suspend fun upload(review: Review, uri: List<Uri>): Boolean =
         ReviewAPIBuilder.uploadReview(review, uri)
 
-    // 주차 코드를 바탕으로 서버로부터 리스트 요청
-    suspend fun getReviewList(parkCode: String): ArrayList<Review> =
-        ReviewAPIBuilder.getReviewList(parkCode)
+    // 주차 코드를 바탕으로 서버로부터 베스트 리뷰 n개 요청
+    suspend fun getBestReviewList(parkCode: String): ArrayList<Review> =
+        ReviewAPIBuilder.getBestReviewList(parkCode)
+
+    // 주차 코드를 바탕으로 서버로부터 모든 리뷰 리스트 요청
+    suspend fun getAllReviewList(parkCode: String): ArrayList<Review> =
+        ReviewAPIBuilder.getAllReviewList(parkCode)
 }

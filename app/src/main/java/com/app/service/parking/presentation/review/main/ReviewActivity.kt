@@ -14,12 +14,12 @@ import com.app.service.parking.databinding.ActivityReviewBinding
 import com.app.service.parking.listener.RecyclerItemClickListener
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.presentation.base.BaseActivity
-import com.app.service.parking.presentation.review.all.AllReviewActivity
+import com.app.service.parking.presentation.review.more.MoreReviewActivity
 import com.app.service.parking.presentation.review.update.ReviewUpdateActivity
 import com.app.service.parking.presentation.review.write.ReviewWriteActivity
 import com.app.service.parking.util.MarkerManager
+import com.app.service.parking.util.PopupImage
 import com.bumptech.glide.Glide
-import com.ceylonlabs.imageviewpopup.ImagePopup
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,10 +50,10 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
     private fun initView() {
         initMapView()
         with(binding) {
-
             // 즐겨찾기 여부에 따른 아이콘 설정
             viewModel?.isFavorite?.observe(this@ReviewActivity) { isFavorite ->
                 if (isFavorite) { // 즐겨찾기에 추가되어 있으면
+
                     Glide.with(this@ReviewActivity).load(R.drawable.ic_review_favorite)
                         .into(favoriteImageView)
                 } else {
@@ -93,7 +93,9 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
             rvAdapter = ReviewRVAdapter(object : RecyclerItemClickListener {
                 // 리뷰 뷰를 클릭했을 때 수행할 콜백백
                 override fun onClick(position: Int, resId: Int?) {
-                    showImagePopup(viewModel?.bestReviewList?.value?.get(position)?.reviewImageUrl?.replace("https", "http"))
+                    // 이미지 Url : https는 보안상 접근 불가로, http로 변경
+                    val imgUri = viewModel?.bestReviewList?.value?.get(position)?.reviewImageUrl?.replace("https", "http")
+                    PopupImage().showImagePopup(this@ReviewActivity, imgUri)
                 }
             })
             reviewRecyclerView.adapter = rvAdapter
@@ -218,7 +220,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
 
             reviewMoreButton.setOnClickListener {
                 startActivity(
-                    Intent(this@ReviewActivity, AllReviewActivity::class.java).putExtra(
+                    Intent(this@ReviewActivity, MoreReviewActivity::class.java).putExtra(
                         "model",
                         viewModel?.lotModel
                     )
@@ -295,14 +297,4 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
         }
     }
 
-    // 리뷰를 클릭했을 때, 리뷰 이미지를 크게 보여주는 팝업창
-    private fun showImagePopup(imgUrl: String?) {
-        // 주차장 사진 url이 함께 존재한다면
-        if (imgUrl.isNullOrBlank().not()) {
-            with(ImagePopup(this)){
-                initiatePopupWithGlide(imgUrl)
-                viewPopup() // Load Image from Review Url
-            }
-        }
-    }
 }

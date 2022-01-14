@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="reviewCount"
             type="String" />
@@ -26,15 +25,16 @@
             android:id="@+id/review_count_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/unclickedTabColor"
+            android:textColor="@color/unselectedTabTextColor"
             tools:text="17"
             android:text="@{reviewCount}"/>
 
         <TextView
+            android:id="@+id/review_type_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="@string/rate_all"
-            android:textColor="@color/unclickedTabColor"
+            android:textColor="@color/unselectedTabTextColor"
             android:layout_marginTop="@dimen/tab_text_margin_top"
             android:text="@{tabName}"/>
 

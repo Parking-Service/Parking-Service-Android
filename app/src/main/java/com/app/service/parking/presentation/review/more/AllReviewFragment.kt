@@ -1,60 +1,45 @@
-package com.app.service.parking.presentation.review.all
+package com.app.service.parking.presentation.review.more
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.app.service.parking.R
+import com.app.service.parking.adapter.recyclerview.MoreReviewRVAdapter
+import com.app.service.parking.databinding.FragmentAllReviewBinding
+import com.app.service.parking.listener.RecyclerItemClickListener
+import com.app.service.parking.presentation.base.BaseFragment
+import com.app.service.parking.util.PopupImage
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class AllReviewFragment : BaseFragment<FragmentAllReviewBinding, MoreReviewViewModel>() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AllReviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AllReviewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override val layoutResId: Int = R.layout.fragment_all_review
+    override val viewModel: MoreReviewViewModel by sharedViewModel()
+    private var moreReviewRVAdapter: MoreReviewRVAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun initActivity() {
+        binding.viewModel = viewModel
+
+        with(binding) {
+            // '더 보기 리뷰' 리사이클러뷰 어댑터 초기화
+            moreReviewRVAdapter = MoreReviewRVAdapter(object: RecyclerItemClickListener {
+                // 리뷰를 클릭했을 때
+                override fun onClick(position: Int, resId: Int?) {
+                    // 리뷰 이미지 Uri : 보안상 문제로 https를 http로 문자 변환
+                    val imgUri = viewModel?.reviewList?.value?.get(position)?.reviewImageUrl?.replace("https", "http")
+                    // 이미지 팝업화면을 보여준다.
+                    PopupImage().showImagePopup(requireContext(), imgUri)
+                }
+            })
+            allReviewRecyclerView.adapter = moreReviewRVAdapter // 리사이클러뷰 어댑터 설정
+            allReviewRecyclerView.layoutManager = MoreReviewRVAdapter.WrapContentLinearLayoutManager(requireContext())
+
+            // 리뷰 데이터를 실시간 관찰
+            viewModel?.reviewList?.observe(this@AllReviewFragment) { reviewList ->
+                // 리사이클러뷰 데이터 갱신
+                moreReviewRVAdapter?.updateItems(reviewList)
+            }
+
+            // 서버로부터 리뷰 데이터 요청
+            viewModel?.requestReviewList()
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_all_review, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AllReviewFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AllReviewFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

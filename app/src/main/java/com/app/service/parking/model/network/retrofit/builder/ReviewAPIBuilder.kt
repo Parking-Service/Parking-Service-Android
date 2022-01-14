@@ -168,29 +168,67 @@ object ReviewAPIBuilder : BaseRetrofitBuilder() {
 
 
     /* GET 방식
-     서버로부터 주차장 코드를 바탕으로 리뷰 리스트 요청
+     서버로부터 주차장 코드를 바탕으로 베스트 리뷰 n개를 요청한다
      */
-    suspend fun getReviewList(parkCode: String) =
+    suspend fun getBestReviewList(parkCode: String) =
         suspendCancellableCoroutine<ArrayList<Review>> { continuation ->
             val api = getRetrofit().create(ReviewAPI::class.java)
-            api.getReviewList(parkCode).enqueue(object :
+            api.getBestReviewList(parkCode).enqueue(object :
                 Callback<List<Review>> {
                 override fun onResponse(
                     call: Call<List<Review>>,
                     response: Response<List<Review>>
                 ) {
                     if (response.body() != null && response.isSuccessful) {
-                        Timber.tag("Request Review List").d("Success")
-                        Log.d("Request Review List", "${response.body()}")
+                        Timber.tag("Request Best Review List").d("Success")
+                        Timber.tag("Request Best Review List").d("${response.body()}")
                         val reviewList = ArrayList<Review>()
                         reviewList.addAll(response.body()!!)
                         continuation.resumeWith(Result.success(reviewList))
                     } else {
                         val error = response.errorBody()?.string()
                         if (error == "100") {
-                            Timber.tag("Request Review List").d("Failed by error 100")
+                            Timber.tag("Request Best Review List").d("Failed by error 100")
                         } else {
-                            Timber.tag("Request Review List").d("Failed by other")
+                            Timber.tag("Request Best Review List").d("Failed by other")
+                        }
+                        continuation.resumeWith(Result.failure(Exception("No found review List")));
+                    }
+
+                }
+
+                override fun onFailure(call: Call<List<Review>>, t: Throwable) {
+                    Timber.tag("Request Review List").d("Failed by : ${t.message}")
+                    continuation.resumeWith(Result.failure(Exception("No found review List")));
+                }
+            })
+        }
+
+
+    /* GET 방식
+     서버로부터 주차장 코드를 바탕으로 베스트 리뷰 n개를 요청한다
+     */
+    suspend fun getAllReviewList(parkCode: String) =
+        suspendCancellableCoroutine<ArrayList<Review>> { continuation ->
+            val api = getRetrofit().create(ReviewAPI::class.java)
+            api.getAllReviewList(parkCode).enqueue(object :
+                Callback<List<Review>> {
+                override fun onResponse(
+                    call: Call<List<Review>>,
+                    response: Response<List<Review>>
+                ) {
+                    if (response.body() != null && response.isSuccessful) {
+                        Timber.tag("Request All Review List").d("Success")
+                        Timber.tag("Request All Review List").d("${response.body()}")
+                        val reviewList = ArrayList<Review>()
+                        reviewList.addAll(response.body()!!)
+                        continuation.resumeWith(Result.success(reviewList))
+                    } else {
+                        val error = response.errorBody()?.string()
+                        if (error == "100") {
+                            Timber.tag("Request All Review List").d("Failed by error 100")
+                        } else {
+                            Timber.tag("Request All Review List").d("Failed by other")
                         }
                         continuation.resumeWith(Result.failure(Exception("No found review List")));
                     }
