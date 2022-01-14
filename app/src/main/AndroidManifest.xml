@@ -22,7 +22,7 @@
         android:theme="@style/Theme.ParkingService"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.app.service.parking.presentation.review.all.AllReviewActivity"
+            android:name="com.app.service.parking.presentation.review.more.MoreReviewActivity"
             android:exported="false"
             android:launchMode="singleTask"/>
         <activity

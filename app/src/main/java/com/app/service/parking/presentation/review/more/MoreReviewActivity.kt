@@ -1,4 +1,4 @@
-package com.app.service.parking.presentation.review.all
+package com.app.service.parking.presentation.review.more
 
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ActivityAllReviewBinding
@@ -9,10 +9,11 @@ import com.app.service.parking.model.dto.Lot
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllReviewActivity : BaseActivity<ActivityAllReviewBinding, AllReviewViewModel>() {
+class MoreReviewActivity : BaseActivity<ActivityAllReviewBinding, MoreReviewViewModel>() {
 
     override val layoutResId = R.layout.activity_all_review
-    override val viewModel: AllReviewViewModel by viewModel()
+    override val viewModel: MoreReviewViewModel by viewModel()
+
     lateinit var viewPagerFragmentAdapter: ReviewViewPagerAdapter
 
 
@@ -26,7 +27,7 @@ class AllReviewActivity : BaseActivity<ActivityAllReviewBinding, AllReviewViewMo
         with(binding) {
 
             // FragmentStateAdapter 생성
-            viewPagerFragmentAdapter = ReviewViewPagerAdapter(this@AllReviewActivity)
+            viewPagerFragmentAdapter = ReviewViewPagerAdapter(this@MoreReviewActivity)
 
             // 생성한 Adapter를 ViewPager와 연결
             reviewViewPager.adapter = viewPagerFragmentAdapter

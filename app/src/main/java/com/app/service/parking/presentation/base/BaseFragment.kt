@@ -18,12 +18,14 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
     abstract val layoutResId: Int
     abstract val viewModel: S
     abstract fun initActivity()
+    val binding: T by lazy {
+        getViewDataBinding()!!
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Override될 layoutResId로 data binding 객체 생성
         viewDataBinding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         // Live data를 사용하기 위한 lifecycleOwner 지정
@@ -38,12 +40,10 @@ abstract class BaseFragment<T : ViewDataBinding, S : BaseViewModel> : Fragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initActivity()
     }
 
     override fun onDestroyView() {
-
         super.onDestroyView()
         viewDataBinding = null
     }

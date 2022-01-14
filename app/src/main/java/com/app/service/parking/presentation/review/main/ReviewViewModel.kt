@@ -93,7 +93,7 @@ class ReviewViewModel(
     // 서버로부터 리뷰 리스트를 요청한다.
     fun requestBestReviewList() {
         viewModelScope.launch {
-            bestReviewList.value = reviewRepository.getReviewList(lotModel?.parkCode!!) // 리뷰 데이터 리스트 갱신
+            bestReviewList.value = reviewRepository.getBestReviewList(lotModel?.parkCode!!) // 리뷰 데이터 리스트 갱신
 
             val userUid = ParkingPreference.getString(PreferenceConst.UID.name) // 유저의 uid
             // 리뷰 리스트에서 사용자의 uid와 동일한 리뷰가 있는지 탐색

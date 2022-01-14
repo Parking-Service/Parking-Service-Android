@@ -2,7 +2,7 @@ package com.app.service.parking.di
 
 import com.app.service.parking.presentation.login.LoginViewModel
 import com.app.service.parking.presentation.main.MainViewModel
-import com.app.service.parking.presentation.review.all.AllReviewViewModel
+import com.app.service.parking.presentation.review.more.MoreReviewViewModel
 import com.app.service.parking.presentation.review.main.ReviewViewModel
 import com.app.service.parking.presentation.review.update.ReviewUpdateViewModel
 import com.app.service.parking.presentation.review.write.ReviewWriteViewModel
@@ -49,7 +49,7 @@ val ReviewUpdateViewModelModule = module {
 
 val AllReviewModelModule = module {
     viewModel {
-        AllReviewViewModel(get())
+        MoreReviewViewModel(get())
     }
 }
 

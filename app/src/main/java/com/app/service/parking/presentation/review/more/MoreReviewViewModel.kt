@@ -1,16 +1,17 @@
-package com.app.service.parking.presentation.review.all
+package com.app.service.parking.presentation.review.more
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.app.service.parking.presentation.base.BaseViewModel
+import com.app.service.parking.global.App
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.dto.Review
-import com.app.service.parking.model.preference.ParkingPreference
-import com.app.service.parking.model.preference.PreferenceConst
 import com.app.service.parking.model.repository.remote.ReviewRepository
+import com.app.service.parking.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class AllReviewViewModel(val reviewRepository: ReviewRepository): BaseViewModel() {
+class MoreReviewViewModel(private val reviewRepository: ReviewRepository): BaseViewModel() {
 
     // 주차장 데이터 모델
     var lotModel: Lot? = null
@@ -32,7 +33,7 @@ class AllReviewViewModel(val reviewRepository: ReviewRepository): BaseViewModel(
     // 서버로부터 리뷰 리스트를 요청한다.
     fun requestReviewList() {
         viewModelScope.launch {
-            reviewList.value = reviewRepository.getReviewList(lotModel?.parkCode!!) // 리뷰 데이터 리스트 갱신
+            reviewList.value = reviewRepository.getAllReviewList(lotModel?.parkCode!!) // 리뷰 데이터 리스트 갱신
         }
     }
 }

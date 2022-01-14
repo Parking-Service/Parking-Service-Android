@@ -2,9 +2,9 @@ package com.app.service.parking.adapter.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.app.service.parking.presentation.review.all.*
+import com.app.service.parking.presentation.review.more.*
 
-class ReviewViewPagerAdapter(activity: AllReviewActivity): FragmentStateAdapter(activity) {
+class ReviewViewPagerAdapter(activity: MoreReviewActivity): FragmentStateAdapter(activity) {
 
     // ViewPager2에 연결할 Fragemnt 생성
     val fragmentList = listOf<Fragment>(AllReviewFragment(), GoodReviewFragment(), NormalReviewFragment(), BadReviewFragment())

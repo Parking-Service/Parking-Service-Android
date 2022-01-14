@@ -43,7 +43,7 @@
     <dimen name="parking_lot_margin_top_between_title_desc">6dp</dimen>
     <dimen name="parking_lot_jibun_text_background_radius">4dp</dimen>
     <dimen name="parking_lot_jibun_text_background_stroke_width">1dp</dimen>
-    <dimen name="parking_lot_information_desc_text_size">12sp</dimen>
+    <dimen name="parking_lot_information_desc_text_size">13sp</dimen>
     <dimen name="review_parking_lot_map_margin_top">16dp</dimen>
 
     <dimen name="icon_button_radius">2dp</dimen>
