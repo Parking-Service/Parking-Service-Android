@@ -34,7 +34,7 @@ class MoreReviewRVAdapter(val listener: RecyclerItemClickListener) :
 
             with(binding) {
                 model = reviewItem // 바인딩 모델 지정
-                root.setOnClickListener { listener.onClick(position) } // 주소 리스트 아이템을 클릭했을 때 작동
+                root.setOnClickListener { listener.onClick(position) } // 주소 리스트 아이템을 클릭했을 때 작동한다.
                 reviewRatingBar.rating = reviewItem.reviewRate!! // 리뷰 래이팅 설정
                 reviewDateTextView.text =
                     dateFormat.format(Date(reviewItem.reviewDate!!)) // 리뷰 등록 일시
