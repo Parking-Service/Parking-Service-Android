@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -79,7 +80,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
 
     override fun onRestart() {
         super.onRestart()
-
+        Log.d("dddd","dddd")
         try {
             mapView = MapView(this).also {
                 mapViewContainer = RelativeLayout(this)

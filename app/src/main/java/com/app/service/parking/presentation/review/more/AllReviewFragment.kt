@@ -23,7 +23,7 @@ class AllReviewFragment : BaseFragment<FragmentAllReviewBinding, MoreReviewViewM
                 // 리뷰를 클릭했을 때
                 override fun onClick(position: Int, resId: Int?) {
                     // 리뷰 이미지 Uri : 보안상 문제로 https를 http로 문자 변환
-                    val imgUri = viewModel?.reviewList?.value?.get(position)?.reviewImageUrl?.replace("https", "http")
+                    val imgUri = viewModel?.allReviewList?.value?.get(position)?.reviewImageUrl?.replace("https", "http")
                     // 이미지 팝업화면을 보여준다.
                     PopupImage().showImagePopup(requireContext(), imgUri)
                 }
@@ -32,7 +32,7 @@ class AllReviewFragment : BaseFragment<FragmentAllReviewBinding, MoreReviewViewM
             allReviewRecyclerView.layoutManager = MoreReviewRVAdapter.WrapContentLinearLayoutManager(requireContext())
 
             // 리뷰 데이터를 실시간 관찰
-            viewModel?.reviewList?.observe(this@AllReviewFragment) { reviewList ->
+            viewModel?.allReviewList?.observe(this@AllReviewFragment) { reviewList ->
                 // 리사이클러뷰 데이터 갱신
                 moreReviewRVAdapter?.updateItems(reviewList)
             }

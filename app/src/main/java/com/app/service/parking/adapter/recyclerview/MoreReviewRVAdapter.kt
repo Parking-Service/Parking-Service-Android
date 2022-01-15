@@ -72,7 +72,7 @@ class MoreReviewRVAdapter(val listener: RecyclerItemClickListener) :
         } else reviewList[position].hashCode().toLong()
     }
 
-    fun updateItems(newReviewList: ArrayList<Review>) {
+    fun updateItems(newReviewList: List<Review>) {
         val diffResult = DiffUtil.calculateDiff(BaseDiffUtil(reviewList, newReviewList), true)
 
         // Inconsistency detected 오류를 방지하기 위해 Temp리스트를 생성하여 기존 리스트를 먼저 건들지 않고 데이터 업데이트
