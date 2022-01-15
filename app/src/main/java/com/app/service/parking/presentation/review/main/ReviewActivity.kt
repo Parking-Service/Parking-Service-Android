@@ -256,6 +256,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
         val latitude = viewModel.lotModel?.latitude?.toDouble() // 위도
         val longitude = viewModel.lotModel?.longitude?.toDouble() // 경도
         val markerManager = MarkerManager()
+
         // 카카오 맵 뷰 초기화
         if (intent.getBooleanExtra("isShowMap", true)) {
             try {
@@ -288,8 +289,7 @@ class ReviewActivity : BaseActivity<ActivityReviewBinding, ReviewViewModel>() {
                     it.setOnTouchListener { _, _ -> true } // 지도 터치 방지
                 }
             } catch (re: RuntimeException) {
-                Timber.tag("에러발생").d(re.toString())
-                Timber.e(re.toString())
+                Timber.tag("에러 발생").d(re.toString())
             }
 
         } else {

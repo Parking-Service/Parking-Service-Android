@@ -2,7 +2,7 @@ package com.app.service.parking.presentation.base
 
 import androidx.recyclerview.widget.DiffUtil
 
-class BaseDiffUtil<T>(private val newList: ArrayList<T>, private val oldList: ArrayList<T>) : DiffUtil.Callback() {
+class BaseDiffUtil<T>(private val newList: ArrayList<T>, private val oldList: List<T>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size
     }
