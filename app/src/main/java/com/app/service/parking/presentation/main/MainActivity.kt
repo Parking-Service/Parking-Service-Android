@@ -78,9 +78,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
         }
     }
 
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("dddd","dddd")
+    override fun onResume() {
+        super.onResume()
         try {
             mapView = MapView(this).also {
                 mapViewContainer = RelativeLayout(this)
@@ -373,10 +372,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             }
             searchBarContainer.searchBar.setOnClickListener {
                 MarkerManager().removeAllMarkers(mapView)
-                binding.mainContainer.mainContentContainer.removeView(mapViewContainer)
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // 다음 맵 특성 상, 하나의 지도밖에 포함하지 못하므로 onStop() 호출시 맵뷰를 제거해준다.
+        mapViewContainer?.removeView(mapView)
     }
 
     // 음성으로 검색하기 다이얼로그 보여주기
@@ -454,7 +458,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(),
             override fun onResults(results: Bundle?) {
                 val matches = results!!.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                 MarkerManager().removeAllMarkers(mapView)
-                binding.mainContainer.mainContentContainer.removeView(mapViewContainer)
                 startActivity(
                     Intent(
                         this@MainActivity,
