@@ -1,9 +1,7 @@
-package com.app.service.parking.model.network.retrofit.builder
+package com.app.service.parking.model.network.retrofit.service
 
 import android.util.Log
-import com.app.service.parking.model.dto.Review
 import com.app.service.parking.model.dto.User
-import com.app.service.parking.model.network.retrofit.api.ReviewAPI
 import com.app.service.parking.model.network.retrofit.api.UserAPI
 import kotlinx.coroutines.suspendCancellableCoroutine
 import retrofit2.Call
@@ -11,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
 
-object UserAPIBuilder : BaseRetrofitBuilder() {
+object UserAPIService : BaseRetrofitService() {
 
     /* POST 방식 */
     // 회원가입

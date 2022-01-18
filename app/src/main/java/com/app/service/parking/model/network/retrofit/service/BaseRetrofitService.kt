@@ -1,4 +1,4 @@
-package com.app.service.parking.model.network.retrofit.builder
+package com.app.service.parking.model.network.retrofit.service
 
 import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.preference.PreferenceConst
@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-open class BaseRetrofitBuilder {
+open class BaseRetrofitService {
     open val baseUrl = "http://49.165.181.24:8080"
     open val TIMEOUT_LIMIT = 5L
     private val gson = GsonBuilder()
