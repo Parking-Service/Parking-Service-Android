@@ -1,4 +1,4 @@
-package com.app.service.parking.model.network.retrofit.builder
+package com.app.service.parking.model.network.retrofit.service
 
 import android.net.Uri
 import android.util.Log
@@ -15,7 +15,7 @@ import retrofit2.Response
 import timber.log.Timber
 import java.io.File
 
-object ReviewAPIBuilder : BaseRetrofitBuilder() {
+object ReviewAPIService : BaseRetrofitService() {
 
     /* POST 방식
      서버에 리뷰 저장

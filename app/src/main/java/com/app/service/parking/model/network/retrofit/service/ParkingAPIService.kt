@@ -1,6 +1,5 @@
-package com.app.service.parking.model.network.retrofit.builder
+package com.app.service.parking.model.network.retrofit.service
 
-import android.util.Log
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.network.retrofit.api.ParkingLotAPI
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +11,7 @@ import retrofit2.Response
 import timber.log.Timber
 import kotlin.coroutines.resumeWithException
 
-object ParkingAPIBuilder : BaseRetrofitBuilder() {
+object ParkingAPIService : BaseRetrofitService() {
 
     // 위도, 경도를 바탕으로 주차장 리스트를 가져옴
     suspend fun getParkingLots(latitude: Double, longitude: Double) =

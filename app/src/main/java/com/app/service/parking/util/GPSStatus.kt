@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 object GPSStatus {
     val mLocMan = App.context?.getSystemService(Context.LOCATION_SERVICE) as (LocationManager)
 
+    // GPS가 켜져있는 확인해주는 메서드
     fun checkGPS(view: View): Boolean {
         // GPS가 꺼져있으면 스낵바 보여주기
         if(mLocMan.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
