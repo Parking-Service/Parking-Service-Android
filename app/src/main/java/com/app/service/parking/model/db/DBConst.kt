@@ -1,4 +1,4 @@
-package com.app.service.parking.model.repository.local
+package com.app.service.parking.model.db
 
 
 class DBConst {

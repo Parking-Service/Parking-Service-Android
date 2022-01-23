@@ -1,9 +1,9 @@
 package com.app.service.parking.presentation.review.more
 
 import com.app.service.parking.R
-import com.app.service.parking.adapter.recyclerview.MoreReviewRVAdapter
+import com.app.service.parking.presentation.adapter.recyclerview.MoreReviewRVAdapter
 import com.app.service.parking.databinding.FragmentBadReviewBinding
-import com.app.service.parking.listener.RecyclerItemClickListener
+import com.app.service.parking.presentation.listener.RecyclerItemClickListener
 import com.app.service.parking.presentation.base.BaseFragment
 import com.app.service.parking.util.PopupImage
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel

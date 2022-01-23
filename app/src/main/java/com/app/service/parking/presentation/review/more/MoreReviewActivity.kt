@@ -4,7 +4,7 @@ import com.app.service.parking.R
 import com.app.service.parking.databinding.ActivityAllReviewBinding
 import com.app.service.parking.databinding.ItemReviewTabBinding
 import com.app.service.parking.presentation.base.BaseActivity
-import com.app.service.parking.adapter.viewpager.ReviewViewPagerAdapter
+import com.app.service.parking.presentation.adapter.viewpager.ReviewViewPagerAdapter
 import com.app.service.parking.model.dto.Lot
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel

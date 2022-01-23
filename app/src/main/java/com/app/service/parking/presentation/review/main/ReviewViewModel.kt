@@ -9,7 +9,7 @@ import com.app.service.parking.model.dto.Review
 import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.preference.PreferenceConst
 import com.app.service.parking.model.repository.entity.Favorite
-import com.app.service.parking.model.repository.local.repository.FavoriteRepository
+import com.app.service.parking.model.repository.local.FavoriteRepository
 import com.app.service.parking.model.repository.remote.ReviewRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
