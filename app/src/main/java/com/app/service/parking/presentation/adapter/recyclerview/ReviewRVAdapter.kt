@@ -1,7 +1,6 @@
-package com.app.service.parking.adapter.recyclerview
+package com.app.service.parking.presentation.adapter.recyclerview
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.service.parking.databinding.ItemReviewBinding
 import com.app.service.parking.presentation.base.BaseDiffUtil
-import com.app.service.parking.listener.RecyclerItemClickListener
+import com.app.service.parking.presentation.listener.RecyclerItemClickListener
 import com.app.service.parking.model.dto.Review
 import com.bumptech.glide.Glide
 import timber.log.Timber

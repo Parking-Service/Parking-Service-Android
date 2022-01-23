@@ -17,10 +17,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import com.app.service.parking.R
-import com.app.service.parking.adapter.marker.CustomMarkerAdapter
+import com.app.service.parking.presentation.adapter.marker.CustomMarkerAdapter
 import com.app.service.parking.custom.dialog.RecordBottomSheetDialog
 import com.app.service.parking.databinding.ActivityMainBinding
-import com.app.service.parking.listener.POIItemClickListener
+import com.app.service.parking.presentation.listener.POIItemClickListener
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.preference.ParkingPreference
 import com.app.service.parking.model.type.LocationFabStatus

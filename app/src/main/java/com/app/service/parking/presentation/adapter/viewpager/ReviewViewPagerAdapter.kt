@@ -1,4 +1,4 @@
-package com.app.service.parking.adapter.viewpager
+package com.app.service.parking.presentation.adapter.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
