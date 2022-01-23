@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ActivityFavoriteBinding
 import com.app.service.parking.presentation.base.BaseActivity
-import com.app.service.parking.listener.RecyclerItemClickListener
-import com.app.service.parking.adapter.recyclerview.FavoriteRVAdapter
+import com.app.service.parking.presentation.listener.RecyclerItemClickListener
+import com.app.service.parking.presentation.adapter.recyclerview.FavoriteRVAdapter
 import com.app.service.parking.presentation.review.main.ReviewActivity
 import com.app.service.parking.model.dto.Lot
-import com.app.service.parking.model.repository.local.db.AppDB
+import com.app.service.parking.model.db.AppDB
 import com.app.service.parking.model.repository.entity.Favorite
-import com.app.service.parking.model.repository.local.repository.FavoriteRepository
+import com.app.service.parking.model.repository.local.FavoriteRepository
 
 class FavoriteActivity : BaseActivity<ActivityFavoriteBinding, FavoriteViewModel>() {
     override val layoutResId: Int

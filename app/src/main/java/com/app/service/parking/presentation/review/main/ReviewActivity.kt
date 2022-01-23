@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.app.service.parking.R
-import com.app.service.parking.adapter.recyclerview.ReviewRVAdapter
+import com.app.service.parking.presentation.adapter.recyclerview.ReviewRVAdapter
 import com.app.service.parking.custom.dialog.NaviBottomSheetDialog
 import com.app.service.parking.databinding.ActivityReviewBinding
-import com.app.service.parking.listener.RecyclerItemClickListener
+import com.app.service.parking.presentation.listener.RecyclerItemClickListener
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.presentation.base.BaseActivity
 import com.app.service.parking.presentation.review.more.MoreReviewActivity

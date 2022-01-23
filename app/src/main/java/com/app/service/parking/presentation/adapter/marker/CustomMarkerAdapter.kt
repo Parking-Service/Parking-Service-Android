@@ -1,4 +1,4 @@
-package com.app.service.parking.adapter.marker
+package com.app.service.parking.presentation.adapter.marker
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.app.service.parking.R
 import com.app.service.parking.databinding.ItemFreeMarkerBinding
 import com.app.service.parking.databinding.ItemPayMarkerBinding
-import com.app.service.parking.listener.POIItemClickListener
+import com.app.service.parking.presentation.listener.POIItemClickListener
 import com.app.service.parking.global.App
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem

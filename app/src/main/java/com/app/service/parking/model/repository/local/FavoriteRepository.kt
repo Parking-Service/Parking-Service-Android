@@ -1,8 +1,8 @@
-package com.app.service.parking.model.repository.local.repository
+package com.app.service.parking.model.repository.local
 
 import androidx.lifecycle.LiveData
 import com.app.service.parking.model.repository.entity.Favorite
-import com.app.service.parking.model.repository.local.db.AppDB
+import com.app.service.parking.model.db.AppDB
 
 class FavoriteRepository(mDatabase: AppDB) {
 

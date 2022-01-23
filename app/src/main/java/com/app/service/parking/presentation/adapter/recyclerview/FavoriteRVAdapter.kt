@@ -1,23 +1,21 @@
-package com.app.service.parking.adapter.recyclerview
+package com.app.service.parking.presentation.adapter.recyclerview
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.service.parking.R
-import com.app.service.parking.databinding.ItemSearchBinding
+import com.app.service.parking.databinding.ItemFavoriteBinding
 import com.app.service.parking.presentation.base.BaseDiffUtil
-import com.app.service.parking.listener.RecyclerItemClickListener
+import com.app.service.parking.presentation.listener.RecyclerItemClickListener
 import com.app.service.parking.model.dto.Lot
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import timber.log.Timber
-import java.lang.IndexOutOfBoundsException
 
-
-class SearchRVAdapter(val listener: RecyclerItemClickListener) :
-    RecyclerView.Adapter<SearchRVAdapter.ViewHolder>() {
+class FavoriteRVAdapter(val listener: RecyclerItemClickListener) :
+    RecyclerView.Adapter<FavoriteRVAdapter.ViewHolder>() {
 
     var lots = ArrayList<Lot>()
 
@@ -25,11 +23,12 @@ class SearchRVAdapter(val listener: RecyclerItemClickListener) :
         setHasStableIds(true)
     }
 
-    inner class ViewHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.model = lots[position] // 바인딩 모델 지정
             binding.root.setOnClickListener { listener.onClick(position) } // 주소 리스트 아이템을 클릭했을 때 작동
             binding.deleteButton.setOnClickListener {
+                Log.d("dddd", position.toString())
                 listener.onClick(
                     position,
                     R.id.delete_button
@@ -40,7 +39,7 @@ class SearchRVAdapter(val listener: RecyclerItemClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemSearchBinding.inflate(
+            ItemFavoriteBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -72,15 +71,16 @@ class SearchRVAdapter(val listener: RecyclerItemClickListener) :
         diffResult.dispatchUpdatesTo(this) // 리사이클러뷰 업데이트
     }
 
-}
-
-// IndexOutOfBoundsException 예외 처리를 위한 커스텀 LayoutManager
-class WrapContentLinearLayoutManager(context: Context) : LinearLayoutManager(context) {
-    override fun onLayoutChildren(recycler: Recycler, state: RecyclerView.State) {
-        try {
-            super.onLayoutChildren(recycler, state)
-        } catch (e: IndexOutOfBoundsException) {
-            Timber.e("IndexOutOfBoundsException is occurred.")
+    // IndexOutOfBoundsException 예외 처리를 위한 커스텀 LayoutManager
+    class WrapContentLinearLayoutManager(context: Context) : LinearLayoutManager(context) {
+        override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
+            try {
+                super.onLayoutChildren(recycler, state)
+            } catch (e: IndexOutOfBoundsException) {
+                Timber.e("IndexOutOfBoundsException is occurred.")
+            }
         }
     }
+
 }
+

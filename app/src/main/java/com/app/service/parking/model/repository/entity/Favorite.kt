@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.app.service.parking.R
 import com.app.service.parking.global.App
-import com.app.service.parking.model.repository.local.DBConst
+import com.app.service.parking.model.db.DBConst
 import java.io.Serializable
 
 @Entity(tableName = DBConst.TABLE_NAME_USER_FAVORITE)

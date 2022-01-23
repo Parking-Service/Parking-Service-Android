@@ -1,11 +1,10 @@
-package com.app.service.parking.model.repository.local.db
+package com.app.service.parking.model.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.app.service.parking.model.repository.local.DBConst
-import com.app.service.parking.model.repository.local.dao.DAOFavorite
+import com.app.service.parking.model.db.dao.DAOFavorite
 import com.app.service.parking.model.repository.entity.Favorite
 
 

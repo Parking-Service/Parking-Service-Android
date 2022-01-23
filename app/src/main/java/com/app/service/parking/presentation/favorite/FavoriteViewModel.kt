@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.service.parking.presentation.base.BaseViewModel
 import com.app.service.parking.model.dto.Lot
 import com.app.service.parking.model.repository.entity.Favorite
-import com.app.service.parking.model.repository.local.repository.FavoriteRepository
+import com.app.service.parking.model.repository.local.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
