@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.app.service.parking.presentation.review.main.ReviewViewModel" />
+            type="com.app.service.parking.presentation.view.review.main.ReviewViewModel" />
         <variable
             name="model"
             type="com.app.service.parking.model.dto.Lot" />
@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".presentation.review.main.ReviewActivity">
+            tools:context=".presentation.view.review.main.ReviewActivity">
 
             <ImageView
                 android:id="@+id/parking_lot_image_view"

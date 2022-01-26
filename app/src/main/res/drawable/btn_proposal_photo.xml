@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 버튼을 누르지 않았을 때, 평상시 버튼 -->
+    <item android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/btn_proposal_photo_radius" />
+            <solid android:color="@color/unpressedProposalPhotoColor" />
+            <stroke
+                android:width="@dimen/btn_proposal_photo_stroke_width"
+                android:color="@color/white" />
+        </shape>
+    </item>
+
+    <!-- 버튼을 눌렀을 때 -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/btn_proposal_photo_radius" />
+            <solid android:color="@color/pressedProposalPhotoColor" />
+            <stroke
+                android:width="@dimen/btn_proposal_photo_stroke_width"
+                android:color="@color/white" />
+        </shape>
+    </item>
+</selector>

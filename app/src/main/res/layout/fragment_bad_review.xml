@@ -5,13 +5,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.app.service.parking.presentation.review.more.MoreReviewViewModel" />
+            type="com.app.service.parking.presentation.view.review.more.MoreReviewViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.review.more.AllReviewFragment">
+        tools:context=".presentation.view.review.more.AllReviewFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/all_review_recycler_view"

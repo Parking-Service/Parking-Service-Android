@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.app.service.parking.presentation.favorite.FavoriteViewModel" />
+            type="com.app.service.parking.presentation.view.favorite.FavoriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.favorite.FavoriteActivity"
+        tools:context=".presentation.view.favorite.FavoriteActivity"
         android:background="@color/activityBackground">
 
         <com.google.android.material.appbar.AppBarLayout

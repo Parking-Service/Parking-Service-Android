@@ -7,10 +7,10 @@
 
         <variable
             name="reviewViewModel"
-            type="com.app.service.parking.presentation.review.main.ReviewViewModel" />
+            type="com.app.service.parking.presentation.view.review.main.ReviewViewModel" />
         <variable
             name="reviewWriteViewModel"
-            type="com.app.service.parking.presentation.review.write.ReviewWriteViewModel" />
+            type="com.app.service.parking.presentation.view.review.write.ReviewWriteViewModel" />
         <variable
             name="rateStatus"
             type="com.app.service.parking.model.type.RateStatus" />
@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.review.write.ReviewWriteActivity">
+        tools:context=".presentation.view.review.write.ReviewWriteActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/action_bar"
@@ -220,7 +220,7 @@
             android:background="@drawable/bg_review_done_btn"
             android:gravity="center"
             android:paddingVertical="@dimen/review_done_btn_padding_vertical"
-            android:text="@string/review_done_text"
+            android:text="@string/review_review_write_done_text"
             android:enabled="false"
             android:clickable="false"
             android:foreground="?selectableItemBackground"

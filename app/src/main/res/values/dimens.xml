@@ -164,4 +164,26 @@
 
     <!-- item_review_tab.xml -->
     <dimen name="tab_text_margin_top">4dp</dimen>
+
+    <!-- activity_proposal.xml -->
+    <dimen name="proposal_image_container">220dp</dimen>
+    <dimen name="proposal_example_image_size">80dp</dimen>
+    <dimen name="proposal_example_image_margin_top">16dp</dimen>
+    <dimen name="proposal_example_image_margin_right">10dp</dimen>
+    <dimen name="proposal_example_text_size">15sp</dimen>
+    <dimen name="proposal_example_text_margin_top">10dp</dimen>
+    <dimen name="proposal_photo_upload_btn_height">46dp</dimen>
+    <dimen name="proposal_photo_upload_margin_top">16dp</dimen>
+    <dimen name="proposal_photo_upload_margin_horizontal">20dp</dimen>
+    <dimen name="proposal_title_text_size">16sp</dimen>
+    <dimen name="proposal_title_margin_top">12dp</dimen>
+    <dimen name="proposal_content_margin_top">12dp</dimen>
+    <dimen name="proposal_edit_text_text_size">16sp</dimen>
+    <dimen name="proposal_edit_text_container_height">160dp</dimen>
+
+
+
+    <!-- btn_proposal_photo.xml -->
+    <dimen name="btn_proposal_photo_stroke_width">1dp</dimen>
+    <dimen name="btn_proposal_photo_radius">3dp</dimen>
 </resources>
