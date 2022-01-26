@@ -22,50 +22,54 @@
         android:theme="@style/Theme.ParkingService"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.app.service.parking.presentation.review.more.MoreReviewActivity"
+            android:name="com.app.service.parking.presentation.view.review.more.MoreReviewActivity"
             android:exported="false"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask" />
         <activity
-            android:name="com.app.service.parking.presentation.review.write.ReviewWriteActivity"
+            android:name="com.app.service.parking.presentation.view.review.write.ReviewWriteActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|adjustUnspecified" />
         <activity
-            android:name="com.app.service.parking.presentation.review.update.ReviewUpdateActivity"
+            android:name="com.app.service.parking.presentation.view.review.update.ReviewUpdateActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|adjustUnspecified" />
         <activity
-            android:name="com.app.service.parking.presentation.favorite.FavoriteActivity"
+            android:name="com.app.service.parking.presentation.view.favorite.FavoriteActivity"
             android:exported="false"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTop" />
         <activity
-            android:name="com.app.service.parking.presentation.search.SearchActivity"
+            android:name="com.app.service.parking.presentation.view.search.SearchActivity"
             android:exported="false"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTop" />
         <activity
-            android:name="com.app.service.parking.presentation.review.main.ReviewActivity"
+            android:name="com.app.service.parking.presentation.view.review.main.ReviewActivity"
             android:exported="true"
             android:launchMode="singleTop" />
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name="com.app.service.parking.presentation.view.main.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:theme="@style/Theme.ParkingService.NoActionBar" />
         <activity
             android:name=".presentation.base.BaseActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.login.LoginActivity"
+            android:name="com.app.service.parking.presentation.view.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.view.proposal.ProposalActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|adjustUnspecified"/>
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

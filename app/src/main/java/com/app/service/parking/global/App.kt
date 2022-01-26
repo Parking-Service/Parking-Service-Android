@@ -33,12 +33,13 @@ class App : Application() {
             modules(
                 listOf(
                     loginViewModelModule,
-                    MainViewModelModule,
-                    SearchViewModelModule,
-                    ReviewViewModelModule,
-                    ReviewWriteModelModule,
-                    ReviewUpdateViewModelModule,
-                    AllReviewModelModule
+                    mainViewModelModule,
+                    searchViewModelModule,
+                    reviewViewModelModule,
+                    reviewWriteModelModule,
+                    reviewUpdateViewModelModule,
+                    allReviewModelModule,
+                    proposalModelModule
                 )
             )
         }

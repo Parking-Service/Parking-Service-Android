@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.app.service.parking.presentation.login.LoginViewModel" />
+            type="com.app.service.parking.presentation.view.login.LoginViewModel" />
     </data>
 
     <RelativeLayout
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00000000"
-            tools:context=".presentation.login.LoginActivity">
+            tools:context=".presentation.view.login.LoginActivity">
 
 
             <LinearLayout

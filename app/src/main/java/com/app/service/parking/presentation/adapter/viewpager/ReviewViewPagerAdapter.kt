@@ -2,7 +2,7 @@ package com.app.service.parking.presentation.adapter.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.app.service.parking.presentation.review.more.*
+import com.app.service.parking.presentation.view.review.more.*
 
 class ReviewViewPagerAdapter(activity: MoreReviewActivity): FragmentStateAdapter(activity) {
 

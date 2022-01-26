@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.app.service.parking.presentation.review.more.MoreReviewViewModel" />
+            type="com.app.service.parking.presentation.view.review.more.MoreReviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

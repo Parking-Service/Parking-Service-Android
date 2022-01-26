@@ -1,12 +1,13 @@
 package com.app.service.parking.di
 
-import com.app.service.parking.presentation.login.LoginViewModel
-import com.app.service.parking.presentation.main.MainViewModel
-import com.app.service.parking.presentation.review.more.MoreReviewViewModel
-import com.app.service.parking.presentation.review.main.ReviewViewModel
-import com.app.service.parking.presentation.review.update.ReviewUpdateViewModel
-import com.app.service.parking.presentation.review.write.ReviewWriteViewModel
-import com.app.service.parking.presentation.search.SearchViewModel
+import com.app.service.parking.presentation.view.login.LoginViewModel
+import com.app.service.parking.presentation.view.main.MainViewModel
+import com.app.service.parking.presentation.view.proposal.ProposalViewModel
+import com.app.service.parking.presentation.view.review.more.MoreReviewViewModel
+import com.app.service.parking.presentation.view.review.main.ReviewViewModel
+import com.app.service.parking.presentation.view.review.update.ReviewUpdateViewModel
+import com.app.service.parking.presentation.view.review.write.ReviewWriteViewModel
+import com.app.service.parking.presentation.view.search.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -16,40 +17,46 @@ val loginViewModelModule = module {
     }
 }
 
-val MainViewModelModule = module {
+val mainViewModelModule = module {
     viewModel {
         MainViewModel()
     }
 }
 
-val SearchViewModelModule = module {
+val searchViewModelModule = module {
     viewModel {
         SearchViewModel(get())
     }
 }
 
-val ReviewViewModelModule = module {
+val reviewViewModelModule = module {
     viewModel {
         ReviewViewModel(get(), get())
     }
 }
 
-val ReviewWriteModelModule = module {
+val reviewWriteModelModule = module {
     viewModel {
         ReviewWriteViewModel(get())
     }
 }
 
-val ReviewUpdateViewModelModule = module {
+val reviewUpdateViewModelModule = module {
     viewModel {
         ReviewUpdateViewModel(get())
     }
 }
 
 
-val AllReviewModelModule = module {
+val allReviewModelModule = module {
     viewModel {
         MoreReviewViewModel(get())
+    }
+}
+
+val proposalModelModule = module {
+    viewModel {
+        ProposalViewModel()
     }
 }
 

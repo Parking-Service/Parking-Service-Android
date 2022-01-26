@@ -63,9 +63,9 @@
     <string name="rate_normal">평범해요!</string>
     <string name="rate_bad">별로에요!</string>
     <string name="rate_edit_text_hint">%s님, 이용하신 주차장은 어떠셨나요? 주차장의 가격이나 시설, 서비스에 대해 리뷰를 작성해주세요!</string>
-    <string name="review_done_text">완료 (%d/10000)</string>
-    <string name="write_review_alert_title">작성하시던 리뷰가 사라져요!</string>
-    <string name="write_review_alert_message">그래도 괜찮으신가요?</string>
+    <string name="review_review_write_done_text">완료 (%d/10000)</string>
+    <string name="write_review_alert_dialog_title">작성하시던 리뷰가 사라져요!</string>
+    <string name="write_review_alert_dialog_message">그래도 괜찮으신가요?</string>
     <string name="default_user_nickname">고객</string>
     <string name="image_max_toast">이미지를 최대 \'%d개\' 까지 선택하실 수 있습니다!</string>
     <string name="review_content_empty">리뷰 작성란이 비어 있어요!\n여러분의 소중한 리뷰를 담아주세요!</string>
@@ -87,7 +87,7 @@
     <string name="menu_notice">공지사항</string>
     <string name="menu_favorite">즐겨찾기</string>
     <string name="menu_guide">서비스 이용안내</string>
-    <string name="menu_suggest_edit">정보수정제안</string>
+    <string name="menu_suggest_edit">정보 수정 제안</string>
     <string name="menu_setting">환경설정</string>
     <string name="inquire">1:1 문의하기</string>
 
@@ -142,4 +142,22 @@
 
     <!-- Favorite Activity -->
     <string name="favorite_toolbar_title">즐겨찾는 주차장</string>
+
+    <!-- Proposal Activity -->
+    <string name="proposal_toolbar_title">@string/menu_suggest_edit</string>
+    <string name="proposal_alert_dialog_title">작성하시던 리뷰가 사라져요!</string>
+    <string name="proposal_alert_dialog_message">그래도 괜찮으신가요?</string>
+    <string name="review_proposal_write_done">확인</string>
+    <string name="proposal_image_desc">아래와 같은 사진을 함께 올려주세요!</string>
+    <string name="first_proposal_example_image">전경</string>
+    <string name="second_proposal_example_image">진입로</string>
+    <string name="third_proposal_example_image">요금</string>
+    <string name="proposal_option_title">수정항목</string>
+    <string name="proposal_option_title_essential">&#160;(필수)</string>
+    <string name="proposal_first_option">운영종료</string>
+    <string name="proposal_second_option">시간정보</string>
+    <string name="proposal_third_option">요금정보</string>
+    <string name="proposal_fourth_option">기타정보</string>
+    <string name="proposal_content_title">수정사항</string>
+    <string name="proposal_edit_text_hint">잘못된 정보나 없는 정보를 알려주세요</string>
 </resources>

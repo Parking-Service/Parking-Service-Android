@@ -21,6 +21,7 @@
         <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/bg_no_review.xml" value="0.24583333333333332" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/bg_review_done_btn.xml" value="0.38385416666666666" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/bg_review_tab_layout.xml" value="0.2046875" />
+        <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/btn_proposal_photo.xml" value="0.30185185185185187" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/btn_rate_good.xml" value="0.38385416666666666" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/ic_rate_bad_unselected.xml" value="0.38385416666666666" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/drawable/ic_rate_good_selected.xml" value="0.38385416666666666" />
@@ -31,9 +32,11 @@
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_favorite.xml" value="0.2" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_login.xml" value="0.20380434782608695" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_proposal.xml" value="0.25" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_review.xml" value="0.2" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_review_update.xml" value="0.20625" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_review_write.xml" value="0.25" />
+        <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/activity_search.xml" value="0.13120567375886524" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/content_main.xml" value="0.209375" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/content_main_top.xml" value="0.20625" />
         <entry key="..\:/android_project/ParkingService/app/src/main/res/layout/fragment_all_review.xml" value="0.33" />

@@ -79,4 +79,10 @@
     <color name="allReviewBackground">#EDEDED</color>
     <color name="unselectedTabTextColor">#B1B1B1</color>
     <color name="selectedTabTextColor">@color/colorPrimary</color>
+    <color name="unpressedProposalPhotoColor">@color/colorPrimary</color>
+    <color name="pressedProposalPhotoColor">#E16C68</color>
+    <color name="selectedOptionColor">@color/colorPrimary</color>
+    <color name="unselectedOptionColor">#FFF7F7</color>
+    <color name="proposalOptionIconColor">#727272</color>
+    <color name="proposalContentEditTextColor">#F8F8F8</color>
 </resources>

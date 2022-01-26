@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.main.MainActivity">
+    tools:context=".presentation.view.main.MainActivity">
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_notice"
@@ -13,7 +13,7 @@
             android:id="@+id/menu_guide"
             android:title="@string/menu_guide" />
         <item
-            android:id="@+id/menu_error"
+            android:id="@+id/menu_proposal"
             android:title="@string/menu_suggest_edit" />
         <item
             android:id="@+id/menu_setting"
